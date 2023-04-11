@@ -85,7 +85,7 @@ const PlanningChart = observer(() => {
                         x1={M.xNow}
                         y1={M.top}
                         x2={M.xNow}
-                        y={M.height}
+                        y2={M.height}
                         stroke={theme.palette.error.main}
                     />
                 </g>

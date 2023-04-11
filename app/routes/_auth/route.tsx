@@ -1,13 +1,10 @@
 import { Box, Divider, Drawer, Typography } from "@mui/material";
-import { json, LoaderArgs, redirect } from "@remix-run/node";
+import { LoaderArgs, json, redirect } from "@remix-run/node";
 import {
     Outlet,
-    useLocation,
-    useMatches,
-    useNavigate
+    useMatches
 } from "@remix-run/react";
 import { Layout } from "design";
-import { useEffect } from "react";
 import { getAccessToken } from "../../session.server";
 
 export async function loader({ request }: LoaderArgs) {
@@ -20,15 +17,6 @@ export async function loader({ request }: LoaderArgs) {
 const drawerWidth = 400;
 export default function AuthOutlet() {
     const title = useTitle();
-
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    useEffect(() => {
-        if (location.pathname === "/auth") {
-            navigate("login");
-        }
-    }, [location]);
 
     return (
         <Layout.Root>

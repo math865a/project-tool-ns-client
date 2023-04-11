@@ -1,0 +1,6 @@
+{
+    "exportall.config.folderListener": [
+        "/app/routes/app.resources_.$resourceId/header",
+        "/app/src/_definitions"
+    ]
+}

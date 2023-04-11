@@ -4,7 +4,7 @@
 
 # Specify node version and choose image
 # also name our image as development (can be anything)
-FROM node:19-bullseye-slim as base
+FROM node:19.5.0 
 
 RUN npm i -g pnpm
 

@@ -1,11 +1,13 @@
 import { withEmotionCache } from "@emotion/react";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import iconStyles from "@fortawesome/fontawesome-svg-core/styles.css";
 import {
     Box,
     Typography,
     unstable_useEnhancedEffect as useEnhancedEffect,
 } from "@mui/material";
 import { LicenseInfo } from "@mui/x-data-grid-pro";
-import { MetaFunction } from "@remix-run/node";
+import { MetaFunction, json } from "@remix-run/node";
 import {
     Links,
     LiveReload,
@@ -13,17 +15,13 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
-    useCatch,
-    useLoaderData,
+    useCatch
 } from "@remix-run/react";
 import { ClientStylesContext, theme } from "mui-config";
 import * as React from "react";
-import styles from "./styles/scrollbar.css";
-import iconStyles from "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-import { json } from "@remix-run/node";
+import calendarStyles from "react-big-calendar/lib/css/react-big-calendar.css";
 import { namespaces } from "./server";
-import calendarStyles from "react-big-calendar/lib/css/react-big-calendar.css"
+import styles from "./styles/scrollbar.css";
 
 export function links() {
     return [

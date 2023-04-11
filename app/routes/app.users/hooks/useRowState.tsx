@@ -7,7 +7,6 @@ import {
     MuiEvent,
 } from "@mui/x-data-grid-pro";
 import { useLoaderData } from "@remix-run/react";
-import _ from "lodash";
 import * as React from "react";
 import { UserRow } from "../definitions";
 import { UsersLoader } from "../route";

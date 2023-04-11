@@ -6,7 +6,7 @@ import {Duration as dur, Interval as int, DateTime as dt} from "luxon"
 import { HandlerArgs } from "@visx/drag/lib/useDrag";
 import _ from "lodash";
 
-@model('capacity-calendar')
+@model('timeline-calendar')
 export class TimelineCalendar extends Model({
     dpx: prop<number>(5).withSetter(),
     tStart: prop<number>(() => getNormalizedNow().minus({weeks: 3}).toMillis()).withSetter(),

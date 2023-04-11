@@ -3,7 +3,3 @@
 .DS_Store
 .env
 /.cache
-/.pnpm-store
-build
-public
-.vscode

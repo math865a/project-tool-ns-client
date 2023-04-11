@@ -61,6 +61,9 @@ dependencies:
   '@mui/x-date-pickers-pro':
     specifier: ^6.0.4
     version: 6.0.4(@emotion/react@11.10.6)(@emotion/styled@11.10.6)(@mui/material@5.11.16)(@mui/system@5.11.16)(luxon@3.3.0)(react-dom@18.2.0)(react@18.2.0)
+  '@remix-run/express':
+    specifier: latest
+    version: 1.15.0(express@4.18.2)
   '@remix-run/node':
     specifier: ^1.15.0
     version: 1.15.0
@@ -69,6 +72,9 @@ dependencies:
     version: 1.15.0(react-dom@18.2.0)(react@18.2.0)
   '@remix-run/serve':
     specifier: ^1.15.0
+    version: 1.15.0
+  '@remix-run/server-runtime':
+    specifier: latest
     version: 1.15.0
   '@visx/axis':
     specifier: ^2.18.0
@@ -107,8 +113,8 @@ dependencies:
     specifier: ^3.6.8
     version: 3.6.8
   lodash:
-    specifier: ^3.2.1
-    version: 3.3.0
+    specifier: ^4.17.15
+    version: 4.17.21
   luxon:
     specifier: ^3.3.0
     version: 3.3.0
@@ -7291,10 +7297,6 @@ packages:
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
-
-  /lodash@3.3.0:
-    resolution: {integrity: sha512-gpux6tVfBHsUdUIciz5HoV0ChAxUTvi0ChpQMIjAsKtg6FTYFtd1B1G0JlqHvAio3teaMVGPDPk2seVq1INwOQ==}
-    dev: false
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}

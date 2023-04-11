@@ -16,7 +16,7 @@ export interface ICapacityInterval {
     w: number;
 }
 
-@model('capacity-view')
+@model('capacity-board-view')
 export class View extends Model({
     viewMode: prop<ViewMode>(() => ViewMode.Month).withSetter(),
     rowMode: prop<RowMode>(() => RowMode.Resource).withSetter(),
