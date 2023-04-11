@@ -1,0 +1,10 @@
+node_modules
+.npmrc
+/.cache
+/build
+/public/build
+.env
+.npmrc
+.pnpm-store
+public
+.vscode

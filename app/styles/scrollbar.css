@@ -1,0 +1,22 @@
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+}
+
+ ::-webkit-scrollbar-track {
+    background-color: "transparent";
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #CCCCCC;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #45637a;
+    cursor: all-scroll;
+}

@@ -1,0 +1,39 @@
+{
+    "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+    "compilerOptions": {
+        "lib": ["DOM", "DOM.Iterable", "ES2019"],
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "jsx": "react-jsx",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "target": "ES2019",
+        "strict": true,
+        "allowJs": true,
+        "forceConsistentCasingInFileNames": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "strictPropertyInitialization": false,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "skipLibCheck": true,
+        "paths": {
+            "~/*": ["./app/*"],
+            "socket": ["./app/src/socket"],
+            "design": ["./app/src/design-system"],
+            "mui-config": ["./app/config/mui"],
+            "session": ["./app/session.server"],
+            "session/*": ["./app/pages/session/*"],
+            "capacity": ["./app/pages/capacity/*"],
+            "useGantt": ["./app/src/features/gantt/useGantt.ts"],
+            "useWorkpackage": [
+                "./app/src/state/workpackage-profile/WorkpackageProvider.tsx"
+            ],
+            "gantt-models": ["./app/src/features/gantt/models"],
+            "styles": ["./app/styles"],
+            "gantt/*": ["./app/src/features/gantt/*"],
+        },
+        // Remix takes care of building everything in `remix build`.
+        "noEmit": true
+    }
+}

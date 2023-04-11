@@ -1,0 +1,112 @@
+
+
+.calendar{
+    --fa-secondary-color: #707070;
+    --fa-primary-color: #B80000;
+}
+
+.circle-dollar {
+    --fa-secondary-color: #282828;
+    --fa-primary-color: #FFB370;
+}
+
+.finish {
+    --fa-primary-color: #282828;
+    --fa-secondary-color: #f5f5f5;
+}
+
+.briefcase {
+    --fa-primary-color: #634223;
+    --fa-secondary-color: #966F4A;
+}
+
+.sun {
+    --fa-primary-color: #FBD374;
+    --fa-secondary-color: #FAB00F;
+    --fa-secondary-opacity: 0.8;
+    --fa-primary-opacity: 0.6;
+}
+
+.clock {
+    --fa-secondary-color: #282828;
+    
+    --fa-primary-color: #a2ccc0;
+    --fa-secondary-opacity: 0.5;
+}
+
+.user-plus {
+    --fa-primary-color: #197673;
+    --fa-secondary-color: #282828;
+    --fa-secondary-opacity: 0.6;
+}
+
+.chart-simple {
+    --fa-primary-color: #45637a;
+    --fa-secondary-color: #f89838;
+    --fa-secondary-opacity: 1;
+}
+
+.chart-gantt {
+    --fa-primary-color:#6C72C6;
+    --fa-secondary-color: #282828;
+    --fa-secondary-opacity: 0.75;
+}
+
+.timeline {
+    --fa-primary-color: #B80000;
+    --fa-secondary-color: #282828;
+    --fa-secondary-opacity: 0.8;
+}
+
+.calculator{
+    --fa-primary-color: #FFBF1F;
+    --fa-secondary-color: #282828;
+    --fa-secondary-opacity: 1;
+}
+
+.signature {
+    --fa-primary-color: #B80000;
+    --fa-secondary-color: #282828;
+    --fa-secondary-opacity: 0.8;
+}
+
+.exclamation-circle {
+    --fa-primary-color: #D5203B;
+    --fa-secondary-color: #fff;
+    --fa-secondary-opacity: 1;
+}
+
+.layer-group {
+    --fa-primary-color: #282828;
+    --fa-secondary-color: #f89838;
+    --fa-primary-opacity: 0.8;
+    --fa-secondary-opacity:1;
+}
+
+.inactive {
+    --fa-primary-color: #282828;
+    --fa-secondary-color: #282828;
+    --fa-primary-opacity: 0.25;
+    --fa-secondary-opacity:0.25;
+}
+
+.rectangle-mixed {
+    --fa-primary-color: #C08552;
+    --fa-secondary-color: #9D99C2;
+    --fa-primary-opacity: 0.8;
+    --fa-secondary-opacity:1;
+}
+
+.plus-minus {
+    --fa-secondary-color: #FB4B4E;
+    --fa-primary-color: #778D7D;
+    --fa-primary-opacity: 0.8;
+    --fa-secondary-opacity:0.8;
+}
+
+.chart-area {
+    --fa-secondary-color: #282828;
+    --fa-primary-color: #79A1E2;
+    --fa-primary-opacity: 1;
+    --fa-secondary-opacity: 0.8;
+}
