@@ -12,6 +12,10 @@ import BackAction from "~/src/layout/topbar/BackAction";
 import { useSession } from "~/src/session-user";
 import { parseRequest } from "~/util/formData";
 import { schema } from "./schema";
+import { useActionData } from "@remix-run/react";
+import { FormResponse } from "@math865a/project-tool.types";
+import { useEffect } from "react";
+import { useNotifications } from "~/src";
 
 export const handle = {
     BackAction:<BackAction title="Mine konto" noBack />
@@ -26,6 +30,8 @@ export async function action({ request }: ActionArgs) {
 }
 
 export default function UserDetails() {
+    const actionData = useActionData<FormResponse>()
+    const {notifyResponse} = useNotifications()
     const { user } = useSession();
     const methods = useForm({
         resolver: yupResolver(schema),
@@ -44,6 +50,13 @@ export default function UserDetails() {
         email: user.email,
         color: user.color,
     });
+
+    useEffect(() => {
+        if (actionData) {
+            notifyResponse(actionData)
+        }
+
+    },[actionData])
     
     return (
         <FormProvider {...methods}>

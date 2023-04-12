@@ -37,6 +37,6 @@ export function getDefaultValues(options: IOptions): IFormValues {
             calendar: calendar,
             resourceTypes: resourceTypes,
         },
-        sendWelcomeMail: false,
+        sendWelcomeEmail: false,
     };
 }

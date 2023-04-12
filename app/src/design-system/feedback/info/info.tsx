@@ -1,5 +1,13 @@
 import { faTimes } from "@fortawesome/pro-solid-svg-icons";
-import { Alert, AlertColor, Snackbar, Typography, Portal, Box, useTheme } from "@mui/material";
+import {
+    Alert,
+    AlertColor,
+    Snackbar,
+    Typography,
+    Portal,
+    Box,
+    useTheme,
+} from "@mui/material";
 import { useMemo } from "react";
 import { Action, Child } from "~/src/design-system";
 
@@ -38,39 +46,41 @@ export default function Info({
             </>
         );
     }, [action, handleClose]);
-const theme = useTheme();
+    const theme = useTheme();
     const backgroundColor = useMemo(() => {
-        switch (type){
+        switch (type) {
             case "error":
                 return theme.palette.error.main;
             case "warning":
                 return theme.palette.warning.main;
             case "info":
-                return theme.palette.info.main;
+                return "#282828";
             case "success":
                 return theme.palette.success.main;
             default:
-                return undefined
+                return undefined;
         }
-    },[type])
+    }, [type]);
 
     return (
         <>
             <Portal>
                 <Snackbar
-                ContentProps={{sx:{fontSize: 12, backgroundColor: backgroundColor}}}
+                    ContentProps={{
+                        sx: { fontSize: 12 },
+                    }}
                     open={open}
                     message={message}
                     onClose={(e, reason) => handleClose(reason)}
                     autoHideDuration={autoHideDuration}
-                
-                    action={<Action.Symbol
-                        icon={faTimes}
-                        onClick={() => handleClose("action")}
-                        title="luk"
-                        sx={{color: "#fff"}}
-                    />}
-                        
+                    action={
+                        <Action.Symbol
+                            icon={faTimes}
+                            onClick={() => handleClose("action")}
+                            title="luk"
+                            sx={{ color: "#fff" }}
+                        />
+                    }
                 />
             </Portal>
         </>

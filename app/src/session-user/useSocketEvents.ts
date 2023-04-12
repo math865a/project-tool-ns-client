@@ -7,7 +7,7 @@ export const useSocketEvents = (socket?: Socket) => {
 
     useEffect(() => {
         socket?.on("user-deactivated", () => {
-            submit({}, { action: "/app/session", replace: true });
+            submit({}, { action: "/app/session", method: "POST", replace: true });
         });
     }, [socket]);
 };

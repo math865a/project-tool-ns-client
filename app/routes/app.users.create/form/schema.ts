@@ -32,6 +32,6 @@ export const schema = yup.object({
         then: resourceSchema,
         otherwise: yup.mixed().default(null),
     }),
-    sendWelcomeMail: yup.boolean(),
+    sendWelcomeEmail: yup.boolean(),
     accessGroups: yup.array(yup.string())
 });

@@ -1,8 +1,8 @@
-import { faThumbsUp } from "@fortawesome/pro-light-svg-icons";
+import { faLock, faThumbsUp } from "@fortawesome/pro-light-svg-icons";
 import { Box, Typography, useTheme } from "@mui/material";
 import { Symbol } from "~/src/design-system";
 
-export default function PasswordChanged() {
+export default function PasswordChanged({message}: {message: string}) {
     const theme = useTheme();
     return (
         <Box
@@ -15,7 +15,7 @@ export default function PasswordChanged() {
             py={3}
         >
             <Symbol
-                icon={faThumbsUp}
+                icon={faLock}
                 size={4}
                 color={theme.palette.text.secondary}
             />
@@ -27,7 +27,7 @@ export default function PasswordChanged() {
                 flexWrap="wrap"
                 color="text.secondary"
             >
-                Dit password er blevet ændret.
+                {message}
             </Typography>
         </Box>
     );

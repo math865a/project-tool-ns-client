@@ -19,6 +19,7 @@ import { Directory } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import { useRowState } from "../../hooks/useRowState";
 import { LinkResourceMenu } from "../link-resource/LinkResourceMenu";
+import { useNotifications } from "~/src";
 
 type Props = Omit<ReturnType<typeof useMenuState>, "handleOpen"> & {
     id: GridRowId;
@@ -41,11 +42,15 @@ export function ActionsMenu({
     split,
     merge,
     forwardCredentials,
+    forwardWelcome,
+    handleResetPassword,
     ...menuProps
 }: Props) {
     const record = useMemo(() => {
         return rows.find((row) => row.uid === id);
     }, [rows, id]);
+
+    const { notify } = useNotifications();
 
     const { handleOpen, ...linkMenuProps } = useMenuState<HTMLLIElement>();
 
@@ -81,6 +86,13 @@ export function ActionsMenu({
                 <Directory.ContextMenuItem
                     icon={faKey}
                     label="Nulstil password"
+                    onClick={() => {
+                        handleResetPassword(record);
+                        menuProps.onClose();
+                        notify(
+                            "Brugerens password blev nulstillet og sendt til brugeren via mail."
+                        );
+                    }}
                 />
 
                 <Directory.ContextMenuItem
@@ -91,7 +103,16 @@ export function ActionsMenu({
                             : "Mail velkomst"
                     }
                     onClick={() => {
-                        forwardCredentials(record.uid);
+                        if (record.lastSeen) {
+                            forwardCredentials(record.uid);
+                            notify(
+                                "Adgangsoplysningerne blev sendt til brugeren."
+                            );
+                        } else {
+                            forwardWelcome(record.uid);
+                            notify("Velkomstmailen blev sendt til brugeren.");
+                        }
+
                         menuProps.onClose();
                     }}
                     space
@@ -104,6 +125,7 @@ export function ActionsMenu({
                         onClick={() => {
                             deleteResource(record);
                             menuProps.onClose();
+                            notify("Ressourcen blev slettet.");
                         }}
                     />
                 )}
@@ -114,6 +136,7 @@ export function ActionsMenu({
                         onClick={() => {
                             split(record);
                             menuProps.onClose();
+                            notify("Ressourcen blev splittet fra brugeren.");
                         }}
                     />
                 )}
@@ -142,6 +165,11 @@ export function ActionsMenu({
                             : "Gør til projektleder"
                     }
                     onClick={() => {
+                        notify(
+                            record.isProjectManager
+                                ? "Brugeren er ikke længere projektleder."
+                                : "Brugeren er nu projektleder."
+                        );
                         toggleProjectManager(record);
                         menuProps.onClose();
                     }}
@@ -152,6 +180,11 @@ export function ActionsMenu({
                     icon={record.isDeactivated ? faUnlock : faLock}
                     label={record.isDeactivated ? "Aktivér" : "Deaktivér"}
                     onClick={() => {
+                        notify(
+                            record.isDeactivated
+                                ? "Brugeren er nu aktiv."
+                                : "Brugeren er nu deaktiveret."
+                        );
                         toggleActive(record);
                         menuProps.onClose();
                     }}
@@ -166,6 +199,7 @@ export function ActionsMenu({
                             console.log(record.uid);
                             handleDeleteClick(record.uid);
                             menuProps.onClose();
+                            notify("Brugeren blev slettet.");
                         }}
                         disabled={record.isSessionUser}
                     />

@@ -1,6 +1,6 @@
 import * as yup from "yup";
 export const schema = yup.object({
-    uid: yup.string(),
+    oldPassword: yup.string().required("Du mangler at angive din gamle adgangskode."),
     password: yup
         .string()
         .required("Du mangler at angive en ny adgangskode.")

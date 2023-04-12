@@ -12,11 +12,12 @@ import {
     Stack,
     Chip,
     Box,
+    InputProps,
 } from "@mui/material";
 import { useEffect } from "react";
 import { Path, useWatch } from "react-hook-form";
 import { FieldValues, useFormContext } from "react-hook-form";
-import { FormUI, IconDef, Symbol, SymbolProps } from "~/src/design-system";
+import { Child, FormUI, IconDef, Symbol, SymbolProps } from "~/src/design-system";
 import { ColorPickerControl } from "~/src/design-system";
 
 interface DefaultProps<T extends FieldValues = FieldValues> {
@@ -36,6 +37,8 @@ interface TextProps<T extends FieldValues = FieldValues>
     minRows?: number;
     maxRows?: number;
     placeholder?: string;
+    type?: InputProps["type"]
+    helperText?: Child
 }
 
 function Text<T extends FieldValues = FieldValues>({
@@ -51,6 +54,8 @@ function Text<T extends FieldValues = FieldValues>({
     minRows,
     maxRows,
     placeholder,
+    type,
+    helperText
 }: TextProps<T>) {
     const {
         register,
@@ -64,6 +69,7 @@ function Text<T extends FieldValues = FieldValues>({
             label={label}
             errorText={errors[name]?.message as string | undefined}
         >
+            <Stack justifyContent="flex-start" spacing={0.5}>
             <OutlinedInput
                 placeholder={placeholder}
                 readOnly={disabled}
@@ -73,6 +79,7 @@ function Text<T extends FieldValues = FieldValues>({
                 rows={rows}
                 minRows={minRows}
                 maxRows={maxRows}
+                type={type}
                 {...register(name)}
                 size="small"
                 error={errors[name] !== undefined}
@@ -82,6 +89,8 @@ function Text<T extends FieldValues = FieldValues>({
                     )
                 }
             />
+            {helperText}
+            </Stack>
         </FormUI.Label>
     );
 }

@@ -23,6 +23,8 @@ export const useRowState = ({
     mailWelcome,
     splitUser,
     mergeUser,
+    activateUser,
+    deactivateUser,
 }: ReturnType<typeof useTransport>) => {
     const { rows: initialRows } = useLoaderData<UsersLoader>();
     const [rows, setRows] = React.useState<UserRow[]>(initialRows);
@@ -30,7 +32,7 @@ export const useRowState = ({
         {}
     );
     React.useEffect(() => {
-        if (initialRows.length > rows.length){
+        if (initialRows.length > rows.length) {
             setRows(initialRows);
         }
     }, [initialRows]);
@@ -108,7 +110,11 @@ export const useRowState = ({
             prev.map((row) => (row.uid === newRow.uid ? newRow : row))
         );
 
-        updateUser(newRow);
+        if (newRow.isDeactivated) {
+            deactivateUser(user.uid);
+        } else {
+            activateUser(user.uid);
+        }
     };
 
     const deleteResource = (user: UserRow) => {
@@ -135,6 +141,10 @@ export const useRowState = ({
         mergeUser(user.uid, connectId);
     };
 
+    const handleResetPassword = (user: UserRow) => {
+        resetPassword(user.email);
+    };
+
     const isEditing = React.useMemo(() => {
         return Object.values(rowModesModel).some(
             (rowMode) => rowMode.mode === GridRowModes.Edit
@@ -143,7 +153,11 @@ export const useRowState = ({
 
     const forwardCredentials = (uid: GridRowId) => {
         mailCredentials(uid);
-    }
+    };
+
+    const forwardWelcome = (uid: GridRowId) => {
+        mailWelcome(uid);
+    };
 
     return {
         rows,
@@ -165,6 +179,8 @@ export const useRowState = ({
         mailCredentials,
         split,
         merge,
-        forwardCredentials
+        forwardCredentials,
+        forwardWelcome,
+        handleResetPassword
     };
 };

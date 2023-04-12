@@ -19,6 +19,7 @@ import { IUserConnectOption } from "~/routes/app.users.create/form";
 import { Action, Avatars, Fallback, Symbol } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import { UserRow } from "../../definitions";
+import { useNotifications } from "~/src";
 
 interface Props extends Omit<ReturnType<typeof useMenuState>, "handleOpen"> {
     user: UserRow;
@@ -38,6 +39,7 @@ export function LinkResourceMenu({
             connectOptions.load(`/api/user/merge-options`);
         }
     }, [menuProps.open]);
+    const { notify } = useNotifications();
 
     const [selected, setSelected] = useState<IUserConnectOption | null>(null);
 
@@ -65,6 +67,7 @@ export function LinkResourceMenu({
             merge(user, selected.id);
             handleClose();
             handleCloseMain();
+            notify("Brugeren er nu forbundet med ressourcen");
         }
     };
 
@@ -82,9 +85,17 @@ export function LinkResourceMenu({
             }}
         >
             <ListItem divider>
-                <Box flexGrow={1} display="flex" justifyContent="space-between" px={1} pb={1}>
+                <Box
+                    flexGrow={1}
+                    display="flex"
+                    justifyContent="space-between"
+                    px={1}
+                    pb={1}
+                >
                     <Typography fontWeight="bold">Forbind ressource</Typography>
-                    <Typography fontSize={12} color="text.secondary">{selected ? "1 valgt" : ""}</Typography>
+                    <Typography fontSize={12} color="text.secondary">
+                        {selected ? "1 valgt" : ""}
+                    </Typography>
                 </Box>
             </ListItem>
 
@@ -93,7 +104,14 @@ export function LinkResourceMenu({
             ) : (
                 <List sx={{ maxHeight: 500, overflowY: "scroll", py: 0 }}>
                     {connectOptions.data.map((d) => (
-                        <MenuItem onClick={() => handleSelect(d)} key={d.id} sx={{backgroundColor: theme => theme.palette.background.paper}}>
+                        <MenuItem
+                            onClick={() => handleSelect(d)}
+                            key={d.id}
+                            sx={{
+                                backgroundColor: (theme) =>
+                                    theme.palette.background.paper,
+                            }}
+                        >
                             <ListItemAvatar>
                                 <Avatars.Individual subject={d} size={25} />
                             </ListItemAvatar>
@@ -114,7 +132,13 @@ export function LinkResourceMenu({
                 </List>
             )}
             <ListItem divider />
-            <Box flexGrow={1} display="flex" justifyContent="flex-end" px={1} pt={1}>
+            <Box
+                flexGrow={1}
+                display="flex"
+                justifyContent="flex-end"
+                px={1}
+                pt={1}
+            >
                 <Action.TextButton
                     text="Annuller"
                     icon={faTimes}

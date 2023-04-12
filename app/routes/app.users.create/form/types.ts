@@ -11,7 +11,7 @@ export interface ICreateValues {
     isProjectManager: boolean;
     isResource: boolean;
     resourceDto: ICreateValuesResourceDto;
-    sendWelcomeMail: boolean;
+    sendWelcomeEmail: boolean;
 }
 
 export type ICreateValuesResourceDto = {

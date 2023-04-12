@@ -80,15 +80,15 @@ export async function action({ request }: ActionArgs) {
         async mailWelcome() {
             const body = await parseRequest<{ uid: string }>(request);
             return await sendRequest(request, {
-                url: getServiceUrl("users", "welcome", body.uid),
+                url: getServiceUrl("users", "mail-welcome", body.uid),
                 method: "POST",
             });
         },
         async resetPassword() {
-            const body = await parseRequest<{ uid: string }>(request);
             return await sendRequest(request, {
-                url: getServiceUrl("users", "reset-password", body.uid),
+                url: getServiceUrl("users", "reset-password"),
                 method: "POST",
+                body: await parseRequest(request)
             });
         },
         async mailCredentials() {

@@ -59,8 +59,8 @@ export const useTransport = () => {
         });
     };
 
-    const resetPassword = (uid: GridRowId) => {
-        fetcher.submit(getBodyUid(uid), {
+    const resetPassword = (email: string) => {
+        fetcher.submit(toFormData({ email }), {
             method: "POST",
             action: `/app/users?/resetPassword`,
         });
@@ -98,6 +98,20 @@ export const useTransport = () => {
         });
     };
 
+    const deactivateUser = (uid: GridRowId) => {
+        fetcher.submit(getBodyUid(uid), {
+            method: "POST",
+            action: `/app/users?/deactivate`,
+        });
+    };
+
+    const activateUser = (uid: GridRowId) => {
+        fetcher.submit(getBodyUid(uid), {
+            method: "POST",
+            action: `/app/users?/activate`,
+        });
+    };
+
     return {
         updateUser,
         deleteUser,
@@ -109,5 +123,7 @@ export const useTransport = () => {
         mailCredentials,
         splitUser,
         mergeUser,
+        activateUser,
+        deactivateUser,
     };
 };
