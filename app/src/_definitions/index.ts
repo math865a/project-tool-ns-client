@@ -3,6 +3,7 @@ export * from './agent';
 export * from './contract';
 export * from './date-range';
 export * from './favorites';
+export * from './feedback';
 export * from './financialsource';
 export * from './form';
 export * from './planning';

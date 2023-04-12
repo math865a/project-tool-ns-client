@@ -1,12 +1,7 @@
 import { AppBar, Toolbar, Box, Stack, Divider } from "@mui/material";
 import { useMemo } from "react";
 
-import {
-    Can,
-    Favorites,
-    FeedbackAction,
-    usePermissions,
-} from "~/src/session-user";
+import { Can, Favorites, Feedback, usePermissions } from "~/src/session-user";
 import { Action as A, Subject } from "~/src/_definitions";
 import BackAction from "./BackAction";
 import QuickCreate from "./QuickCreate";
@@ -61,7 +56,7 @@ export default function Topbar({ drawerWidth }: { drawerWidth: number }) {
                         spacing={3}
                         sx={{ mr: 2 }}
                     >
-                        <FeedbackAction />
+                        <Feedback />
                         <Box height={25}>
                             <Divider orientation="vertical" />
                         </Box>

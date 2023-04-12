@@ -8,6 +8,7 @@ import Topbar from "~/src/layout/topbar";
 import { SessionContextProvider } from "~/src/session-user";
 import { logout, requireAuth, sendRequest } from "../../session.server";
 import Sidebar from "../../src/layout/sidebar";
+import { NotificationsProvider } from "~/src";
 
 export async function loader({ request }: LoaderArgs) {
     const token = await requireAuth(request);
@@ -25,7 +26,7 @@ export async function loader({ request }: LoaderArgs) {
             token: token.access_token,
         });
     } catch (e) {
-        console.log("error", e)
+        console.log("error", e);
         return await logout(request);
     }
 }
@@ -38,14 +39,16 @@ const drawerWidth = 225;
 export default function App() {
     return (
         <Layout.Root>
-            <SessionContextProvider>
-                <Topbar drawerWidth={drawerWidth} />
-                <Sidebar drawerWidth={drawerWidth} />
-                <Layout.Main ml={drawerWidth + "px"}>
-                    <Toolbar />
-                    <Outlet />
-                </Layout.Main>
-            </SessionContextProvider>
+            <NotificationsProvider>
+                <SessionContextProvider>
+                    <Topbar drawerWidth={drawerWidth} />
+                    <Sidebar drawerWidth={drawerWidth} />
+                    <Layout.Main ml={drawerWidth + "px"}>
+                        <Toolbar />
+                        <Outlet />
+                    </Layout.Main>
+                </SessionContextProvider>
+            </NotificationsProvider>
         </Layout.Root>
     );
 }

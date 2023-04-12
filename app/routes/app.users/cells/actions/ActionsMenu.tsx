@@ -22,7 +22,14 @@ import { LinkResourceMenu } from "../link-resource/LinkResourceMenu";
 
 type Props = Omit<ReturnType<typeof useMenuState>, "handleOpen"> & {
     id: GridRowId;
-} & Omit<ReturnType<typeof useRowState>, "handleSaveClick" | "handleCancelClick" | "handleEditClick" | "isEditing" | "rowModesModel">;
+} & Omit<
+        ReturnType<typeof useRowState>,
+        | "handleSaveClick"
+        | "handleCancelClick"
+        | "handleEditClick"
+        | "isEditing"
+        | "rowModesModel"
+    >;
 
 export function ActionsMenu({
     id,
@@ -33,6 +40,7 @@ export function ActionsMenu({
     handleDeleteClick,
     split,
     merge,
+    forwardCredentials,
     ...menuProps
 }: Props) {
     const record = useMemo(() => {
@@ -82,6 +90,10 @@ export function ActionsMenu({
                             ? "Mail adgangsoplysninger"
                             : "Mail velkomst"
                     }
+                    onClick={() => {
+                        forwardCredentials(record.uid);
+                        menuProps.onClose();
+                    }}
                     space
                 />
 

@@ -1,21 +1,10 @@
-import { inputBaseClasses, outlinedInputClasses } from "@mui/material";
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 let materialTheme = createTheme({
     typography: {
         fontFamily: [
             "Poppins",
-            "Inter",
-
-            "Public Sans",
             '"Segoe UI"',
-            "Roboto",
-            '"Helvetica Neue"',
-            "Arial",
-            "sans-serif",
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
         ].join(","),
         body1: {
             fontSize: "0.9rem",

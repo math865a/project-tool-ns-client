@@ -1,3 +1,2 @@
 export * from "./useFeedback";
-export * from "./action";
-export * from "./form";
+export * from "./Feedback"

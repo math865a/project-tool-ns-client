@@ -1,61 +1,64 @@
-import { CacheProvider } from '@emotion/react';
-import createEmotionServer from '@emotion/server/create-instance';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import { RemixServer } from '@remix-run/react';
-import { EntryContext } from '@remix-run/react/dist/entry';
+import { CacheProvider } from "@emotion/react";
+import createEmotionServer from "@emotion/server/create-instance";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import { RemixServer } from "@remix-run/react";
+import { EntryContext } from "@remix-run/react/dist/entry";
 import { createEmotionCache, theme } from "mui-config";
-import { renderToString } from 'react-dom/server';
-import { LocalizationProvider } from '@mui/x-date-pickers-pro';
-import { AdapterLuxon } from '@mui/x-date-pickers-pro/AdapterLuxon';
+import { renderToString } from "react-dom/server";
+import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+import { AdapterLuxon } from "@mui/x-date-pickers-pro/AdapterLuxon";
 export default function handleRequest(
-  request: Request,
-  responseStatusCode: number,
-  responseHeaders: Headers,
-  remixContext: EntryContext,
+    request: Request,
+    responseStatusCode: number,
+    responseHeaders: Headers,
+    remixContext: EntryContext
 ) {
-  const cache = createEmotionCache();
-  const { extractCriticalToChunks } = createEmotionServer(cache);
+    const cache = createEmotionCache();
+    const { extractCriticalToChunks } = createEmotionServer(cache);
 
-  function MuiRemixServer() {
-    return (
-      <CacheProvider value={cache}>
-        <ThemeProvider theme={theme}>
-        <LocalizationProvider dateAdapter={AdapterLuxon} adapterLocale="da">
-          <CssBaseline />
-          <RemixServer context={remixContext} url={request.url} />
-          </LocalizationProvider>
-        </ThemeProvider>
-      </CacheProvider>
+    function MuiRemixServer() {
+        return (
+            <CacheProvider value={cache}>
+                <ThemeProvider theme={theme}>
+                    <LocalizationProvider
+                        dateAdapter={AdapterLuxon}
+                        adapterLocale="da"
+                    >
+                        <CssBaseline />
+                        <RemixServer context={remixContext} url={request.url} />
+                    </LocalizationProvider>
+                </ThemeProvider>
+            </CacheProvider>
+        );
+    }
+
+    // Render the component to a string.
+    const html = renderToString(<MuiRemixServer />);
+
+    // Grab the CSS from emotion
+    const { styles } = extractCriticalToChunks(html);
+
+    let stylesHTML = "";
+
+    styles.forEach(({ key, ids, css }) => {
+        const emotionKey = `${key} ${ids.join(" ")}`;
+        const newStyleTag = `<style data-emotion="${emotionKey}">${css}</style>`;
+        stylesHTML = `${stylesHTML}${newStyleTag}`;
+    });
+
+    // Add the Emotion style tags after the insertion point meta tag
+    const markup = html.replace(
+        /<meta(\s)*name="emotion-insertion-point"(\s)*content="emotion-insertion-point"(\s)*\/>/,
+        `<meta name="emotion-insertion-point" content="emotion-insertion-point"/>${stylesHTML}`
     );
-  }
 
-  // Render the component to a string.
-  const html = renderToString(<MuiRemixServer />);
+    responseHeaders.set("Content-Type", "text/html");
 
-  // Grab the CSS from emotion
-  const { styles } = extractCriticalToChunks(html);
-
-  let stylesHTML = '';
-
-  styles.forEach(({ key, ids, css }) => {
-    const emotionKey = `${key} ${ids.join(' ')}`;
-    const newStyleTag = `<style data-emotion="${emotionKey}">${css}</style>`;
-    stylesHTML = `${stylesHTML}${newStyleTag}`;
-  });
-
-  // Add the Emotion style tags after the insertion point meta tag
-  const markup = html.replace(
-    /<meta(\s)*name="emotion-insertion-point"(\s)*content="emotion-insertion-point"(\s)*\/>/,
-    `<meta name="emotion-insertion-point" content="emotion-insertion-point"/>${stylesHTML}`,
-  );
-
-  responseHeaders.set('Content-Type', 'text/html');
-
-  return new Response(`<!DOCTYPE html>${markup}`, {
-    status: responseStatusCode,
-    headers: responseHeaders,
-  });
+    return new Response(`<!DOCTYPE html>${markup}`, {
+        status: responseStatusCode,
+        headers: responseHeaders,
+    });
 }
 
 /*

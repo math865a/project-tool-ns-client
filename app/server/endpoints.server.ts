@@ -15,6 +15,7 @@ export interface IServiceMap {
         projectManager: string;
         schedule: string;
         resourcePortfolio: string;
+        feedback: string;
     };
     gateways: {
         capacityBoard: string;
@@ -50,7 +51,8 @@ function getServiceMap() {
             userService: "user-service",
             capacityBoard: "capacity-board",
             schedule: "schedule",
-            resourcePortfolio: "resource-portfolio"
+            resourcePortfolio: "resource-portfolio",
+            feedback: "feedback"
         },
         gateways: {
             capacityBoard: "capacity-board",
@@ -88,5 +90,8 @@ export function getServiceUrl(
 
 export const namespaces = _.mapValues(
     serviceMap.gateways,
-    (x) => "http://100.64.100.70:5000/" + x
+    (x) => "http://" + process.env.HOST_IP + ":" + process.env.GATEWAY_PORT + "/" + x
 );
+
+
+//http://100.64.100.70:5000/

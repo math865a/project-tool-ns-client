@@ -169,6 +169,7 @@ export interface IFormActionProps {
     edge?: "start" | "end";
     loadingText?: string;
     confirmDisabled?: boolean;
+    cancelDisabled?: boolean;
     hideOnNotDirty?: boolean;
     hideCancel?: boolean;
     hideConfirm?: boolean;
@@ -185,6 +186,7 @@ function Actions({
     confirmText = "Opret",
     cancelText = "Annuller",
     loadingText,
+    cancelDisabled,
     confirmDisabled,
     hideOnNotDirty,
     hideCancel,
@@ -213,7 +215,7 @@ function Actions({
             justifyContent={edge === "end" ? "flex-end" : "flex-start"}
         >
             {hideOnNotDirty && !isDirty ? (
-                <></>
+                null
             ) : (
                 <Stack
                     spacing={2}
@@ -223,10 +225,11 @@ function Actions({
                         <Action.TextButton
                             type="button"
                             onClick={handleCancel}
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || cancelDisabled}
                             text={cancelText}
                             icon={cancelIcon}
                             color={cancelColor}
+
                         />
                     )}
                     {!hideConfirm && (

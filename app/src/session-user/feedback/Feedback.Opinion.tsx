@@ -1,29 +1,30 @@
-import { faSend } from "@fortawesome/pro-light-svg-icons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
-import { Controls, Dialog, FormUI } from "~/src/design-system";
-import { IFeedbackFormProps } from "../FeedbackFormDialog";
-import { schema } from "./definitions/schema";
+import { Opinion } from "~/src/_definitions";
+import { Controls, FormUI } from "~/src/design-system";
+import { FeedbackDialog } from "./Feedback.Dialog";
+import * as yup from "yup";
 
-export function OpinionForm({ onSubmit, onClose }: IFeedbackFormProps) {
+export const schema = yup.object({
+    topic: yup.string().required("Du mangler at angive et emne."),
+    text: yup.string().required("Du mangler at angive en besked."),
+});
+
+export function OpinionForm() {
     const methods = useForm({
         defaultValues: {
-            type: "opinion",
             topic: "",
             text: "",
-        },
+        } as Opinion,
         resolver: yupResolver(schema),
     });
 
     return (
         <FormProvider {...methods}>
             <form
-                onSubmit={methods.handleSubmit(onSubmit)}
                 style={{ width: "100%" }}
             >
-                <Dialog.Title title="Giv din mening" />
-
-                <Dialog.Body>
+                <FeedbackDialog title="Giv os din mening">
                     <FormUI.VStack>
                         <Controls.Default.Text
                             name="topic"
@@ -38,16 +39,7 @@ export function OpinionForm({ onSubmit, onClose }: IFeedbackFormProps) {
                             minRows={5}
                         />
                     </FormUI.VStack>
-                </Dialog.Body>
-                <Dialog.Footer>
-                    <FormUI.Actions
-                    hideOnNotDirty
-                        onCancel={() => onClose(methods.formState.isDirty)}
-                        confirmText="Indsend"
-                        confirmIcon={faSend}
-                        confirmColor="inherit"
-                    />
-                </Dialog.Footer>
+                </FeedbackDialog>
             </form>
         </FormProvider>
     );

@@ -1,34 +1,48 @@
-import { faSend } from "@fortawesome/pro-light-svg-icons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Divider } from "@mui/material";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Controls, Dialog, FormUI } from "~/src/design-system";
-import { IFeedbackFormProps } from "../FeedbackFormDialog";
-import { schema } from "./definitions/schema";
+import { Bug } from "~/src/_definitions";
+import { Controls, FormUI } from "~/src/design-system";
+import { useSession } from "../SessionContextProvider";
+import { FeedbackDialog } from "./Feedback.Dialog";
+import * as yup from "yup"
 
-export function BugForm({ onSubmit, onClose }: IFeedbackFormProps) {
+export const schema = yup.object({
+    priority: yup.number().min(0).max(3).required(),
+    summary: yup.string().required(),
+    page: yup.string(),
+    stepsToReproduce: yup.string(),
+    expectedResult: yup.string(),
+    actualResult: yup.string(),
+    remarks: yup.string()
+})
+
+export function BugForm() {
+    const {
+        feedback,
+    } = useSession();
+
     const methods = useForm({
         defaultValues: {
-            type: "bug",
             summary: "",
             priority: 0,
             page: "",
             stepsToReproduce: "",
             expectedResult: "",
             actualResult: "",
-            comments: "",
-        },
+            remarks: "",
+        } as Bug,
         resolver: yupResolver(schema),
     });
 
     return (
         <FormProvider {...methods}>
             <form
-                onSubmit={methods.handleSubmit(onSubmit)}
+          
                 style={{ width: "100%" }}
             >
-                <Dialog.Title title="Rapporter en fejl" />
-                <Dialog.Body>
+                <FeedbackDialog title="Rapporter en fejl">
                     <FormUI.VStack>
                         <Controls.Default.Text
                             name="summary"
@@ -50,7 +64,7 @@ export function BugForm({ onSubmit, onClose }: IFeedbackFormProps) {
                         />
                         <Divider />
                         <Controls.Default.Text
-                            widthFrac={2}
+                         fullWidth
                             name="page"
                             label="Side"
                             placeholder="Hvilken side oplevede du fejlen på?"
@@ -85,16 +99,7 @@ export function BugForm({ onSubmit, onClose }: IFeedbackFormProps) {
                             fullWidth
                         />
                     </FormUI.VStack>
-                </Dialog.Body>
-                <Dialog.Footer>
-                    <FormUI.Actions
-                    hideOnNotDirty
-                        onCancel={() => onClose(methods.formState.isDirty)}
-                        confirmText="Indsend"
-                        confirmIcon={faSend}
-                        confirmColor="inherit"
-                    />
-                </Dialog.Footer>
+                </FeedbackDialog>
             </form>
         </FormProvider>
     );

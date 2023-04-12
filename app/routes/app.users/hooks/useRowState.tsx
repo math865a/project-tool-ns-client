@@ -141,6 +141,10 @@ export const useRowState = ({
         );
     }, [rowModesModel]);
 
+    const forwardCredentials = (uid: GridRowId) => {
+        mailCredentials(uid);
+    }
+
     return {
         rows,
         rowModesModel,
@@ -161,5 +165,6 @@ export const useRowState = ({
         mailCredentials,
         split,
         merge,
+        forwardCredentials
     };
 };
