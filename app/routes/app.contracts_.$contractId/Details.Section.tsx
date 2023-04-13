@@ -6,6 +6,7 @@ import { Action as A, Can, Subject } from "~/src";
 import { toFormData } from "~/util/formData";
 import { loader } from "./route";
 import { getDefaultValues, schema } from "./details";
+import { ServerValidation } from "~/src/hooks";
 
 export function DetailsSection() {
     const { node } = useLoaderData<typeof loader>();
@@ -28,11 +29,13 @@ export function DetailsSection() {
                 endActions={
                     <FormUI.Actions
                         hideOnNotDirty
+                        confirmText="Gem"
                         onSubmit={methods.handleSubmit(onSubmit)}
                     />
                 }
             >
-                <form style={{ width: "100%" }}>
+                <form style={{ width: "100%" , paddingBottom: "8px"}}>
+                    <ServerValidation/>
                     <Can I={A.Write} a={Subject.Contracts} passThrough>
                         {(allowed) => (
                             <Details.Container>

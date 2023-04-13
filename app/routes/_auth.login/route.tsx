@@ -77,7 +77,7 @@ export default function Login() {
                 >
                     Log Ind
                 </Button>
-                <Typography component={Link} to="/auth/forgot-password">
+                <Typography component={Link} to="/forgot-password">
                     Har du glemt dit password?
                 </Typography>
             </Stack>

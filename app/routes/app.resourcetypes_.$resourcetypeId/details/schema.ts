@@ -7,4 +7,3 @@ export const schema = yup
         salesOvertime: yup.number().default(0),
         typeNo: yup.number().required().min(1),
     })
-    .required();

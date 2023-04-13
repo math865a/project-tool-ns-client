@@ -13,13 +13,13 @@ import {
     GridToolbarFilterButton,
     GridToolbarQuickFilter,
     GridValidRowModel,
-    daDK
+    daDK,
 } from "@mui/x-data-grid-pro";
 import React, {
     createContext,
     useContext,
     useLayoutEffect,
-    useState
+    useState,
 } from "react";
 import { Action } from "../action";
 import { renderCellExpand } from "./ExpandCellRenderer";
@@ -49,7 +49,11 @@ const StyledGridOverlay = styled("div")(({ theme }) => ({
     },
 }));
 
-function NoRowsOverlay({text = "Der er ingen rækker at vise"}: {text?: string}) {
+function NoRowsOverlay({
+    text = "Der er ingen rækker at vise",
+}: {
+    text?: string;
+}) {
     return (
         <StyledGridOverlay>
             <svg
@@ -154,20 +158,24 @@ const sxView: GridProps["sx"] = {
     },
 };
 
-
-function DefaultToolbar(){
-
-    return(
-        <Box flexGrow={1} height={35} display="flex" alignItems="center" justifyContent="space-between">
+function DefaultToolbar() {
+    return (
+        <Box
+            mt={1}
+            flexGrow={1}
+            height={50}
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+        >
+          
+            <GridToolbarQuickFilter />
             <Stack direction="row" spacing={1} alignItems="center">
-            <GridToolbarFilterButton/>
-                <GridToolbarExport/>
+                <GridToolbarFilterButton />
+                <GridToolbarExport />
             </Stack>
-            <GridToolbarQuickFilter/>
-
         </Box>
-    )
-
+    );
 }
 
 type ViewGridProps<T extends GridValidRowModel = GridValidRowModel> = {
@@ -233,7 +241,11 @@ function View<T extends GridValidRowModel = GridValidRowModel>({
                 rowBuffer={15}
                 components={{
                     NoRowsOverlay: NoRowsOverlay,
-                    Toolbar: Toolbar ? Toolbar : hideToolbar ? undefined : DefaultToolbar,
+                    Toolbar: Toolbar
+                        ? Toolbar
+                        : hideToolbar
+                        ? undefined
+                        : DefaultToolbar,
                 }}
                 componentsProps={{
                     row: {
@@ -243,8 +255,7 @@ function View<T extends GridValidRowModel = GridValidRowModel>({
                     },
                     toolbar: {
                         showQuickFilter: true,
-                        
-                    }
+                    },
                 }}
                 localeText={daDK.components.MuiDataGrid.defaultProps.localeText}
                 rowHeight={rows?.length === 0 ? 300 : rowHeight}
@@ -306,5 +317,5 @@ export const Grid = {
     LinkCell,
     multilineColumn: multilineColumn,
     useViewContext: useViewContext,
-    BooleanCell
+    BooleanCell,
 };

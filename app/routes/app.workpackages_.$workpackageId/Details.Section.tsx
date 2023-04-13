@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useSubmit } from "@remix-run/react";
 import { Controls, Details, FormUI, Page } from "design";
 import { FormProvider, useForm } from "react-hook-form";
 import { Action, Subject } from "~/src/_definitions";
@@ -8,6 +8,8 @@ import { useWorkpackage } from "~/src/state";
 import { IWorkpackageDetails } from "~/src/state/workpackage-profile/state";
 import { schema } from "./details";
 import { WorkpackageLoader } from "./route";
+import { toFormData } from "~/util";
+import { ServerValidation } from "~/src/hooks";
 
 export default function DetailsSection() {
     const {
@@ -19,6 +21,11 @@ export default function DetailsSection() {
         defaultValues: details.state,
     });
 
+    const submit = useSubmit()
+    const onSubmit = (values: IWorkpackageDetails) => {
+        submit(toFormData(values), { method: "post" });
+    };
+
     return (
         <FormProvider {...methods}>
             <Page.Section
@@ -26,15 +33,18 @@ export default function DetailsSection() {
                 xs={6}
                 title="Detaljer"
                 endActions={
-                    <FormUI.SocketActions<IWorkpackageDetails>
-                        message="update:details"
-                        afterSubmit={(value) => details.updateDetails(value)}
+                    <FormUI.Actions
+                        onSubmit={methods.handleSubmit(onSubmit)}
+                        hideOnNotDirty
+                        confirmText="Gem ændringer"
+
                     />
                 }
             >
                 <Can I={Action.Write} a={Subject.Workpackages} passThrough>
                     {(allowed) => (
-                        <form style={{ width: "100%" }}>
+                        <form style={{ width: "100%", paddingBottom: "8px" }}>
+                            <ServerValidation/>
                             <Details.Container>
                                 <Details.Item
                                     title="Kontrakt"

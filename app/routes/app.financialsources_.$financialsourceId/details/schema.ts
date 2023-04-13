@@ -1,7 +1,4 @@
-import * as yup from "yup"
-export const schema = yup
-    .object({
-        financialsourceId: yup.string().required(),
-        name: yup.string().required(),
-    })
-    .required();
+import * as yup from "yup";
+export const schema = yup.object({
+    name: yup.string().required("Du mangler at angive et navn"),
+});

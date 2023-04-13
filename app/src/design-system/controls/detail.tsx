@@ -6,6 +6,7 @@ import {
     MenuItem,
     OutlinedInput,
     Select,
+    TextField,
     Typography,
 } from "@mui/material";
 import _ from "lodash";
@@ -14,6 +15,7 @@ import { Path, useWatch } from "react-hook-form";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { FormUI } from "../forms";
 import { Symbol } from "../symbol";
+import { disableInteraction } from "~/styles";
 
 interface DefaultProps<T extends FieldValues = FieldValues> {
     name: Path<T>;
@@ -35,21 +37,30 @@ function Text<T extends FieldValues = FieldValues>({
     width,
     rows,
     placeHolder = "-",
-    disabled
+    disabled,
 }: TextControlProps<T>) {
     const { register } = useFormContext<T>();
 
     return (
         <OutlinedInput
             fullWidth={!width}
+            style={disabled ? disableInteraction : undefined}
             sx={{
                 width: width,
                 py: rows ? 0.5 : undefined,
                 color: "text.secondary",
                 fontFamily: "Poppins",
                 fontSize: 13,
+                ...(disabled
+                    ? {
+                          "& .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "transparent",
+                          },
+                      }
+                    : {}),
             }}
-            disabled={disabled}
+            size="small"
+            readOnly={disabled}
             {...register(name)}
             className="display-text"
             endAdornment={
@@ -73,7 +84,7 @@ function Dropdown<T extends FieldValues = FieldValues>({
     width,
     placeHolder = "-",
     options,
-    disabled
+    disabled,
 }: SelectProps<T>) {
     const {
         register,
@@ -94,7 +105,7 @@ function Dropdown<T extends FieldValues = FieldValues>({
                 )}
             </Box>
         );
-    }
+    };
 
     if (options.length === 0) return null;
 
@@ -108,16 +119,25 @@ function Dropdown<T extends FieldValues = FieldValues>({
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
             onBlur={() => setIsHovering(false)}
+            style={disabled ? disableInteraction : undefined}
             open={open}
             sx={{
                 width: width,
                 py: 0,
+               
             }}
             size="small"
             value={value}
-            disabled={disabled}
+       
             error={errors[name] !== undefined}
-            SelectDisplayProps={{style: { paddingTop: "5.5px", paddingBottom: "5.5px", paddingLeft: "12px"}}}
+            SelectDisplayProps={{
+                style: {
+                    paddingTop: "5.5px",
+                    paddingBottom: "5.5px",
+                    paddingLeft: "12px",
+                    borderColor: "transparent",
+                },
+            }}
             placeholder={placeHolder}
             className="display-text"
             renderValue={(value) => {
@@ -134,7 +154,6 @@ function Dropdown<T extends FieldValues = FieldValues>({
         >
             {options.map((d) => (
                 <MenuItem value={d.id} key={d.id}>
-                    
                     <ListItemText
                         primary={d.name}
                         primaryTypographyProps={{

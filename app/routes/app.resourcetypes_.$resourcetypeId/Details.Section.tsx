@@ -10,6 +10,7 @@ import { useLoaderData, useSubmit } from "@remix-run/react";
 import { toFormData } from "~/util/formData";
 import { getDefaultValues, schema } from "./details";
 import { ResourceTypeLoader } from "./route";
+import { ServerValidation } from "~/src/hooks";
 
 export default function DetailsSection() {
     const { node } = useLoaderData<ResourceTypeLoader>();
@@ -42,7 +43,8 @@ export default function DetailsSection() {
             >
                 <Can I={A.Write} a={Subject.ResourceTypes} passThrough>
                     {(allowed) => (
-                        <form style={{ width: "100%" }}>
+                        <form style={{ width: "100%", paddingBottom: "8px" }}>
+                            <ServerValidation />
                             <Details.Container>
                                 <Details.Item
                                     title="Navn"

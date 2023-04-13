@@ -77,7 +77,7 @@ export const useTasks = () => {
         }
 
         setTasks(
-            _.sortBy(_.map(rawTasks, formatTask), (d) => d.workpackage.id)
+            _.sortBy(_.map(rawTasks, formatTask), (d) => d.interval.end?.toMillis())
         );
     }, [rawTasks]);
 

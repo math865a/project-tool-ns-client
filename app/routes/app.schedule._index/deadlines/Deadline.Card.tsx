@@ -6,6 +6,7 @@ import {
     CardHeader,
     Chip,
     Divider,
+    Paper,
     Stack,
     Tooltip,
     Typography,
@@ -17,6 +18,9 @@ import { Avatars, Symbol } from "~/src/design-system";
 import _ from "lodash";
 import { formatDecimal } from "~/util/format";
 import { faClock, faTimer } from "@fortawesome/pro-light-svg-icons";
+import { useElementSize } from "@mantine/hooks";
+import { useSession } from "~/src";
+import { useSummary } from "../_state";
 
 export function DeadlineCard({
     title,
@@ -28,6 +32,7 @@ export function DeadlineCard({
     work,
     dailyWork,
     projectManager,
+    workDays,
 }: IDeadlineTask) {
     const theme = useTheme();
     const dueDisplay = useMemo(() => {
@@ -53,6 +58,17 @@ export function DeadlineCard({
         };
     }, [due]);
 
+    const { workpackages } = useSummary();
+
+    const color = useMemo(() => {
+        const wp = workpackages.find((wp) => wp.id === workpackage.id);
+        return wp?.color;
+    }, [workpackages, workpackage.id]);
+
+    const { ref, width } = useElementSize();
+
+    const { user } = useSession();
+
     return (
         <Card
             sx={{
@@ -67,34 +83,114 @@ export function DeadlineCard({
             variant="outlined"
         >
             <CardHeader
-                title={title}
-                subheader={workpackage.systematicName}
-                subheaderTypographyProps={{ fontSize: 12 }}
-                titleTypographyProps={{
-                    noWrap: true,
-                    fontSize: 12,
-                    maxWidth: 175,
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                }}
-                action={
-                    <Stack
-                        direction="row"
-                        spacing={0.75}
-                        alignItems="center"
-                        pr={1}
-                        pt={1}
-                        maxWidth={50}
+                disableTypography
+                title={
+                    <Tooltip
+                        title={
+                            <Box p={1} maxWidth={200}>
+                                <Typography
+                                    fontWeight="bold"
+                                    fontSize={12}
+                                    gutterBottom
+                                >
+                                    Arbejdspakke
+                                </Typography>
+                                <Typography fontSize={12}>
+                                    {workpackage.name}
+                                </Typography>
+                            </Box>
+                        }
                     >
-                        <Symbol icon={faClock} />
-                        <Typography
-                            fontSize={12}
-                            pt={0.25}
-                            color="text.secondary"
+                        <Stack
+                            direction="row"
+                            spacing={1}
+                            alignItems="center"
+                            pb={0.33}
                         >
-                            {formatDecimal(work) + "t"}
+                            {color && (
+                                <Box
+                                    width={10}
+                                    height={10}
+                                    borderRadius={0.75}
+                                    sx={{
+                                        backgroundColor: color,
+                                    }}
+                                />
+                            )}
+                            <Typography fontSize={13}>
+                                {workpackage.systematicName}
+                            </Typography>
+                        </Stack>
+                    </Tooltip>
+                }
+                subheader={
+                    <Tooltip
+                        title={
+                            <Box p={1} maxWidth={200}>
+                                <Typography
+                                    fontWeight="bold"
+                                    fontSize={12}
+                                    gutterBottom
+                                >
+                                    Opgave
+                                </Typography>
+                                <Typography fontSize={12}>{title}</Typography>
+                            </Box>
+                        }
+                    >
+                        <Typography
+                            color="text.secondary"
+                            ref={ref}
+                            noWrap
+                            overflow="hidden"
+                            textOverflow="ellipsis"
+                            fontSize={12}
+                            maxWidth={225}
+                        >
+                            {title}
                         </Typography>
-                    </Stack>
+                    </Tooltip>
+                }
+                action={
+                    <Tooltip
+                        title={
+                            <Box p={1}>
+                                <Typography
+                                    fontWeight="bold"
+                                    fontSize={12}
+                                    gutterBottom
+                                >
+                                    Arbejde
+                                </Typography>
+                                <Typography fontSize={12} gutterBottom>
+                                    {formatDecimal(work) + " timer i alt"}
+                                </Typography>
+                                <Typography fontSize={12}>
+                                    {formatDecimal(dailyWork) +
+                                        " timer dagligt (" +
+                                        workDays +
+                                        (workDays === 1 ? " dag)" : " dage)")}
+                                </Typography>
+                            </Box>
+                        }
+                    >
+                        <Stack
+                            direction="row"
+                            spacing={0.75}
+                            alignItems="center"
+                            pr={1}
+                            maxWidth={50}
+                        >
+                            <Symbol icon={faClock} />
+                            <Typography
+                                fontSize={12}
+                                pt={0.25}
+                                color="text.secondary"
+                            >
+                                {formatDecimal(work) + "t"}
+                            </Typography>
+                        </Stack>
+                    </Tooltip>
                 }
             />
 
@@ -110,7 +206,7 @@ export function DeadlineCard({
                         placement="bottom"
                         title={
                             <Box p={1}>
-                                <Typography fontWeight="bold" fontSize={12}>
+                                <Typography fontSize={12} gutterBottom>
                                     {`${_.capitalize(
                                         interval.start
                                             ?.setLocale("da")
@@ -143,12 +239,17 @@ export function DeadlineCard({
                             subject={projectManager}
                             size={22.5}
                             fontSize={11}
+                            tooltip={projectManager.name + " (projektleder)"}
                         />
                         <Divider orientation="vertical" flexItem />
                         <Avatars.EllipsisGroup
                             People={team}
                             size={22.5}
                             fontSize={11}
+                            getTooltip={(p) =>
+                                p.name +
+                                (user.uid === p.id ? " (mig)" : " (teammedlem)")
+                            }
                         />
                     </Stack>
                 </Box>

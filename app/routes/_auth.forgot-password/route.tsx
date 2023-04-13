@@ -1,7 +1,7 @@
 import { ResetPasswordDto } from '@math865a/project-tool.types';
 import { Button, Stack, TextField, Typography } from '@mui/material';
 import { ActionArgs } from '@remix-run/node';
-import { Link, useActionData } from '@remix-run/react';
+import { Form, Link, useActionData } from '@remix-run/react';
 import { sendRequest } from 'session';
 import { getServiceUrl } from '~/server';
 
@@ -12,7 +12,7 @@ export const handle = {
 export async function action({ request }: ActionArgs) {
     const formData = await request.formData();
     const result = await sendRequest(request, {
-        url: "http://auth-service:5001/reset-password",
+        url: getServiceUrl('authentication', 'reset-password'),
         method: 'POST',
         body: {
             email: formData.get('email') as string,
@@ -28,15 +28,15 @@ export default function ResetPassword() {
         return (
             <Stack spacing={4} flexGrow={1}>
                 <Typography>
-                    Hvis den angivede mail er tilknyttet en bruger, vil du inden
-                    kort til modtage et engangspassword.
+                    Hvis mailadressen er tilknyttet en bruger, vil du inden
+                   længe modtage en mail med en ny adgangskode.
                 </Typography>
                 <Button
                     variant="contained"
                     type="submit"
                     size="large"
                     component={Link}
-                    to="/auth/login"
+                    to="/login"
                     sx={{
                         textTransform: 'initial',
                         fontWeight: 'bold',
@@ -50,7 +50,7 @@ export default function ResetPassword() {
     }
 
     return (
-        <form method="post">
+        <Form method="post">
             <Stack spacing={4} flexGrow={1}>
                 <TextField
                     name="email"
@@ -67,9 +67,9 @@ export default function ResetPassword() {
                         letterSpacing: '0.05rem',
                     }}
                 >
-                    Send mig et engangspassword
+                    Nulstil min adgangskode
                 </Button>
             </Stack>
-        </form>
+        </Form>
     );
 }

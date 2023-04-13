@@ -7,6 +7,7 @@ import { toFormData } from "~/util/formData";
 import { loader } from "./route";
 import {} from "./details/schema";
 import { getDefaultValues, schema } from "./details";
+import { ServerValidation } from "~/src/hooks";
 
 export default function DetailsSection() {
     const { node } = useLoaderData<typeof loader>();
@@ -18,6 +19,7 @@ export default function DetailsSection() {
     const submit = useSubmit();
 
     const onSubmit = (values: ReturnType<typeof getDefaultValues>) => {
+        console.log(values);
         submit(toFormData(values), { method: "post" });
     };
 
@@ -29,11 +31,13 @@ export default function DetailsSection() {
                 endActions={
                     <FormUI.Actions
                         hideOnNotDirty
+                        confirmText="Bekræft"
                         onSubmit={methods.handleSubmit(onSubmit)}
                     />
                 }
             >
                 <form style={{ width: "100%" }}>
+                    <ServerValidation />
                     <Can I={A.Write} a={Subject.FinancialSources} passThrough>
                         {(allowed) => (
                             <Details.Container>

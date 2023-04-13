@@ -1,28 +1,38 @@
-import { FormErrorResponse } from "@math865a/project-tool.types";
+import { FormErrorResponse, FormResponse } from "@math865a/project-tool.types";
 import { useActionData, useNavigation } from "@remix-run/react";
 import _ from "lodash";
 import { useEffect } from "react";
 import { Path, useFormContext } from "react-hook-form";
+import { useNotifications } from "../components";
 
 export const useServerValidation = <
     T extends { [index: string]: any } = { [index: string]: any }
 >(
     updateErrorMessage?: (message: string | null) => void
 ) => {
-    const { setError } = useFormContext<T>();
+    const { notifyResponse } = useNotifications();
+    const { setError, reset, getValues } = useFormContext<T>();
     const transition = useNavigation();
-    const actionData = useActionData<FormErrorResponse>();
+    const actionData = useActionData<FormResponse>();
 
     useEffect(() => {
         if (transition.state === "idle" && actionData) {
-            _.forEach(actionData.validation, (v, k) => {
-                setError(k as Path<T>, {
-                    message: v,
+            if (actionData.status === "error") {
+                _.forEach(actionData.validation, (v, k) => {
+                    setError(k as Path<T>, {
+                        message: v,
+                    });
                 });
-            });
-            if (updateErrorMessage && actionData.message) {
-                updateErrorMessage(actionData.message);
+                if (updateErrorMessage && actionData.message) {
+                    updateErrorMessage(actionData.message);
+                }
+            } else {
+                reset(getValues())
+                if (updateErrorMessage) {
+                    updateErrorMessage(null);
+                }
             }
+            notifyResponse(actionData);
         }
     }, [transition.state, actionData]);
 };
@@ -36,4 +46,4 @@ export function ServerValidation({
     return null;
 }
 
-export default ServerValidation
+export default ServerValidation;

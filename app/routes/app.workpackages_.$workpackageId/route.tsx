@@ -16,6 +16,7 @@ import PlanningSection from "./Planning.Section";
 import StatusSection from "./Status.Section";
 import WorkBreakdownsSection from "./WorkBreakdown.Section";
 import WorkTimesseriesSection from "./WorkTimeseries.Section";
+import { parseRequest } from "~/util";
 
 export const handle = {
     BackAction: <PageContext />,
@@ -55,9 +56,15 @@ export async function action({ params, request }: LoaderArgs) {
             method: "DELETE",
         });
         if (result.status === "ok") {
-            return redirect("..");
+            return redirect("/app/workpackages");
         }
         return json(result);
+    } else if (request.method === "POST") {
+        return await sendRequest(request, {
+            url: getServiceUrl("workpackages", params.workpackageId),
+            method: "POST",
+            body: await parseRequest(request),
+        });
     }
 }
 

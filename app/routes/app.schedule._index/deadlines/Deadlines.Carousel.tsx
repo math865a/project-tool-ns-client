@@ -9,14 +9,7 @@ export function DeadlinesCarousel() {
     } = useSummary();
 
     return (
-        <Box
-            flexGrow={1}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            p={1}
-        >
-            <Box flexGrow={1}>
+        <Box width="100%">
             <Carousel
                 slideSize={275}
                 slideGap="lg"
@@ -25,13 +18,11 @@ export function DeadlinesCarousel() {
                 height={130}
             >
                 {deadlines.map((d) => (
-                    <Carousel.Slide key={d.id} >
+                    <Carousel.Slide key={d.id}>
                         <DeadlineCard {...d} />
                     </Carousel.Slide>
                 ))}
             </Carousel>
-            </Box>
-
         </Box>
     );
 }

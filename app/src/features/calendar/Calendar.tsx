@@ -14,8 +14,8 @@ export function Calendar({ resourceId }: { resourceId: string }) {
     const { events, loadEvents, hasLoaded } = useEvents(resourceId);
 
     const handleRangeChange = (r: any) => {
-        const range = r as unknown as { start: Date; end: Date }; 
-        console.log(r)
+        const range = r as unknown as { start: Date; end: Date };
+        console.log(r);
         loadEvents(dt.fromJSDate(range.start), dt.fromJSDate(range.end));
     };
 
@@ -30,18 +30,22 @@ export function Calendar({ resourceId }: { resourceId: string }) {
         };
     }, []);
 
-
     return (
         <Page.SubLayout>
             <Divider />
             <Box flexGrow={1} pt={4} height={"80vh"}>
-                {hasLoaded ? 
-                <BigCalendar
-                    onRangeChange={handleRangeChange}
-                    events={events}
-                    views={[Views.MONTH]}
-                    {...props}
-                /> : <Fallback.SectionLoading height="85vh"/>}
+                {hasLoaded ? (
+                    <BigCalendar
+                        showAllEvents
+                        onRangeChange={handleRangeChange}
+                        events={events}
+                        views={[Views.MONTH]}
+                        onShowMore={(data) => console.log(data)}
+                        {...props}
+                    />
+                ) : (
+                    <Fallback.SectionLoading height="85vh" />
+                )}
             </Box>
         </Page.SubLayout>
     );

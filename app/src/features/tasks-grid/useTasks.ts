@@ -6,13 +6,16 @@ import { useEffect, useState } from "react";
 import { IAllocation, IRawAllocation, IRawTask, ITask } from "~/src";
 import { getWorkDays } from "~/util/time";
 
-export const useTasks = (resourceId: string) => {
+export const useTasks = (
+    resourceId: string,
+    initialPeriod: { start: dt; end: dt } = {
+        start: dt.local().minus({ weeks: 2 }),
+        end: dt.local().plus({ months: 2 }),
+    }
+) => {
     const fetcher = useFetcher<IRawTask[]>();
 
-    const [period, setPeriod] = useState<{ start: dt; end: dt }>({
-        start: dt.local().minus({ weeks: 2 }),
-        end: dt.local().plus({ months: 3 }),
-    });
+    const [period, setPeriod] = useState<{ start: dt; end: dt }>(initialPeriod);
 
     const updatePeriod = (range: DateRange<dt>) => {
         let start = period.start;
@@ -29,7 +32,7 @@ export const useTasks = (resourceId: string) => {
             start: newStart,
             end: newEnd,
         });
-        loadTasks({ start: newStart, end: newEnd })
+        loadTasks({ start: newStart, end: newEnd });
     };
 
     const [tasks, setTasks] = useState<ITask[]>([]);
@@ -38,7 +41,7 @@ export const useTasks = (resourceId: string) => {
         const searchParams = new URLSearchParams({
             start: period.start.toISODate() as string,
             end: period.end.toISODate() as string,
-        })
+        });
         const url = `/api/tasks/${resourceId}?${searchParams.toString()}`;
         fetcher.load(url);
     };

@@ -1,4 +1,11 @@
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import {
+    Cell,
+    Label,
+    Pie,
+    PieChart,
+    ResponsiveContainer,
+    Tooltip,
+} from "recharts";
 import { Page } from "~/src/design-system";
 import { useSummary } from "./_state";
 import { TaskDistributionTooltip } from "./distribution";
@@ -34,7 +41,6 @@ export default function DistributionSection() {
                                     )?.color ?? d.color
                                 }
                                 style={{
-                                    cursor: "pointer",
                                     borderColor: "transparent",
                                     stroke: "transparent",
                                     outline: "none",
@@ -43,15 +49,16 @@ export default function DistributionSection() {
                         ))}
                     </Pie>
                     <Tooltip
-                    allowEscapeViewBox={{ x: false, y: true }}
-                    wrapperStyle={{
-                        outline: "none",
-                        borderColor: "transparent",
-                    }}
-                    content={(props) => <TaskDistributionTooltip {...props} />}
-                />
+                        allowEscapeViewBox={{ x: false, y: true }}
+                        wrapperStyle={{
+                            outline: "none",
+                            borderColor: "transparent",
+                        }}
+                        content={(props) => (
+                            <TaskDistributionTooltip {...props} />
+                        )}
+                    />
                 </PieChart>
-
             </ResponsiveContainer>
         </Page.Section>
     );

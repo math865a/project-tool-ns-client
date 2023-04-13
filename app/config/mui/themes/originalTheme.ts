@@ -2,10 +2,7 @@ import { createTheme } from "@mui/material/styles";
 
 let materialTheme = createTheme({
     typography: {
-        fontFamily: [
-            "Poppins",
-            '"Segoe UI"',
-        ].join(","),
+        fontFamily: ["Poppins", '"Segoe UI"'].join(","),
         body1: {
             fontSize: "0.9rem",
         },
@@ -100,11 +97,10 @@ materialTheme = createTheme(materialTheme, {
                 PaperProps: {
                     sx: {
                         backgroundColor: "#fff",
-                        borderRadius: 4
+                        borderRadius: 4,
                     },
                 },
-
-            }
+            },
         },
         MuiButton: {
             styleOverrides: {
@@ -274,6 +270,7 @@ materialTheme = createTheme(materialTheme, {
                         "& .MuiOutlinedInput-notchedOutline": {
                             borderColor: "transparent",
                         },
+                        
                     },
                 },
             ],
@@ -292,15 +289,13 @@ materialTheme = createTheme(materialTheme, {
                         root: {
                             fontSize: 13,
                         },
+
                         "& .MuiOutlinedInput-notchedOutline": {
                             borderColor: "transparent",
-                            "&:disabled": {
+                            "& .Mui-disabled": {
                                 borderColor: "transparent",
-                   
                             },
                         },
-                    
-                 
                     },
                 },
                 {
