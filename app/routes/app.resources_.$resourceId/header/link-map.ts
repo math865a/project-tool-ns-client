@@ -17,11 +17,6 @@ export const useLinks = () => {
                 root: true
             },
             {
-                to: `/app/resources/${resourceId}/calendar`,
-                icon: faCalendar,
-                title: "Kalender",
-            },
-            {
                 to: `/app/resources/${resourceId}/tasks`,
                 icon: faListUl,
                 title: "Opgaver",

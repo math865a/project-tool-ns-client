@@ -14,11 +14,6 @@ export const links = [
         title: "Dashboard",
     },
     {
-        to: "/app/schedule/calendar",
-        icon: faCalendar,
-        title: "Kalender",
-    },
-    {
         to: "/app/schedule/tasks",
         icon: faListUl,
         title: "Opgaver",

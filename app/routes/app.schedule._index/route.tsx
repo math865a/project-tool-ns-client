@@ -25,7 +25,6 @@ export default function SummaryPage() {
     return (
         <ScheduleSummaryProvider>
             <DeadlinesSection />
-            <DistributionSection />
             <TasksSection />
         </ScheduleSummaryProvider>
     );

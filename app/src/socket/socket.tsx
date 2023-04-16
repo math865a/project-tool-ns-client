@@ -19,17 +19,16 @@ export const useSocket = ({
 
     useEffect(() => {
         const socket = io(namespaces[namespace], {
-            transports: ["websocket"],
             auth: {
                 access_token: token ?? "",
-                uid: uid
-            },
+                uid: uid,
+            }
         });
         setSocket(socket);
         return () => {
             socket.close();
         };
-    }, [token ,uid]);
+    }, [token, uid]);
 
     return socket;
 };

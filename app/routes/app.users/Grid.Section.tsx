@@ -27,6 +27,9 @@ export default function GridSection() {
                     onRowEditStop={rowState.handleRowEditStop}
                     processRowUpdate={rowState.processRowUpdate}
                     editMode="row"
+                    hideFooter={false}
+                    pagination
+                    autoPageSize
                     initialState={{
                         sorting: {
                             sortModel: [
