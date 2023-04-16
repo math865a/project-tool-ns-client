@@ -5,7 +5,6 @@ import {Duration as dur} from "luxon"
 export const sessionStorage = createCookieSessionStorage({
     cookie: {
         name: "__session",
-        httpOnly: true,
         path: "/",
         sameSite: "lax",
         secrets: ["3Aa&q!$-{~G7tiiUZnJU+UX%nM]za<"],
