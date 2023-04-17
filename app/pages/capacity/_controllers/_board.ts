@@ -10,6 +10,7 @@ import { Filter } from "./filter";
 import { Pagination } from "./pagination";
 import { Transport } from "./transport";
 import { View } from "./view";
+import { Detail } from "./detail";
 
 @model("capacity-board")
 export class CapacityBoard extends Model({
@@ -20,11 +21,13 @@ export class CapacityBoard extends Model({
     Boundary: prop<Boundary>(() => new Boundary({})),
     View: prop<View>(() => new View({})),
     Filter: prop<Filter>(),
+    Detail: prop<Detail>(() => new Detail({})),
     RowStore: prop<RowStore>(() => new RowStore({})),
     CapacityStore: prop<CapacityStore>(() => new CapacityStore({})),
     CapacityViewStore: prop<CapacityViewsStore>(
         () => new CapacityViewsStore({})
     ),
+
 }) {
     api: React.MutableRefObject<GridApiPro> | undefined;
 
@@ -32,6 +35,4 @@ export class CapacityBoard extends Model({
     updateApi(api: React.MutableRefObject<GridApiPro>) {
         this.api = api;
     }
-
-
 }

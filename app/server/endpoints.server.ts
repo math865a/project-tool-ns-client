@@ -16,6 +16,7 @@ export interface IServiceMap {
         schedule: string;
         resourcePortfolio: string;
         feedback: string;
+        activity: string;
     };
     gateways: {
         capacityBoard: string;
@@ -53,6 +54,7 @@ function getServiceMap() {
             schedule: "schedule",
             resourcePortfolio: "resource-portfolio",
             feedback: "feedback",
+            activity: "activity",
         },
         gateways: {
             capacityBoard: "capacity-board",

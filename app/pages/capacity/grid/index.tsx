@@ -3,7 +3,7 @@ import { DataGridPro } from "@mui/x-data-grid-pro";
 import { GridApiPro } from "@mui/x-data-grid-pro/models/gridApiPro";
 import { Grid } from "design";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useEffect } from "react";
 import { columnDefinitions } from "../_config/columns";
 import {
     FOOTER_HEIGHT, HEADER_HEIGHT, ROW_HEIGHT, TOOLBAR_HEIGHT
@@ -12,10 +12,19 @@ import { gridStyle } from "../_config/grid-style";
 import { useBoard } from "../_provider";
 import Footer from "./Footer";
 import CapacityBoardToolbar from "./toolbar";
+import { useLocation } from "@remix-run/react";
 
 const CapacityBoardGrid = observer(
     ({ api }: { api: React.MutableRefObject<GridApiPro> }) => {
         const Board = useBoard();
+
+        const location = useLocation()
+
+        useEffect(() => {
+            if (location.pathname === "/app/capacity"){
+                Board.Detail.setActiveId(null)
+            }
+        }, [location.pathname])
 
         return (
             <Box

@@ -28,7 +28,7 @@ export class CapacityInterval extends Model({
 
     @computed
     get endDate(){
-        return normalize(this.tf).plus({days: 1})
+        return normalize(this.tf)
     }
 
     @computed

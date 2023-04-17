@@ -1,4 +1,5 @@
 import { LoaderArgs } from "@remix-run/node";
+import { Outlet } from "@remix-run/react";
 import { sendRequest } from "session";
 import CapacityBoard from "~/pages/capacity";
 import { getServiceUrl } from "~/server";
@@ -26,6 +27,7 @@ export default function CapacityBoardPage() {
                     <Page.Root maxWidth="xl">
                         <Page.Layout>
                             <CapacityBoard />
+                            <Outlet/>
                         </Page.Layout>
                     </Page.Root>
                 ) : (
