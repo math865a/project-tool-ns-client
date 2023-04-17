@@ -7,31 +7,8 @@ import {DateTime as dt} from "luxon"
 @model("capacity-pagination")
 export class Pagination extends Model({
     page: prop<number>(0).withSetter(),
-    //pageSize: prop<number>(10).withSetter(),
 }) {
     onAttachedToRootStore() {
-      /*  const sync = reaction(
-            () => this.page,
-            (page) => {
-                const rows = _.slice(
-                    this.Rows,
-                    this.rowRange.first,
-                    this.rowRange.last
-                ).map((d) => d.id);
-                const boundaries = getRoot<CapacityBoard>(
-                    this
-                ).Boundary.dataBoundaries.map((d) => ({
-                    ts: d.interval.start.toFormat("yyyy-MM-dd"),
-                    tf: d.interval.end.toFormat("yyyy-MM-dd"),
-                }));
-                getRoot<CapacityBoard>(this).CapacityStore.loadBatch(
-                    rows,
-                    boundaries
-                );
-            },
-            { equals: comparer.shallow }
-        );
-*/
         const autoPageSize = reaction(() => this.pageSize, (pageSize) => {
             getRoot<CapacityBoard>(this).api?.current.setPageSize(pageSize)
         }, {equals: comparer.shallow})
