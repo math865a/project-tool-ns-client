@@ -14,7 +14,7 @@ import {
     TypographyProps,
 } from "@mui/material";
 
-import { Action, Child, IconDef, Symbol, SymbolProps } from "../index";
+import { Action, Child, IconDef, Symbol, SymbolProps } from "./index";
 
 export interface IDialogProps {
     children?: Child | Child[];

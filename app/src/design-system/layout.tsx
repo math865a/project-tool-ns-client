@@ -2,7 +2,7 @@ import {
   Box, CssBaseline, Paper, Typography, BoxProps,
 } from '@mui/material';
 import * as React from 'react';
-import { Child } from '../types';
+import { Child } from './types';
 
 function Root({
   children,

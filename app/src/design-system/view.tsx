@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Link } from "@remix-run/react";
 import { useMemo, useState } from "react";
-import { Child } from "../types";
+import { Child } from "./types";
 
 interface WrapperProps {
     children?: Child | Child[];

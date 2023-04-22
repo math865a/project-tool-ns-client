@@ -11,14 +11,14 @@ import {
 } from "@mui/material";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { faCheck, faTimes } from "@fortawesome/pro-solid-svg-icons";
-import { Child } from "../types";
-import { Action } from "../action";
-import { IconDef } from "../symbol";
-import { Fallback } from "../fallback";
+import { Child } from "./types";
+import { Action } from "./action";
+import { IconDef } from "./symbol";
+import { Fallback } from "./fallback";
 import { useNavigation, useTransition } from "@remix-run/react";
 import { formSubmit, UseSocketSubmitProps } from "~/src/hooks/useFormSubmit";
-import { Inform, useInform } from "../feedback/info";
-import { Feedback } from "../feedback";
+import { Inform, useInform } from "./feedback/info";
+import { Feedback } from "./feedback";
 import { useEffect } from "react";
 
 export interface IFormLabelProps {
@@ -173,8 +173,24 @@ export interface IFormActionProps {
     hideOnNotDirty?: boolean;
     hideCancel?: boolean;
     hideConfirm?: boolean;
-    confirmColor?: "success" | "info" | "warning" | "error" | "inherit" | "primary" | "secondary" | undefined;
-    cancelColor?: "success" | "info" | "warning" | "error" | "inherit" | "primary" | "secondary" | undefined
+    confirmColor?:
+        | "success"
+        | "info"
+        | "warning"
+        | "error"
+        | "inherit"
+        | "primary"
+        | "secondary"
+        | undefined;
+    cancelColor?:
+        | "success"
+        | "info"
+        | "warning"
+        | "error"
+        | "inherit"
+        | "primary"
+        | "secondary"
+        | undefined;
 }
 
 function Actions({
@@ -192,7 +208,7 @@ function Actions({
     hideCancel,
     hideConfirm,
     confirmColor = "success",
-    cancelColor = "error"
+    cancelColor = "error",
 }: IFormActionProps) {
     const {
         reset,
@@ -214,9 +230,7 @@ function Actions({
             mt={1}
             justifyContent={edge === "end" ? "flex-end" : "flex-start"}
         >
-            {hideOnNotDirty && !isDirty ? (
-                null
-            ) : (
+            {hideOnNotDirty && !isDirty ? null : (
                 <Stack
                     spacing={2}
                     direction={edge === "end" ? "row" : "row-reverse"}
@@ -229,7 +243,6 @@ function Actions({
                             text={cancelText}
                             icon={cancelIcon}
                             color={cancelColor}
-
                         />
                     )}
                     {!hideConfirm && (
@@ -242,10 +255,8 @@ function Actions({
                             color={confirmColor}
                         />
                     )}
-
                 </Stack>
             )}
- 
         </Box>
     );
 }
@@ -336,13 +347,14 @@ function SocketActions<
     );
 }
 
-const useResetStale = (reset: (values: FieldValues) => void, values: FieldValues) => {
+const useResetStale = (
+    reset: (values: FieldValues) => void,
+    values: FieldValues
+) => {
     useEffect(() => {
         reset(values);
-    },[values])
-}
-
-
+    }, [values]);
+};
 
 export const FormUI = {
     Label,
@@ -353,7 +365,7 @@ export const FormUI = {
     Actions,
     SocketActions,
     TextAdornment,
-    useResetStale
+    useResetStale,
 };
 
 /*                <Button

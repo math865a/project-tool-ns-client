@@ -18,8 +18,8 @@ import {
 
 import { Link } from "@remix-run/react";
 import React, { createContext, useEffect, useMemo, useRef } from "react";
-import { IconDef, Symbol, SymbolProps } from "../index";
-import { Child } from "../types";
+import { IconDef, Symbol, SymbolProps } from "./index";
+import { Child } from "./types";
 
 function Root({
     children,

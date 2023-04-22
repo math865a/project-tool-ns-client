@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { getAvatarName, getContrastColor } from "~/util";
 import { useMemo, useState } from "react";
-import { Child, IPerson } from "../types";
+import { Child, IPerson } from "./types";
 import _ from "lodash";
 
 const DEFAULT_SIZE = 20;

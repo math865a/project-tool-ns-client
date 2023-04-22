@@ -20,7 +20,7 @@ import {
     Symbol as SymbolComponent,
     IconDef,
     SymbolProps,
-} from "../index";
+} from "./index";
 
 export namespace ActionTypes {
     export type ITooltipPlacement =

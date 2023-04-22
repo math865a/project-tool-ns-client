@@ -2,8 +2,8 @@ import { disableInteraction } from  "~/styles";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import v from "voca";
-import { IconDef, Symbol, SymbolProps } from "../symbol";
-import type { Child } from "../types";
+import { IconDef, Symbol, SymbolProps } from "./symbol";
+import type { Child } from "./types";
 
 interface Props {
     children?: Child | Child[];

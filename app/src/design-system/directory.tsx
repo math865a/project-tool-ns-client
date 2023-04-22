@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import { Link as RouterLink, useLocation } from "@remix-run/react";
 import { useMemo } from "react";
-import { Child } from "../types";
-import { IconDef, Symbol } from "../symbol";
+import { Child } from "./types";
+import { IconDef, Symbol } from "./symbol";
 
 export namespace DirectoryTypes {
     export interface IWrapperProps extends ListProps {
