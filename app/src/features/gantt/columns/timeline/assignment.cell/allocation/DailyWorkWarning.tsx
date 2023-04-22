@@ -12,7 +12,7 @@ export const DailyWorkWarning = observer(
         Allocation: Allocation;
         isDragging: boolean;
     }) => {
-        if (Allocation.dailyWork > 8 && !isDragging) {
+        if (Allocation.Timesheet.stats.dailyWork > 8 && !isDragging) {
             return (
                 <Box
                     position="absolute"

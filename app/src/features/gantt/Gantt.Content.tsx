@@ -14,7 +14,7 @@ export const GanttContent = observer(() => {
     const { Gantt } = useWorkpackage();
 
     const content = computed(() => {
-        if (Gantt.ActivityStore.Activities.length === 1) {
+        if (Gantt.Store.ActivityStore.Activities.length === 1) {
             return <GanttNoRows />;
         } else {
             return <GanttGrid />;
@@ -25,10 +25,10 @@ export const GanttContent = observer(() => {
 
     useEffect(() => {
         if (
-            width !== Gantt.Dimensions.dialogDimensions.width ||
-            height !== Gantt.Dimensions.dialogDimensions.height
+            width !== Gantt.Dimensions.width ||
+            height !== Gantt.Dimensions.height
         ) {
-            Gantt.Dimensions.updateDialogDimensions(width, height);
+            Gantt.Dimensions.update(width, height);
         }
     }, [width, height]);
 

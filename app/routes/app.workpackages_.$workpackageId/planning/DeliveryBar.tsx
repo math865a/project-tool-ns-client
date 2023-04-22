@@ -10,8 +10,8 @@ export const DeliveryBar = observer(({ Delivery }: { Delivery: Activity }) => {
         },
     } = useWorkpackage();
 
-    const x1 = computed(() => M.xScale(Delivery.Interval.sNorm));
-    const x2 = computed(() => M.xScale(Delivery.Interval.fNorm));
+    const x1 = computed(() => M.xScale(Delivery.Interval.t.s));
+    const x2 = computed(() => M.xScale(Delivery.Interval.t.f));
     const w = computed(() => x2.get() - x1.get());
     const y = computed(() => M.yScale(Delivery.id) as number);
 
@@ -38,7 +38,7 @@ export const DeliveryBar = observer(({ Delivery }: { Delivery: Activity }) => {
         >
             <g tabIndex={0} style={{ outline: "none" }}>
                 <rect
-                    fill={Delivery.fill}
+                    fill={Delivery.Style.fill}
                     x={0}
                     width={w.get()}
                     y={3}
@@ -48,12 +48,12 @@ export const DeliveryBar = observer(({ Delivery }: { Delivery: Activity }) => {
                 <polygon
                     style={{ userSelect: "none" }}
                     points={leftTriangle.get()}
-                    fill={Delivery.fill}
+                    fill={Delivery.Style.fill}
                 />
                 <polygon
                     style={{ userSelect: "none" }}
                     points={rightTriangle.get()}
-                    fill={Delivery.fill}
+                    fill={Delivery.Style.fill}
                 />
             </g>
         </g>

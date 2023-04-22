@@ -158,6 +158,16 @@ export class Allocation extends Model({
     }
 
     @computed
+    get workdaysPassed(){
+        return this.workdays.filter(d => (d.datetime as dt) < dt.now())
+    }
+
+    @computed
+    get workHoursLeft(){
+        return this.totalHours - _.sumBy(this.workdaysPassed, d => d.work)
+    }
+
+    @computed
     get weeks() {
         return _.uniqBy(
             this.Interval.interval

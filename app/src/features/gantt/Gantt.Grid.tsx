@@ -25,7 +25,7 @@ export const GanttGrid = observer(() => {
                     isGroupExpandedByDefault={(row) => {
                         const Row = Gantt.Table.getRow(row.id as string);
                         if (!Row || Row.kind === "Assignment") return false;
-                        return Row.isExpanded;
+                        return Row.Row.isExpanded;
                     }}
                     onColumnWidthChange={Gantt.Table.handleColumnWidthChange}
                     componentsProps={{
@@ -36,7 +36,6 @@ export const GanttGrid = observer(() => {
                             )
                                 ? Gantt.Table.ContextMenu.handleContextMenu
                                 : undefined,
-                            ...Gantt.Table.Hover.listeners,
                         },
                     }}
                     pinnedColumns={{ right: ["timeline"] }}

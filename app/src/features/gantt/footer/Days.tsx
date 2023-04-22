@@ -4,8 +4,10 @@ import { useGantt } from "useGantt";
 
 export const PlanDays = observer(() => {
     const {
-        Analysis: { PlanTotals: T },
+        Store: {ActivityStore},
     } = useGantt();
+
+    if (!ActivityStore.Plan) return null;
 
     return (
         <Stack direction="row" spacing={1} alignItems="center">
@@ -15,10 +17,10 @@ export const PlanDays = observer(() => {
             </Stack>
             <Stack>
                 <Typography color="text.secondary" fontSize={12}>
-                    {T.workdays}
+                    {ActivityStore.Plan.Interval.counts.workDays}
                 </Typography>
                 <Typography color="text.secondary" fontSize={12}>
-                    {T.days}
+                    {ActivityStore.Plan.Interval.counts.days}
                 </Typography>
             </Stack>
         </Stack>

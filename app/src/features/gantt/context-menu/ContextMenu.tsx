@@ -39,12 +39,6 @@ export const GanttContextMenu = observer(() => {
                 onClick: () => T.ContextMenu.createTask(),
             },
             {
-                name: "createAllocation",
-                label: "Tilføj allokering",
-                icon: faUserPlus,
-                onClick: () => T.ContextMenu.createAllocation(),
-            },
-            {
                 name: "delete",
                 label: "Slet",
                 icon: faTrash,

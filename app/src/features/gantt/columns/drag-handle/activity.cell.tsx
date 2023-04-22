@@ -10,7 +10,7 @@ export const ActivityDragHandleCell = observer(({ Activity }: { Activity: Activi
 
     return (
         <Box maxWidth={30} flexGrow={1} display="flex" justifyContent="center">
-            {Activity.isHovering && (
+            {Activity.Interaction.isHovering && (
                 <Action.Symbol
                     icon={faGrip}
                    // ref={setActivatorNodeRef}

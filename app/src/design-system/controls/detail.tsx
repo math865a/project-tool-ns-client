@@ -67,7 +67,7 @@ function Text<T extends FieldValues = FieldValues>({
                 adornmentText && <FormUI.TextAdornment text={adornmentText} />
             }
             multiline={rows !== undefined}
-            rows={rows}
+            minRows={rows}
             placeholder={placeHolder}
         />
     );

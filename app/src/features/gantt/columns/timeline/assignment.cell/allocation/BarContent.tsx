@@ -13,7 +13,7 @@ const BarContent = observer(
                 component={Paper}
                 display="flex"
                 flexGrow={1}
-                height={Allocation.Bar.h}
+                height={Allocation.Bar.iRect.h}
                 maxWidth={width}
                 justifyContent="space-between"
                 alignItems="center"
@@ -23,11 +23,11 @@ const BarContent = observer(
                 sx={{
                     borderRadius: 1,
                     color: Allocation.fill.color,
-                    height: Allocation.Bar.h,
-                    width: Allocation.Bar.coord.w,
+                    height: Allocation.Bar.iRect.h,
+                    width: Allocation.Bar.rect.w,
                     textDecoration: "none",
                     backgroundColor:
-                        Allocation.Assignment?.TeamMember?.resource.color,
+                        Allocation.Assignment?.TeamMember?.Resource.color,
                 }}
                 style={disableInteraction}
             >
@@ -49,7 +49,7 @@ const BarContent = observer(
                                 sx={{ fontVariant: "tabular-nums" }}
                                 letterSpacing={0.3}
                             >
-                                {Allocation.totalHours}
+                                {Allocation.Timesheet.stats.timesheet.total}
                             </Typography>
                             <Typography
                                 fontSize={11}
@@ -77,7 +77,7 @@ const BarContent = observer(
                                     sx={{ fontVariant: "tabular-nums" }}
                                     letterSpacing={0.3}
                                 >
-                                    {Allocation.Interval.workdayCount}
+                                    {Allocation.Interval.counts.workDays}
                                 </Typography>
                                 <Typography
                                     fontSize={11}
@@ -103,9 +103,11 @@ const BarContent = observer(
                                 sx={{ fontVariant: "tabular-nums" }}
                                 letterSpacing={0.3}
                             >
-                                {Allocation.dailyWork === 0
+                                {Allocation.Timesheet.stats.dailyWork === 0
                                     ? "-"
-                                    : formatDecimal(Allocation.dailyWork)}
+                                    : formatDecimal(
+                                          Allocation.Timesheet.stats.dailyWork
+                                      )}
                             </Typography>
                             <Typography
                                 fontSize={11}

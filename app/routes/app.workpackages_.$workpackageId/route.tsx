@@ -17,7 +17,8 @@ import StatusSection from "./Status.Section";
 import WorkBreakdownsSection from "./WorkBreakdown.Section";
 import WorkTimesseriesSection from "./WorkTimeseries.Section";
 import { parseRequest } from "~/util";
-
+import {Unstable_Grid2 as Grid} from "@mui/material"
+import StatsSection from "./Stats.Section";
 export const handle = {
     BackAction: <PageContext />,
 };
@@ -79,11 +80,17 @@ export default function Workpackage() {
                                 <Page.Layout>
                                     <HeaderSection />
                                     <DetailsSection />
-                                    <StatusSection />
+                                    <Grid xs={6} sx={{p: 0}}>
+                                        <Grid container>
+                                        <StatusSection />
+                                        <StatsSection/>
+                                        </Grid>
+
+                                    </Grid>
+                                 
                                     <PlanningSection />
                                     <WorkBreakdownsSection />
                                     <WorkTimesseriesSection />
-
                                     <Outlet />
                                 </Page.Layout>
                             </Page.Root>

@@ -14,7 +14,7 @@ export class PlanningChartModel extends Model({
     tPad: prop<number>(0.25),
     width: prop<number>(0).withSetter(),
     maxHeight: prop<number>(200),
-    footerHeight: prop<number>(75).withSetter()
+    footerHeight: prop<number>(100).withSetter()
 }) {
     spacing = this.rowHeight - this.hBar;
 

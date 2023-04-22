@@ -11,7 +11,7 @@ import { useWorkpackage } from 'useWorkpackage';
 
 export const GanttAssignmentMenu = observer(() => {
     const { Gantt } = useWorkpackage()
-    const T = Gantt.TeamMenu;
+    const T = Gantt.Table.AssignmentMenu
     return (
         <Menu
             open={T.open}
@@ -31,8 +31,8 @@ export const GanttAssignmentMenu = observer(() => {
             <div>
                 <Autocomplete
                     open
-                    value={T.Activity?.maybeCurrent?.Team ?? []}
-                    options={_.sortBy(Gantt.TeamStore.TeamMembers, (d) =>
+                    value={T.Activity?.Team ?? []}
+                    options={_.sortBy(Gantt.Store.TeamStore.TeamMembers, (d) =>
                         T.Selected.includes(d) ? 1 : 2
                     )}
                     groupBy={(option) =>
@@ -90,13 +90,13 @@ export const GanttAssignmentMenu = observer(() => {
                         >
                             <ListItemAvatar sx={{ minWidth: 40 }}>
                                 <Avatars.Individual
-                                    subject={option.resource}
+                                    subject={option.Resource}
                                     size={25}
                                 />
                             </ListItemAvatar>
                             <ListItemText
-                                primary={option.resource.name}
-                                secondary={option.resourceType.name}
+                                primary={option.Resource.name}
+                                secondary={option.ResourceType.name}
                                 primaryTypographyProps={{ fontSize: 12 }}
                                 secondaryTypographyProps={{ fontSize: 12 }}
                             />
@@ -105,7 +105,7 @@ export const GanttAssignmentMenu = observer(() => {
                     renderInput={(params) => (
                         <AutoControl.Header title="Tildelte ressourcer" {...params} />
                     )}
-                    getOptionLabel={(option) => option.resource.name}
+                    getOptionLabel={(option) => option.Resource.name}
                 />
             </div>
             <Box flexGrow={1} display="flex" justifyContent="flex-end" py={1}>

@@ -92,7 +92,7 @@ export default function DetailsSection() {
                                     value={
                                         <Controls.Detail.Text
                                             name="description"
-                                            rows={4}
+                                            rows={6}
                                             disabled={!allowed}
                                         />
                                     }

@@ -9,7 +9,7 @@ export default function StatusSection() {
     const { stage, bookingStage } = useWorkpackage();
 
     return (
-        <Page.Section title="Status" xs={6}>
+        <Page.Section title="Status" xs={12}>
             <Can I={Action.Write} a={Subject.Workpackages} passThrough>
                 {(allowed) => (
                     <Details.Container>

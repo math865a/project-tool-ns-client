@@ -111,7 +111,6 @@ export class Timeline extends Model({
         if (!Plan) {
             throw new Error("no Plan");
         }
-
         const padding = Plan.Interval.dt * TIMELINE_PADDING;
         this.setDs(Plan.Interval.startDate.toMillis() - padding);
         this.setDf(Plan.Interval.endDate.toMillis() + padding);

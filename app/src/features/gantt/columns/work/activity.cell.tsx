@@ -12,8 +12,8 @@ export const ActivityWorkCell = observer((props: GridRenderCellParams<Activity>)
             justifyContent="center"
         >
             <Stack direction="row" alignItems="center" spacing={1}>
-                <Typography fontSize={12} sx={{color: props.row.textColor}}>
-                    {props.row.Aggregates.displayWork}
+                <Typography fontSize={12} sx={{color: props.row.Style.textColor}}>
+                    {props.row.Work.display.total}
                 </Typography>
             </Stack>
         </Box>

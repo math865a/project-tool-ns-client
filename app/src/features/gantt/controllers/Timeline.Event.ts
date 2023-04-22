@@ -90,25 +90,6 @@ export default class TimelineEvent extends Model({
             diff: { days: 0 },
             x: x,
         };
-
-        /*if (
-            (d.weekday === 6 && ['left', 'none'].includes(forceDirection)) ||
-            (d.weekday === 7 && forceDirection === 'left')
-        ) {
-            xNew = relocateBack();
-            if (xNew.diff === 0) {
-                xNew = relocateForwards();
-            }
-        } else if (
-            (d.weekday === 7 && ['right', 'none'].includes(forceDirection)) ||
-            (d.weekday === 6 && forceDirection === 'right')
-        ) {
-            xNew = relocateForwards();
-            if (!xNew) {
-                xNew = relocateBack();
-            }
-        }*/
-
         return xNew;
     }
 

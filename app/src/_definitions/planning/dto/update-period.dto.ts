@@ -1,10 +1,11 @@
 export class UpdatePeriodDto {
-    constructor(
-        public readonly activityId: string,
-        public readonly startDate: string,
-        public readonly endDate: string,
 
-    ){}
+        public readonly activityId: string
+        public readonly startDate: string
+        public readonly endDate: string
+        public readonly workDayCount: number
+
+
 }
 
 export class PeriodUpdatedResult {

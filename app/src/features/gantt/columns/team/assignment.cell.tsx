@@ -13,7 +13,7 @@ export const AssignmentDailyWorkCell = observer(
                 justifyContent="center"
             >
                 <Typography fontSize={12} color="text.secondary">
-                    {props.row.dailyWork}
+                    {/*props.row.dailyWork*/}
                 </Typography>
             </Box>
         );

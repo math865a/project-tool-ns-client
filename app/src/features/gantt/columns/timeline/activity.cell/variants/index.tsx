@@ -15,8 +15,8 @@ export const BarVariant = observer(({ Activity }: { Activity: Activity }) => {
 
     return (
         <Box
-            width={Activity.Bar.coord.w}
-            height={Activity.Bar.h}
+            width={Activity.Bar.rect.w}
+            height={Activity.Bar.rect.h}
             position="relative"
         >
             {Variant.get()}

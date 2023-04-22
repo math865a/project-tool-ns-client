@@ -17,9 +17,8 @@ export const ActivityDndProvider = observer((props: { children: ReactNode }) => 
 
     return (
         <DndContext
-            onDragStart={Gantt.Timeline.TimelineEvent.onDragStart}
-            onDragMove={Gantt.Timeline.TimelineEvent.onDragMove}
-            onDragEnd={Gantt.Timeline.TimelineEvent.onDragEnd}
+            onDragStart={Gantt.Timeline.Drag.onDragStart}
+            onDragEnd={Gantt.Timeline.Drag.onDragEnd}
             sensors={sensors}
             modifiers={[
                 restrictToHorizontalAxis,

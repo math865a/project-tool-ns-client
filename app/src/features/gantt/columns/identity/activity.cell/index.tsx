@@ -41,7 +41,7 @@ export const ActivityIdentityCell = observer((props: GridRenderCellParams<Activi
             setNameState(Activity.name);
             inform("Navnet blev ikke ændret. Det må ikke være tomt.", "error");
         } else if (nameState !== Activity.name) {
-            Activity.handleNameChange(nameState);
+            Activity.updateName = nameState;
             inform("Navnet blev gemt.", "success");
         }
     };

@@ -9,10 +9,10 @@ export const Preview = observer(
     ({ Allocation }: { Allocation: Allocation }) => {
         return createPortal(
             <DragOverlay modifiers={[overlayOffset]} dropAnimation={null}>
-                {Allocation.Bar.event === "move" ? (
+                {Allocation.Bar.Delta.event === "move" ? (
                     <BarContent
                         Allocation={Allocation}
-                        width={Allocation.Bar.w0}
+                        width={Allocation.Bar.iRect.w}
                     />
                 ) : null}
             </DragOverlay>,

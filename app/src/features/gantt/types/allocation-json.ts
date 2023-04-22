@@ -1,10 +1,10 @@
-import { DateObjectUnits } from "luxon";
+
 
 export class AllocationJson {
     id: string;
     interval: {
-        start: DateObjectUnits;
-        end: DateObjectUnits;
+        start: string;
+        end: string;
     };
     timesheet: {
         defaultMinutes: number;
@@ -14,8 +14,8 @@ export class AllocationJson {
     constructor(props: {
         id: string;
         interval: {
-            start: DateObjectUnits;
-            end: DateObjectUnits;
+            start: string;
+            end: string;
         };
         timesheet: {
             defaultMinutes: number;

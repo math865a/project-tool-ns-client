@@ -10,7 +10,6 @@ import { Can } from "~/src/session-user";
 import { useWorkpackage } from "~/src/state";
 import { WorkpackageLoader } from "../route";
 
-
 export const PlanningSectionFooter = observer(() => {
     const {
         Gantt: {
@@ -25,7 +24,7 @@ export const PlanningSectionFooter = observer(() => {
     const { ref, height } = useElementSize();
 
     useEffect(() => {
-        PlanningChart.setFooterHeight(height);
+        PlanningChart.footerHeight = height;
     }, [height]);
 
     return (
@@ -57,4 +56,3 @@ export const PlanningSectionFooter = observer(() => {
         </Box>
     );
 });
-

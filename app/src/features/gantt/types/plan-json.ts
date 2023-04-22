@@ -1,17 +1,17 @@
-import { DateObjectUnits } from "luxon";
+
 
 export class PlanJson {
     kind: 'Plan' = 'Plan';
     id: string;
-    startDate: DateObjectUnits;
-    endDate: DateObjectUnits;
+    startDate: string;
+    endDate: string;
     children: string[];
     name: string = 'Plan';
     description?: string;
     constructor(props: {
         id: string,
-        startDate: DateObjectUnits;
-        endDate: DateObjectUnits;
+        startDate: string;
+        endDate: string;
         children?: string[];
     }) {
         Object.assign(this, props)

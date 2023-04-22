@@ -22,9 +22,9 @@ export const restrictToRow: Modifier = action(
         const Bar = (active?.data?.current as ActivityDataBag)?.Bar;
         if (!Bar) return transform;
         const Timeline = Bar.Timeline
-        const pad = Timeline.TimelineEvent.throttleStep;
+        const pad = Timeline.Boundary.throttleStep;
         const calcIntersections = () => {
-            if (Bar.event === "move") {
+            if (Bar.Delta.event === "move") {
                 return {
                     r:
                         rr < br
@@ -32,12 +32,12 @@ export const restrictToRow: Modifier = action(
                             : Math.max(br + x - rr + pad, bl + x - rr + pad),
                     l: rl > bl ? undefined : Math.min(bl + x - rl, br + x - rl),
                 };
-            } else if (Bar.event === "resize-start") {
+            } else if (Bar.Delta.event === "resize-start") {
                 return {
                     r: bl + x - rr + pad,
                     l: bl + x - rl,
                 };
-            } else if (Bar.event === "resize-end") {
+            } else if (Bar.Delta.event === "resize-end") {
                 return {
                     r: br + x - rr + pad,
                     l: br + x - rl,

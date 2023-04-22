@@ -14,7 +14,7 @@ export const AssignmentWorkCell = observer((props: GridRenderCellParams<Assignme
         >
             <Stack direction="row" alignItems="center" spacing={1}>
                 <Typography fontSize={12} color="text.secondary">
-                    {props.row.workHours.total}
+                    {/*props.row.workHours.total*/}
                 </Typography>
             </Stack>
         </Box>

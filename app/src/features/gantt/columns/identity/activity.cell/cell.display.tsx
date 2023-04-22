@@ -20,7 +20,7 @@ export const ActivityIdentityCellDisplay = observer(
                         pl={1}
                         onDoubleClick={allowed ? startEditing : undefined}
                         sx={{
-                            color: Activity.textColor
+                            color: Activity.Style.textColor
                         }}
                     >
                         {Activity.name}

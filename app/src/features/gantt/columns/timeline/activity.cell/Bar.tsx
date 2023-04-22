@@ -1,12 +1,10 @@
 import { useDraggable } from "@dnd-kit/core";
-import { computed } from "mobx";
-import { observer } from "mobx-react-lite";
-import { Activity } from "gantt-models";
 import { CSS } from "@dnd-kit/utilities";
-import { CSSProperties } from "react";
-import { BarVariant } from "./variants";
-import { Can } from "~/src/session-user";
+import { Activity } from "gantt-models";
+import { observer } from "mobx-react-lite";
 import { Action, Subject } from "~/src/_definitions";
+import { Can } from "~/src/session-user";
+import { BarVariant } from "./variants";
 
 export const Bar = observer(({ Activity }: { Activity: Activity }) => {
     const B = Activity.Bar;
@@ -19,27 +17,15 @@ export const Bar = observer(({ Activity }: { Activity: Activity }) => {
             },
         });
 
-    const barStyles = computed(() => {
-        return {
-            position: "absolute",
-            height: B.h,
-            top: B.y,
-            left: B.p0.x1,
-            width: B.coord.w,
-            transform: CSS.Transform.toString(B.transform),
-            opacity: B.opacity,
-        } as CSSProperties;
-    });
-
     return (
         <div
             ref={setNodeRef}
             style={{
                 position: "absolute",
-                height: B.h,
-                top: B.y,
-                left: B.p0.x1,
-                width: B.coord.w,
+                height: B.iRect.h,
+                top: B.iRect.y,
+                left: B.iRect.x1,
+                width: B.rect.w,
                 transform: CSS.Transform.toString(B.transform),
                 opacity: B.opacity,
             }}
@@ -50,7 +36,7 @@ export const Bar = observer(({ Activity }: { Activity: Activity }) => {
                     {...listeners}
                     className="move"
                     ref={setActivatorNodeRef}
-                    style={B.ActivatorStyle.moveActivatorStyles}
+                    style={Activity.Style.moveActivatorStyles}
                 />
 
                 <div
@@ -58,14 +44,14 @@ export const Bar = observer(({ Activity }: { Activity: Activity }) => {
                     {...listeners}
                     className="resize-start"
                     ref={setActivatorNodeRef}
-                    style={B.ActivatorStyle.resizeStartActivatorStyles}
+                    style={Activity.Style.resizeStartActivatorStyles}
                 />
                 <div
                     {...attributes}
                     {...listeners}
                     className="resize-end"
                     ref={setActivatorNodeRef}
-                    style={B.ActivatorStyle.resizeEndActivatorStyles}
+                    style={Activity.Style.resizeEndActivatorStyles}
                 />
             </Can>
             <BarVariant Activity={Activity} />

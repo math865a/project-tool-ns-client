@@ -1,6 +1,4 @@
-import {
-    faChartSimpleHorizontal
-} from "@fortawesome/pro-light-svg-icons";
+import { faChartSimpleHorizontal } from "@fortawesome/pro-light-svg-icons";
 import { observer } from "mobx-react-lite";
 import { Fallback, Page } from "~/src/design-system";
 import GanttDialog from "./planning/GanttAction";
@@ -19,7 +17,6 @@ const PlanningSection = observer(() => {
             startActions={<GanttDialog />}
             endActions={<PlanningSectionFooter />}
         >
-            
             {Gantt.isEmpty ? (
                 <Fallback.Empty
                     text="Der er ikke oprettet nogle leverancer endnu."

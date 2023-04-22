@@ -6,12 +6,12 @@ export class TaskJson {
     name: string = "Ny opgave";
     description: string = "";
     children: string[] = [];
-    startDate: DateObjectUnits;
-    endDate: DateObjectUnits;
+    startDate: string;
+    endDate: string;
     constructor(props: {
         id: string;
-        startDate: DateObjectUnits;
-        endDate: DateObjectUnits;
+        startDate: string;
+        endDate: string;
     }) {
         this.id = props.id;
         this.startDate = props.startDate;

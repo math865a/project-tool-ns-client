@@ -9,9 +9,9 @@ export const ActivityDurationCell = observer((props: GridRenderCellParams<Activi
             <Typography
                 textAlign="center"
                 fontSize={12}
-                sx={{ color: props.row.textColor }}
+                sx={{ color: props.row.Style.textColor }}
             >
-                {String(props.row.Period.workdayCount) + " dage"}
+                {props.row.Interval.display.counts.medium.workDays}
             </Typography>
         </Box>
     );

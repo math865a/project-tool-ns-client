@@ -1,7 +1,7 @@
 import { faCalendar } from "@fortawesome/pro-light-svg-icons";
 import { Box, Menu, Typography } from "@mui/material";
 import { GridRenderCellParams } from "@mui/x-data-grid-pro";
-import { DateRangeCalendar } from "@mui/x-date-pickers-pro";
+import { DateRange, DateRangeCalendar } from "@mui/x-date-pickers-pro";
 import { Action, PickerDay } from "design";
 import { Activity } from "gantt-models";
 import { DateTime as dt } from "luxon";
@@ -14,6 +14,12 @@ export const ActivityPeriodCell = observer((props: GridRenderCellParams<Activity
     const [isHovering, setIsHovering] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
+
+
+    const handleChange = (dateRange: DateRange<dt>) => {
+
+    }
+
     return (
         <>
             <Can I={A.Write} a={Subject.Workpackages} passThrough>
@@ -29,7 +35,7 @@ export const ActivityPeriodCell = observer((props: GridRenderCellParams<Activity
                     >
                         <Typography
                             fontSize={12}
-                            sx={{ color: props.row.textColor }}
+                            sx={{ color: props.row.Style.textColor }}
                             textAlign="center"
                             pr={
                                 allowed &&
@@ -40,7 +46,7 @@ export const ActivityPeriodCell = observer((props: GridRenderCellParams<Activity
                                     : 0
                             }
                         >
-                            {props.row.Period.displayInterval}
+                            {props.row.Interval.display.intervals.short}
                         </Typography>
 
                         {(isHovering || open) && props.row.kind === "Task" && allowed && (
@@ -75,10 +81,10 @@ export const ActivityPeriodCell = observer((props: GridRenderCellParams<Activity
                     <DateRangeCalendar<dt>
                         displayWeekNumber
                         value={[
-                            props.row.Interval.startDate,
-                            props.row.Interval.endDate,
+                            props.row.Interval.dt.start,
+                            props.row.Interval.dt.end,
                         ]}
-                        onChange={props.row.Period.handleDatePickerChange}
+                        onChange={handleChange}
                         slots={{ day: PickerDay }}
                         sx={{
                             "& .MuiDateRangeCalendar-monthContainer": {

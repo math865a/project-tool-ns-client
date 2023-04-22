@@ -25,21 +25,18 @@ export class ActivityAggregates extends Model(
     }
 
     @computed
-    get work(): any {
-        const parent = getParent<Activity>(this);
-        if (!parent) {
-            return {
-                defaultWork: 0,
-                overtimeWork: 0,
-                totalWork: 0,
-            };
-        }
+    get Parent() {
+        return getParent<Activity>(this) as Activity;
+    }
+
+    @computed
+    get workBreakdown() {
         const defaultMinutes = _.sumBy(
-            parent.Assignments,
+            this.Parent.Assignments,
             (d) => d.timesheet.default
         );
         const overtimeMinutes = _.sumBy(
-            parent.Assignments,
+            this.Parent.Assignments,
             (d) => d.timesheet.overtime
         );
         return {
@@ -50,74 +47,68 @@ export class ActivityAggregates extends Model(
     }
 
     @computed
-    get totalHours() {
-        return this.work.totalWork === 0
-            ? "-"
-            : dur
-                  .fromObject(
-                      { minutes: this.work.totalWork },
-                      { locale: "da" }
-                  )
-                  .shiftTo("hours").hours;
+    get workHoursBreakdown() {
+        return _.mapValues(this.workBreakdown, (d) => d / 60);
     }
 
     @computed
-    get workHours() {
+    get workLeft() {
+        const parent = getParent<Activity>(this);
+        if (!parent) return 0;
+        return _.sumBy(parent.Assignments, (d) => d.workHoursLeft);
+    }
+
+    @computed
+    get workDone() {
+        return this.workHoursBreakdown.totalWork - this.workLeft;
+    }
+
+    @computed
+    get dailyWorkHoursBreakdown() {
+        return _.mapValues(
+            this.workHoursBreakdown,
+            (d) => d / this.Parent.Period.workdayCount
+        );
+    }
+
+    @computed
+    get workCompletedRatio() {
+        if (this.workHoursBreakdown.totalWork > 0) {
+            return _.round(
+                this.workDone / this.workHoursBreakdown.totalWork,
+                2
+            );
+        }
+        return 0;
+    }
+
+    @computed
+    get workLeftRatio() {
+        return 1 - this.workCompletedRatio;
+    }
+
+    @computed
+    get workAggregates() {
         return {
-            default:
-                this.work.defaultWork === 0
-                    ? "-"
-                    : dur
-                          .fromObject(
-                              { minutes: this.work.defaultWork },
-                              { locale: "da" }
-                          )
-                          .shiftTo("hours", "minutes")
-                          .toHuman({
-                              listStyle: "short",
-                              unitDisplay: "narrow",
-                          })
-                          .replace("og", "/"),
-            overtime:
-                this.work.overtimeWork === 0
-                    ? "-"
-                    : dur
-                          .fromObject(
-                              { minutes: this.work.overtimeWork },
-                              { locale: "da" }
-                          )
-                          .shiftTo("hours", "minutes")
-                          .toHuman({
-                              listStyle: "short",
-                              unitDisplay: "narrow",
-                          })
-                          .replace("og", "/"),
-            total:
-                this.work.totalWork === 0
-                    ? "-"
-                    : dur
-                          .fromObject(
-                              { minutes: this.work.totalWork },
-                              { locale: "da" }
-                          )
-                          .shiftTo("hours", "minutes")
-                          .toHuman({
-                              listStyle: "short",
-                              unitDisplay: "narrow",
-                          })
-                          .replace("og", "/").replace(" m", "min").replace(" t", "t"),
+            totals: _.mapValues(this.workHoursBreakdown, (d) =>
+                dur.fromObject({ hours: d }).toFormat("hh:mm")
+            ),
+            daily: _.mapValues(this.dailyWorkHoursBreakdown, (d) =>
+                dur.fromObject({ hours: d }).toFormat("hh:mm")
+            ),
+            status: {
+                workLeft: dur
+                    .fromObject({ hours: this.workLeft })
+                    .toFormat("hh:mm"),
+                workDone: dur
+                    .fromObject({ hours: this.workDone })
+                    .toFormat("hh:mm"),
+            },
+            statusPercents: {
+                workLeft: _.round(this.workLeftRatio * 100, 2) + "%",
+                workDone: _.round(this.workCompletedRatio * 100, 2) + "%",
+            },
         };
-    }
-
-    @computed
-    get displayWork(){
-        if (this.workHours.total === "0t / 0min"){
-            return "-"
-        } else if (this.workHours.total.startsWith("0t / ")){
-            return this.workHours.total.replace("0t / ", "");
-         } else if (this.workHours.total.includes("/ 0min")){
-            return this.workHours.total.replace("/ 0min", "");
-        } return this.workHours.total
     }
 
     @computed
@@ -148,7 +139,7 @@ export class ActivityAggregates extends Model(
     @computed
     get aggregates(): any {
         return {
-            work: this.work,
+            work: this.workAggregates,
             finance: this.finance,
         };
     }

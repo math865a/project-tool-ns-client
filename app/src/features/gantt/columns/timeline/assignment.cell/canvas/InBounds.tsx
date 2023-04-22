@@ -23,7 +23,7 @@ export const InBounds = observer(
                         )})`}
                     >
                         <rect
-                            width={Gantt.Timeline.wDay}
+                            width={Gantt.Timeline.Drag.snapWidth}
                             height={ROW_HEIGHT}
                             fill={Canvas.selectionColor}
                         />

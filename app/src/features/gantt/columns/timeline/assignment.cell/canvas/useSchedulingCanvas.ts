@@ -6,7 +6,6 @@ import { useWorkpackage } from "useWorkpackage";
 import { AssignmentCanvas } from "gantt-models";
 import { normalize } from "~/util";
 
-
 export const useSchedulingCanvas = (Canvas: AssignmentCanvas) => {
     const { Gantt } = useWorkpackage();
     const navigate = useNavigate();
@@ -15,12 +14,9 @@ export const useSchedulingCanvas = (Canvas: AssignmentCanvas) => {
 
     const onDragStart = useCallback(
         (args: HandlerArgs) => {
-            if (
-                Canvas.isDraggingAllocation ||
-                Gantt.Timeline.TimelineEvent.isDragging
-            )
+            if (Canvas.isDraggingAllocation || Gantt.Timeline.Drag.isDragging)
                 return;
-            Canvas.setIsDragging(true);
+            Canvas.isDragging = true;
             const { dx, x = 0 } = args;
             const t = normalize(Gantt.Timeline.xScale.invert(x));
             setDays(() => [int.fromDateTimes(t, t.plus({ days: 1 }))]);
@@ -33,7 +29,7 @@ export const useSchedulingCanvas = (Canvas: AssignmentCanvas) => {
             if (
                 Canvas.isHoveringAllocation ||
                 Canvas.isDraggingAllocation ||
-                Gantt.Timeline.TimelineEvent.isDragging
+                Gantt.Timeline.Drag.isDragging
             )
                 return;
             const { dx, x = 0 } = args;
@@ -47,24 +43,18 @@ export const useSchedulingCanvas = (Canvas: AssignmentCanvas) => {
 
     const onDragEnd = useCallback(
         (args: HandlerArgs) => {
-            if (
-                Canvas.isDraggingAllocation ||
-                Gantt.Timeline.TimelineEvent.isDragging
-            )
+            if (Canvas.isDraggingAllocation || Gantt.Timeline.Drag.isDragging)
                 return;
 
             if (days.length > 0) {
-                const interval = int.merge(days)[0];    
-                setDays([]);        
+                const interval = int.merge(days)[0];
+                setDays([]);
                 const id = Canvas.addAllocation(interval);
-                navigate(`${id}`)
+                navigate(`${id}`);
             } else {
-                setDays([])
+                setDays([]);
             }
-            Canvas.setIsDragging(false);
-      
-            
-
+            Canvas.isDragging = false;
         },
         [days, setDays, Gantt.Timeline.xScale, Canvas]
     );
@@ -75,7 +65,6 @@ export const useSchedulingCanvas = (Canvas: AssignmentCanvas) => {
         onDragEnd,
         resetOnStart: true,
     });
-    
 
     return {
         days: days,

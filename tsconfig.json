@@ -28,7 +28,7 @@
             "useWorkpackage": [
                 "./app/src/state/workpackage-profile/WorkpackageProvider.tsx"
             ],
-            "gantt-models": ["./app/src/features/gantt/models"],
+            "gantt-models": ["./app/src/features/gantt/model"],
             "styles": ["./app/styles"],
             "gantt/*": ["./app/src/features/gantt/*"],
         },

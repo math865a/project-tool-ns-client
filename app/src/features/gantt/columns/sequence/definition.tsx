@@ -4,5 +4,5 @@ import { Activity, Assignment } from "gantt-models";
 export const sequenceColumn: GridColDef<Activity | Assignment> = {
     field: "sequence",
     valueGetter: (props) =>
-        props.row.kind !== "Assignment" ? props.row.sequence : 1,
+        props.row.kind !== "Assignment" ? props.row.Row.sequence : 1,
 };

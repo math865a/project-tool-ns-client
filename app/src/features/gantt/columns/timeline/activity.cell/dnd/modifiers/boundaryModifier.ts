@@ -24,40 +24,40 @@ export const boundarySensor: Modifier = action(
         const calcRR = () => {
             return Math.min(
                 Math.abs(bar.right + x - row.right),
-                TE.slideZoneWidth
+                TE.Boundary.slideZoneWidth
             );
         };
 
         const calcLR = () => {
             return Math.min(
                 Math.abs(bar.left + x - row.right),
-                TE.slideZoneWidth
+                TE.Boundary.slideZoneWidth
             );
         };
 
         const calcLL = () => {
             return Math.min(
                 Math.max(bar.left + x - row.left, 0),
-                TE.slideZoneWidth
+                TE.Boundary.slideZoneWidth
             );
         };
 
         const calcRL = () => {
             return Math.min(
                 Math.max(bar.right + x - row.left, 0),
-                TE.slideZoneWidth
+                TE.Boundary.slideZoneWidth
             );
         };
 
         const calcIntersections = () => {
             let d: ID = {};
-            if (Bar.event === "move") {
+            if (Bar.Delta.event === "move") {
                 d.rr = calcRR();
                 d.ll = calcLL();
-            } else if (Bar.event === "resize-start") {
+            } else if (Bar.Delta.event === "resize-start") {
                 d.lr = calcLR();
                 d.ll = calcLL();
-            } else if (Bar.event === "resize-end") {
+            } else if (Bar.Delta.event === "resize-end") {
                 d.rr = calcRR();
                 d.rl = calcRL();
             }
@@ -66,7 +66,7 @@ export const boundarySensor: Modifier = action(
 
         const calcRate = (d: number) => {
             if (d === 0) return 0;
-            return d - TE.slideZoneWidth;
+            return d - TE.Boundary.slideZoneWidth;
         };
 
         const { rr, rl, lr, ll } = calcIntersections();
@@ -78,7 +78,7 @@ export const boundarySensor: Modifier = action(
             if (rl) r = calcRate(rl);
             if (ll) r = calcRate(ll);
         }
-        TE.TimelineEvent.updateRate(r);
+        TE.Boundary.updateRate(r);
         return transform;
     }
 );

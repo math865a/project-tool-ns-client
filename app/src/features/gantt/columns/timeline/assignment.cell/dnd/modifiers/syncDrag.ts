@@ -15,9 +15,9 @@ export const syncDrag: Modifier = action(
 
         let { x: dx } = transform;
         let direction: 'right' | 'left' | 'none' = 'none';
-        if (dx > Allocation.Bar.dx) {
+        if (dx > Allocation.Bar.Delta.dx) {
             direction = 'right';
-        } else if (dx < Allocation.Bar.dx) {
+        } else if (dx < Allocation.Bar.Delta.dx) {
             direction = 'left';
         } else if (dx > 0) {
             direction = 'right';
@@ -26,8 +26,8 @@ export const syncDrag: Modifier = action(
         }
 
         const dxSnap =
-            Math.round(dx / Allocation.Bar.Timeline.wDay) *
-            Allocation.Bar.Timeline.wDay;
+            Math.round(dx / Allocation.Bar.Timeline.Drag.snapWidth) *
+            Allocation.Bar.Timeline.Drag.snapWidth;
 
         Allocation.Bar.syncDrag(dxSnap, type, direction);
 

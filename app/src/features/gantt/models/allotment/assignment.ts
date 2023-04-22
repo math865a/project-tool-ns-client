@@ -116,6 +116,11 @@ export class Assignment extends Model({
     }
 
     @computed
+    get workHoursLeft(){
+        return _.sumBy(this.Allocations, d => d.workHoursLeft)
+    }
+
+    @computed
     get workHours() {
         return {
             default:

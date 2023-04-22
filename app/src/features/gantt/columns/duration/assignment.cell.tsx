@@ -13,7 +13,7 @@ export const AssignmentDurationCell = observer((props: GridRenderCellParams<Assi
        
         >
                 <Typography fontSize={12} color="text.secondary">
-                    {props.row.workDayCount + " dage"}
+                    {/*props.row.workDayCount + " dage"*/}
                 </Typography>
         </Box>
     );

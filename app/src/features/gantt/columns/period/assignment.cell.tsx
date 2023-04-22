@@ -13,7 +13,7 @@ export const AssignmentPeriodCell = observer((props: GridRenderCellParams<Assign
       
         >
                 <Typography fontSize={12} color="text.secondary">
-                    {props.row.period}
+                    {/*props.row.period*/}
                 </Typography>
         </Box>
     );

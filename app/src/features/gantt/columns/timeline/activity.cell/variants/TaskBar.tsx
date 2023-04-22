@@ -7,9 +7,9 @@ export const TaskBar = observer(({ Activity }: { Activity: Activity }) => {
 
     return (
         <Box
-            width={Bar.coord.w}
-            height={Bar.h}
-            sx={{ backgroundColor: Activity.fill, borderRadius: 0.5 }}
+            width={Bar.rect.w}
+            height={Bar.rect.h}
+            sx={{ backgroundColor: Activity.Style.fill, borderRadius: 0.5 }}
             component={Paper}
         />
     );

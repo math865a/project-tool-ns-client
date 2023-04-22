@@ -19,7 +19,7 @@ const PlanningChart = observer(() => {
 
     useEffect(() => {
         if (width) {
-            M.setWidth(width);
+            M.width = width;
         }
     }, [width]);
 
@@ -33,8 +33,6 @@ const PlanningChart = observer(() => {
             position="relative"
             sx={{ overflowY: "auto", overflowX: "hidden" }}
             mb={1}
-
-            // onMouseMove={onMouseMove}
         >
             <svg
                 width={M.width}
@@ -64,7 +62,7 @@ const PlanningChart = observer(() => {
                     }}
                     top={M.top}
                     left={0}
-                    stroke="transparent" //{theme.palette.text.secondary}
+                    stroke="transparent"
                     tickLineProps={{ stroke: "transparent" }}
                     tickLabelProps={() => ({
                         fill: theme.palette.text.secondary,
@@ -100,8 +98,3 @@ const PlanningChart = observer(() => {
 });
 
 export default PlanningChart;
-/*                  <Line
-                        from={{ x: M.xNow, y: M.top }}
-                        to={{ x: M.xNow, y: M.height }}
-                        stroke={theme.palette.error.main}
-                    />*/

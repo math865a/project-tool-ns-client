@@ -18,7 +18,7 @@ const WorkTimeseriesTooltip = observer(
             });
 
         const {
-            Gantt: { TeamStore },
+            Gantt: { Store: {TeamStore} },
         } = useWorkpackage();
 
         const tooltipData = _.filter(
@@ -42,9 +42,9 @@ const WorkTimeseriesTooltip = observer(
                     {tooltipData.map((d) => (
                         <Chart.Tooltip.Entry
                             key={d.TeamMember.id}
-                            color={d.TeamMember.resource.color}
-                            title={d.TeamMember.resource.name}
-                            subtitle={d.TeamMember.resourceType.name}
+                            color={d.TeamMember.Resource.color}
+                            title={d.TeamMember.Resource.name}
+                            subtitle={d.TeamMember.ResourceType.name}
                             textColor="text.primary"
                             subtitleTextColor="text.secondary"
                             fontSize={11}

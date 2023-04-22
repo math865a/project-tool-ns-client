@@ -25,7 +25,7 @@ export const ActivityTeamCell = observer((props: GridRenderCellParams<Activity>)
                             height: ROW_HEIGHT,
                         }}
                         onClick={(event) =>
-                            Gantt.TeamMenu.handleOpen(event, props.row)
+                            Gantt.Table.AssignmentMenu.handleOpen(event, props.row)
                         }
                     >
                         <Content Activity={props.row} allowed={allowed} />

@@ -24,7 +24,7 @@ export interface IKeyValueDetailItemProps {
     title?: string | Child;
     icon?: IconDef;
     symbolProps?: SymbolProps;
-    value?: string | null | Child;
+    value?: string | number | null | Child;
     valueIcon?: JSX.Element;
     variant?: "description";
     action?: Child | Child[];
@@ -35,6 +35,7 @@ export interface IKeyValueDetailItemProps {
     align?: "center" | "flex-start" | "flex-end";
     showAction?: boolean;
     errorText?: string;
+    plValue?: number
 }
 
 function Item({
@@ -51,6 +52,7 @@ function Item({
     align = "center",
     showAction,
     errorText,
+    plValue = 0
 }: IKeyValueDetailItemProps) {
     const [isHovering, setIsHovering] = useState<boolean>(false);
 
@@ -98,9 +100,10 @@ function Item({
                     alignItems="center"
                     justifyContent={justifyValue}
                     flexGrow={1}
+                    pl={plValue}
                 >
                     {valueIcon}
-                    {typeof value === "string" && (
+                    {(typeof value === "string" || typeof value === "number") && (
                         <Typography
                             sx={{
                                 color: (theme) => theme.palette.text.secondary,

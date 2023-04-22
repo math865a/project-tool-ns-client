@@ -12,7 +12,7 @@ export const GanttNoRows = observer(() => {
     invariant(workpackageId)
 
     const handleCreateDelivery = () => {
-        Gantt.ActivityStore.createDelivery(0)
+        Gantt.Store.ActivityStore.createDelivery(0)
     }
 
     return (

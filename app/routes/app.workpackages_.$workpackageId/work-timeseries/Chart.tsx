@@ -20,7 +20,7 @@ export const TeamWorkTimeseriesChart = observer(() => {
     const {
         Gantt: {
             Analysis: { WorkTimeseries: WOS },
-            TeamStore,
+            Store: {TeamStore},
         },
     } = useWorkpackage();
 
@@ -31,8 +31,8 @@ export const TeamWorkTimeseriesChart = observer(() => {
                     stackId="1"
                     dataKey={TeamMember.id}
                     key={TeamMember.id}
-                    fill={TeamMember.resource.color}
-                    stroke={TeamMember.resource.color}
+                    fill={TeamMember.Resource.color}
+                    stroke={TeamMember.Resource.color}
                     type="monotone"
                 />
             );
@@ -42,8 +42,8 @@ export const TeamWorkTimeseriesChart = observer(() => {
                 stackId="1"
                 dataKey={TeamMember.id}
                 key={TeamMember.id}
-                fill={TeamMember.resource.color}
-                stroke={TeamMember.resource.color}
+                fill={TeamMember.Resource.color}
+                stroke={TeamMember.Resource.color}
                 maxBarSize={75}
             />
         );

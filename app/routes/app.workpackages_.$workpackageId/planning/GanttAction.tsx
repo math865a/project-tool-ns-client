@@ -13,9 +13,9 @@ const GanttAction = observer(() => {
 
     useEffect(() => {
         if (location.pathname.includes("gantt")) {
-            Gantt.Table.setIsMounted(true);
+            Gantt.Table.updateIsMounted = true;
         } else {
-            Gantt.Table.setIsMounted(false);
+            Gantt.Table.updateIsMounted = false;
         }
     }, [location.pathname]);
 

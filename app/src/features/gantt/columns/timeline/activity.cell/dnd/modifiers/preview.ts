@@ -34,8 +34,8 @@ export const previewModifier: Modifier = action(
         } else if (type === "resize-end") {
             return {
                 ...transform,
-                x: -Bar.w0 + transform.x,
-                y: Bar.y,
+                x: -Bar.iRect.w + transform.x,
+                y: Bar.iRect.y,
             };
         }
         return transform;

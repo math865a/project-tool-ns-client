@@ -1,4 +1,3 @@
-import { DateObjectUnits } from "luxon";
 
 export class DeliveryJson {
     kind: 'Delivery' = 'Delivery';
@@ -6,13 +5,13 @@ export class DeliveryJson {
     name: string = "Ny leverance";
     description: string = ""
     children: string[] = []
-    startDate: DateObjectUnits;
-    endDate: DateObjectUnits;
+    startDate: string;
+    endDate: string;
     color: string;
     constructor(props: {
         id: string;
-        startDate: DateObjectUnits;
-        endDate: DateObjectUnits;
+        startDate: string;
+        endDate: string;
         color: string;
     }) {
         this.id = props.id;

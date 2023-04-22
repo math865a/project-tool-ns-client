@@ -4,8 +4,9 @@ import { useGantt } from "useGantt";
 
 export const PlanWork = observer(() => {
     const {
-        Analysis: { PlanTotals: T },
+       Store: {ActivityStore: {Plan}}
     } = useGantt();
+    if (!Plan) return null;
     return (
         <Stack direction="row" spacing={1} alignItems="center">
             <Stack alignItems="flex-end">
@@ -14,10 +15,10 @@ export const PlanWork = observer(() => {
             </Stack>
             <Stack>
                 <Typography color="text.secondary" fontSize={12}>
-                    {T.workHours}
+                    {Plan.Work.work.total}
                 </Typography>
                 <Typography color="text.secondary" fontSize={12}>
-                    {T.dailyWork}
+                    {Plan.Work.work.dailyWork}
                 </Typography>
             </Stack>
         </Stack>

@@ -16,7 +16,7 @@ export default Preview;
 const Content = observer(({ Activity }: { Activity: Activity }) => {
     const row = document.getElementById(`activity-${Activity.id}`);
 
-    if (!Activity.Bar.event || !row) return null;
+    if (!Activity.Bar.Delta.event || !row) return null;
     return (
         <DragOverlay
             dropAnimation={null}
@@ -30,8 +30,8 @@ const Content = observer(({ Activity }: { Activity: Activity }) => {
         >
             <div
                 style={{
-                    opacity: Activity.Bar.event === "move" ? 1 : 0,
-                    cursor: Activity.Bar.ActivatorStyle.dragActivatorCursor,
+                    opacity: Activity.Bar.Delta.event === "move" ? 1 : 0,
+                    cursor: Activity.Style.dragActivatorCursor,
                 }}
             >
                 <BarVariant Activity={Activity} />

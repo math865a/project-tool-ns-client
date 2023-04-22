@@ -11,12 +11,12 @@ export const barSync: Modifier = action(
 
         if (!type || !Bar) return transform;
 
-        let dx = transform.x + Bar.Timeline.TimelineEvent.dxBoundary;
+        let dx = transform.x + Bar.Timeline.Boundary.x;
         if (type === 'move') {
             Bar.syncModifier({ dx: dx, dw: 0 }, type);
         } else if (type === 'resize-start') {
-            if (Bar.w0 - dx < Bar.Timeline.wDay) {
-                dx = Bar.w0 - Bar.Timeline.wDay;
+            if (Bar.iRect.w - dx < Bar.Timeline.Drag.snapWidth) {
+                dx = Bar.iRect.w - Bar.Timeline.Drag.snapWidth;
             }
             Bar.syncModifier(
                 {
@@ -26,8 +26,8 @@ export const barSync: Modifier = action(
                 type
             );
         } else {
-            if (Bar.w0 + dx < Bar.Timeline.wDay) {
-                dx = Bar.Timeline.wDay - Bar.w0;
+            if (Bar.iRect.w + dx < Bar.Timeline.Drag.snapWidth) {
+                dx = Bar.Timeline.Drag.snapWidth - Bar.iRect.w;
             }
 
             Bar.syncModifier({ dx: 0, dw: dx }, type);

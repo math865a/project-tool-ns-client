@@ -5,45 +5,59 @@ import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId/rou
 import { Gantt } from "~/src/features";
 import { useSocketContext } from "~/src/socket";
 
-
 const useDependencies = () => {
     const {
         node: { id: workpackageId },
-        planning,
-        foreignKeys: {planId},
+        planning: { activities, team, assignments, start, end },
+        foreignKeys: { planId },
     } = useLoaderData<WorkpackageLoader>();
     const gridApi = useGridApiRef();
-    const socket = useSocketContext()
+    const socket = useSocketContext();
     return {
         workpackageId,
         planId,
         gridApi,
-        data: planning,
+        activities,
+        team,
+        assignments,
+        start,
+        end,
         socket,
     };
 };
 
 export const useGanttModel = () => {
-    const { workpackageId, planId, gridApi, data, socket } = useDependencies();
-
-
+    const {
+        workpackageId,
+        planId,
+        gridApi,
+        activities,
+        socket,
+        team,
+        assignments,
+        start,
+        end,
+    } = useDependencies();
 
     const initializeModel = () => {
-        return new Gantt({ workpackageId, planId })
-            .registerGridApi(gridApi)
-            .initializeData(data);
+        return new Gantt({
+            workpackageId,
+            activities,
+            team,
+            assignments,
+            start,
+            end,
+            api: gridApi,
+        });
     };
-
-
 
     const [Root] = useState<Gantt>(() => initializeModel());
 
     useEffect(() => {
-        if (socket && !Root.Transport.socket) {
-            Root.initializeSocket(socket);
+        if (socket && !Root.Store.Transport.socket) {
+            Root.Store.Transport.initializeSocket(socket);
         }
-    },[socket])
-
+    }, [socket]);
 
     return Root;
 };

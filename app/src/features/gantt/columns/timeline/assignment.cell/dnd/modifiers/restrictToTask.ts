@@ -13,10 +13,10 @@ export const restrictToTask: Modifier = action(
         if (!bag || !type) return transform;
         const { Allocation } = bag;
         if (!Allocation.Assignment?.Task?.Bar) return transform;
-        const { x: x1Bound, w: wb } = Allocation.Assignment.Task.Bar.coord;
+        const { x1: x1Bound, w: wb } = Allocation.Assignment.Task.Bar.rect;
         const x2Bound = x1Bound + wb;
 
-        const { x1, x2 } = Allocation.Bar;
+        const { x1, x2 } = Allocation.Bar.iRect;
         let { x: dx }: { x: number } = transform;
         let ndx = _.clone(dx);
 

@@ -4,8 +4,12 @@ import { useGantt } from "useGantt";
 
 export const PlanPeriod = observer(() => {
     const {
-        Analysis: { PlanTotals: T },
+        Store: {
+            ActivityStore: { Plan },
+        },
     } = useGantt();
+
+    if (!Plan) return null;
 
     return (
         <Stack direction="row" spacing={1} alignItems="center">
@@ -15,10 +19,10 @@ export const PlanPeriod = observer(() => {
             </Stack>
             <Stack>
                 <Typography color="text.secondary" fontSize={12}>
-                    {T.start}
+                    {Plan.Interval.display.dates.long.start}
                 </Typography>
                 <Typography color="text.secondary" fontSize={12}>
-                    {T.end}
+                    {Plan.Interval.display.dates.long.end}
                 </Typography>
             </Stack>
         </Stack>

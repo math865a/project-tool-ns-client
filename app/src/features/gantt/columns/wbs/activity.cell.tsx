@@ -6,12 +6,12 @@ export const ActivityWBSCell = observer(({ Activity }: { Activity: Activity }) =
     return (
         <Box flexGrow={1}>
             <Typography
-           sx={{color:Activity.textColor}}
+           sx={{color:Activity.Style.textColor}}
                 fontSize={12}
                 textAlign="center"
                 //fontWeight={Activity.Style.fontWeight}
             >
-                {Activity.wbs}
+                {Activity.Row.wbs}
             </Typography>
         </Box>
     );
