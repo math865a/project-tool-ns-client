@@ -56,6 +56,7 @@ export default function CreateWorkpackage() {
             stageOptions,
         },
     } = useLoaderData<typeof loader>();
+    console.log(record)
 
     console.log(stageOptions)
     const methods = useForm({
