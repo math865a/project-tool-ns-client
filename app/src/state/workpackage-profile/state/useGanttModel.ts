@@ -42,11 +42,11 @@ export const useGanttModel = () => {
     const initializeModel = () => {
         return new Gantt({
             workpackageId,
+            start,
+            end,
             activities,
             team,
             assignments,
-            start,
-            end,
             api: gridApi,
         });
     };

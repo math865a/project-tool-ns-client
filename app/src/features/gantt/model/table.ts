@@ -27,9 +27,9 @@ export class GanttTable {
 
     get Rows() {
         return [
-            this.Gantt.Store.ActivityStore.Activities,
-            this.Gantt.Store.AssignmentStore.Assignments
-        ].flat();
+            ...this.Gantt.Store.ActivityStore.Activities.filter(d => d.kind !== "Plan"),
+            ...this.Gantt.Store.AssignmentStore.Assignments
+        ]
     }
 
     set updateIsMounted(isMounted: boolean) {

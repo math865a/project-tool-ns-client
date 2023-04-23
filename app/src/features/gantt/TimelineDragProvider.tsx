@@ -20,7 +20,7 @@ export const TimelineDragProvider = observer(
     ({ children }: { children?: Child | Child[] }) => {
         const {
             Gantt: {
-                Timeline: { TimelineDrag: M },
+                Timeline: { Slide: M },
             },
         } = useWorkpackage();
 
@@ -33,16 +33,18 @@ export const TimelineDragProvider = observer(
 
         return (
             <TimelineDragHandlerContext.Provider
-                value={{ onMouseDown: dragStart, onMouseMove: dragMove, onMouseUp: dragEnd }}
+                value={{
+                    onMouseDown: dragStart,
+                    onMouseMove: dragMove,
+                    onMouseUp: dragEnd,
+                }}
             >
-                <TimelineDragOverlay/>
+                <TimelineDragOverlay />
                 {children}
             </TimelineDragHandlerContext.Provider>
         );
     }
 );
-
-
 
 export const useTimelineDrag = () => {
     const ctx = useContext(TimelineDragHandlerContext);
@@ -50,4 +52,4 @@ export const useTimelineDrag = () => {
         throw new Error("No drag");
     }
     return ctx;
-}
+};

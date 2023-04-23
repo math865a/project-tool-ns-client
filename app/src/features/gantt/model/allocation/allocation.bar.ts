@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { autorun, makeAutoObservable, toJS } from "mobx";
 import { Allocation } from "./allocation.model";
 import { GanttBarDelta } from "../shared";
 import { ROW_HEIGHT } from "../../constants";
@@ -18,7 +18,7 @@ export class AllocationBar {
             this.Allocation.Assignment.Store.GanttStore.Gantt.Timeline,
             this.Allocation.Interval
         );
-    }
+    } 
 
     get TaskBar() {
         return this.Allocation.Assignment.Task?.Bar;
@@ -203,8 +203,8 @@ export class AllocationBar {
             return this.barDelta;
         }
         return {
-            dx: this.Delta.snap.dx,
-            dw: this.Delta.snap.dw,
+            dx: this.Delta.dx,
+            dw: this.Delta.dw,
         };
     }
 

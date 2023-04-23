@@ -22,7 +22,7 @@ export const TeamMenu = observer(
         onClose: () => void;
         anchorEl: HTMLElement | null;
     }) => {
-        const { TeamStore } = useGantt();
+        const { Store: {TeamStore} } = useGantt();
 
         const orderState = useLocalObservable(() => ({ order: 1 as 1 | -1 }));
 
@@ -33,7 +33,7 @@ export const TeamMenu = observer(
         const items = computed(() => {
             const orderedTeam = _.sortBy(
                 TeamStore.TeamMembers,
-                (d) => d.resource.name
+                (d) => d.Resource.name
             );
             if (orderState.order === 1) {
                 return orderedTeam;
@@ -58,7 +58,7 @@ export const TeamMenu = observer(
                 .map((d, index) => (
                     <TeamMemberItem
                         TeamMember={d as unknown as TeamMember}
-                        key={d.resource.id}
+                        key={d.Resource.id}
                         divider={index !== items.get().length - 1}
                     />
                 ));

@@ -23,7 +23,7 @@ export class AssignmentStore {
     constructor(
         GanttStore: GanttStore,
         Transport: GanttTransport,
-        data: AssignmentJson[]
+data: AssignmentJson[]
     ) {
         makeAutoObservable(this, {}, { autoBind: true });
         this.GanttStore = GanttStore;

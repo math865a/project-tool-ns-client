@@ -15,14 +15,16 @@ export class GanttStore {
     TeamStore: TeamStore;
     constructor(
         Gantt: Gantt,
+        workpackageId: string,
         data: {
             activities: ActivityJson[];
             assignments: AssignmentJson[];
             team: TeamMemberJson[];
         }
     ) {
-        makeAutoObservable(this, {}, { autoBind: true });
+        makeAutoObservable(this, {}, { autoBind: true })
         this.Gantt = Gantt;
+        this.workpackageId = workpackageId;
         this.Transport = new GanttTransport(this);
         this.ActivityStore = new ActivityStore(
             this,

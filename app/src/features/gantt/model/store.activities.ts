@@ -15,11 +15,13 @@ export class ActivityStore {
         GanttStore: GanttStore,
         Transport: GanttTransport,
         data: ActivityJson[]
+
     ) {
         makeAutoObservable(this, {}, { autoBind: true });
         this.GanttStore = GanttStore;
         this.Transport = Transport;
-        this.resolveMany(data);
+        this.resolveMany(data)
+
     }
 
     getActvitityById(id: string) {

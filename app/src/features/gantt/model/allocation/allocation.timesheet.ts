@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { GanttInterval } from "../shared";
+import { makeAutoObservable } from "mobx";
 
 export class Timesheet {
     private Interval: GanttInterval;
@@ -12,6 +13,7 @@ export class Timesheet {
             overtimeMinutes: number;
         }
     ) {
+        makeAutoObservable(this, {}, { autoBind: true })
         this.Interval = Interval;
         if (timesheet) {
             this.defaultMinutes = timesheet.defaultMinutes;

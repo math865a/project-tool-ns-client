@@ -7,7 +7,7 @@ import { Action } from "~/src/design-system";
 import { TeamMenu } from "../team-menu";
 
 export const TeamMenuAction = observer(() => {
-    const { TeamStore } = useGantt();
+    const { Store: {TeamStore} } = useGantt();
 
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);

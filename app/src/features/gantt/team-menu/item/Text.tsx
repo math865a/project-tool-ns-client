@@ -15,7 +15,7 @@ const TeamMemberText = observer(
                         const textProps = allowed
                             ? {
                                   component: Link,
-                                  to: `/app/resources/${TeamMember.resource.id}`,
+                                  to: `/app/Resources/${TeamMember.Resource.id}`,
                                   prefetch: "intent",
                               }
                             : {
@@ -37,7 +37,7 @@ const TeamMemberText = observer(
                                     }}
                                     {...textProps}
                                 >
-                                    {TeamMember.resource.name}
+                                    {TeamMember.Resource.name}
                                 </Typography>
                           
                         );
@@ -48,7 +48,7 @@ const TeamMemberText = observer(
                         const textProps = allowed
                             ? {
                                   component: Link,
-                                  to: `/app/resourcetypes/${TeamMember.resourceType.id}`,
+                                  to: `/app/Resourcetypes/${TeamMember.ResourceType.id}`,
                                   prefetch: "intent",
                               }
                             : {
@@ -71,7 +71,7 @@ const TeamMemberText = observer(
                                     }}
                                     {...textProps}
                                 >
-                                    {TeamMember.resourceType.name}
+                                    {TeamMember.ResourceType.name}
                                 </Typography>
                            
                         );

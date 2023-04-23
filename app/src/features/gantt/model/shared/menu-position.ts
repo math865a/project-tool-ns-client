@@ -1,5 +1,9 @@
+import { makeAutoObservable } from "mobx";
+
 export class MenuPosition {
-    constructor(public x: number, public y: number) {}
+    constructor(public x: number, public y: number) {
+        makeAutoObservable(this, {}, { autoBind: true })
+    }
 
     get anchorPosition() {
         return {

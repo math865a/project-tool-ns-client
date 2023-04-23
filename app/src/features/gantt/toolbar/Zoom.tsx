@@ -5,7 +5,9 @@ import { Action } from "~/src/design-system";
 import { useGantt } from "useGantt";
 
 export const TimelineZoom = observer(() => {
-    const Gantt = useGantt();
+    const {
+        Timeline: { Zoom },
+    } = useGantt();
 
     return (
         <Box width={200}>
@@ -14,27 +16,21 @@ export const TimelineZoom = observer(() => {
                 <Action.Symbol
                     icon={faMinus}
                     title="Zoom ud"
-                    onClick={() => Gantt.Timeline.zoom(-1)}
-                    disabled={
-                        Gantt.Timeline.dpxBounds.min === Gantt.Timeline.dpx
-                    }
+                    onClick={() => Zoom.increment(-1)}
+                    disabled={Zoom.min === Zoom.zoom}
                 />
                 <Slider
-                    min={Gantt.Timeline.dpxBounds.min}
+                    min={Zoom.min}
                     size="small"
-                    max={Gantt.Timeline.dpxBounds.max}
-                    value={Gantt.Timeline.dpx}
-                    onChange={(_, value) =>
-                        Gantt.Timeline.handleZoom(value as number)
-                    }
+                    max={Zoom.max}
+                    value={Zoom.zoom}
+                    onChange={(_, value) => Zoom.slide(value as number)}
                 />
                 <Action.Symbol
                     icon={faPlus}
                     title="Zoom ind"
-                    onClick={() => Gantt.Timeline.zoom(1)}
-                    disabled={
-                        Gantt.Timeline.dpxBounds.max === Gantt.Timeline.dpx
-                    }
+                    onClick={() => Zoom.increment(1)}
+                    disabled={Zoom.max === Zoom.zoom}
                 />
             </Stack>
         </Box>

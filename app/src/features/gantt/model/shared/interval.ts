@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { DateTime as dt, Interval as int } from "luxon";
-import { IReactionDisposer, reaction } from "mobx";
+import { IReactionDisposer, makeAutoObservable, reaction } from "mobx";
 import { getDateTime, getWorkDays } from "~/util";
 
 type ChangeHandler = (data: {
@@ -22,6 +22,7 @@ export class GanttInterval {
         public end: string,
         public onChange?: ChangeHandler
     ) {
+        makeAutoObservable(this, {}, { autoBind: true });
         this.init();
     }
 
@@ -44,8 +45,6 @@ export class GanttInterval {
             this.dt.end.plus({ milliseconds: end })
         );
     }
-
-    updateFromCoordinates(start: number, end: number) {}
 
     init() {
         if (this.onChange) {

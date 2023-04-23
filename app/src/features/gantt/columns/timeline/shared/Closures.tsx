@@ -5,7 +5,7 @@ import { ROW_HEIGHT } from "gantt/constants";
 
 const Closures = observer(() => {
     const {
-        Gantt: { Timeline, TimelineIntervals, Dimensions },
+        Gantt: { Timeline: {Intervals}, Dimensions },
     } = useWorkpackage();
 
     return (
@@ -22,7 +22,7 @@ const Closures = observer(() => {
                 strokeWidth={1}
                 orientation={["diagonal"]}
             />
-            {TimelineIntervals.closures.map((c, i) => (
+            {Intervals.closures.map((c, i) => (
                 <g transform={`translate(${c.x}, 0)`}>
                     <rect
                         fill="url('#closure')"

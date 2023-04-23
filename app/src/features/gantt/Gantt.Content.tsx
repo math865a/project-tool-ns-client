@@ -14,7 +14,7 @@ export const GanttContent = observer(() => {
     const { Gantt } = useWorkpackage();
 
     const content = computed(() => {
-        if (Gantt.Store.ActivityStore.Activities.length === 1) {
+        if (Gantt.Store.ActivityStore.Activities.length <= 1) {
             return <GanttNoRows />;
         } else {
             return <GanttGrid />;

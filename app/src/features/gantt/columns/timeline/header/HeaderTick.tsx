@@ -11,7 +11,7 @@ export const HeaderTick = observer((props: TickRendererProps) => {
     const { Gantt } = useWorkpackage();
 
     const tick = computed(() => {
-        return Gantt.TimelineIntervals.intervals.headerIntervals.find(
+        return Gantt.Timeline.Intervals.intervals.headerIntervals.find(
             (d) => d.primary === props.formattedValue
         );
     });
@@ -21,7 +21,7 @@ export const HeaderTick = observer((props: TickRendererProps) => {
     });
 
     const width = computed(() => {
-        return Gantt.Timeline.wDay * days.get();
+        return Gantt.Timeline.Drag.snapWidth * days.get();
     });
 
     const theme = useTheme();

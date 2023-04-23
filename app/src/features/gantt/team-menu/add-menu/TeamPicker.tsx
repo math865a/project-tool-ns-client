@@ -23,7 +23,7 @@ export const TeamPicker = observer(
     }) => {
         const [selected, setSelected] = useState<TeamMemberJson[]>([]);
 
-        const {Gantt: {TeamStore}, inform} = useWorkpackage()
+        const {Gantt: {Store: {TeamStore}}, inform} = useWorkpackage()
 
         const handleChange = (values: TeamMemberJson[]) => {
             setSelected(values);

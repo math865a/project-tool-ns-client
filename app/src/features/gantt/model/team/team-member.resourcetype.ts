@@ -1,3 +1,4 @@
+import { makeAutoObservable } from "mobx";
 import { ResourceTypeJson } from "../../types";
 import { Rate } from "../shared";
 
@@ -8,6 +9,7 @@ export class ResourceType {
     abbrevation: string
     SalesRate: Rate;
     constructor(props: ResourceTypeJson) {
+        makeAutoObservable(this, {}, { autoBind: true })
         this.update(props);
     }
 

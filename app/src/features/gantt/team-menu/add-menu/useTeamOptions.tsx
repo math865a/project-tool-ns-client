@@ -5,7 +5,7 @@ import invariant from "tiny-invariant";
 import { useWorkpackage } from "useWorkpackage";
 
 export const useTeamOptions = (open: boolean) => {
-    const {Gantt: {Transport: {socket}}} = useWorkpackage();
+    const {Gantt: {Store: {Transport: {socket}}}} = useWorkpackage();
 
     const {workpackageId} = useParams()
     invariant(workpackageId)

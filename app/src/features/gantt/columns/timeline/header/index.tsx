@@ -4,12 +4,9 @@ import { Axis } from "@visx/axis";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useWorkpackage } from "useWorkpackage";
-
-import { HeaderTick } from "./HeaderTick";
-import { GanttColumn } from "~/src/features/gantt/types";
 import { HEADER_HEIGHT } from "gantt/constants";
 import { useTimelineDrag } from "../shared";
-
+import { HeaderTick } from "./HeaderTick";
 
 export const TimelineHeader = observer(() => {
     const { Gantt } = useWorkpackage();
@@ -17,20 +14,11 @@ export const TimelineHeader = observer(() => {
     const api = useGridApiContext();
 
     useEffect(() => {
-        Gantt.Dimensions.setTimelineWidth(
-            api.current.getColumn("timeline").computedWidth
-        );
-
-        api.current.getAllColumns().forEach((col) => {
-            Gantt.Table.updateColumnWidth(
-                col.field as GanttColumn,
-                col.computedWidth
-            );
-        });
+        Gantt.Dimensions.updateTimelineWidth =
+            api.current.getColumn("timeline").computedWidth;
     }, []);
 
-
-    const {onMouseDown} = useTimelineDrag()
+    const { onMouseDown } = useTimelineDrag();
 
     return (
         <Box
@@ -38,7 +26,7 @@ export const TimelineHeader = observer(() => {
             height={HEADER_HEIGHT}
             component="div"
             position="relative"
-           sx={{cursor: Gantt.Timeline.TimelineDrag.cursor}}
+            sx={{ cursor: Gantt.Timeline.Slide.cursor }}
             onMouseDown={onMouseDown}
         >
             <svg
@@ -51,19 +39,19 @@ export const TimelineHeader = observer(() => {
                     hideTicks
                     scale={Gantt.Timeline.xScale}
                     top={HEADER_HEIGHT}
-                    tickValues={Gantt.TimelineIntervals.ticks}
+                    tickValues={Gantt.Timeline.Intervals.ticks}
                     tickFormat={(_, index) =>
-                        Gantt.TimelineIntervals.intervals.headerIntervals[index]
-                            .primary
+                        Gantt.Timeline.Intervals.intervals.headerIntervals[
+                            index
+                        ].primary
                     }
                     //tickLength={HEADER_HEIGHT}
                     tickComponent={(props) => <HeaderTick {...props} />}
-                    key={`${Gantt.Timeline.dtBounds}-${Gantt.Timeline.ds}`}
+                    key={`${Gantt.Timeline.Boundary.x}-${Gantt.Timeline.Interval.start}`}
                     tickLineProps={{ stroke: "rgba(224, 224, 224, 1)" }}
                     stroke="rgba(224, 224, 224, 1)"
                 />
             </svg>
-     
         </Box>
     );
 });

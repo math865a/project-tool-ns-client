@@ -1,6 +1,6 @@
 import { FormResponse } from "@math865a/project-tool.types";
 import { json, LoaderArgs, redirect } from "@remix-run/node";
-import { Outlet, useRouteLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData, useRouteLoaderData } from "@remix-run/react";
 import { ClientOnly } from "remix-utils";
 import { sendRequest } from "session";
 import { SocketProvider } from "socket";
@@ -70,10 +70,13 @@ export async function action({ params, request }: LoaderArgs) {
 }
 
 export default function Workpackage() {
+
+
+    const data = useLoaderData();
+    console.log(data);
     return (
         <HasAccess to={Subject.Workpackages}>
-            <ClientOnly>
-                {() => (
+
                     <SocketProvider namespace="projectManagement">
                         <WorkpackageProvider>
                             <Page.Root maxWidth="lg">
@@ -96,8 +99,7 @@ export default function Workpackage() {
                             </Page.Root>
                         </WorkpackageProvider>
                     </SocketProvider>
-                )}
-            </ClientOnly>
+     
         </HasAccess>
     );
 }

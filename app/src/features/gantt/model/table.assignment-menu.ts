@@ -12,7 +12,7 @@ import {
 export class GanttAssignmentMenu{
     Table: GanttTable;
     Activity: Activity | null = null;
-    open: boolean;
+    open: boolean = false;
     position: MenuPosition | null;
     
     constructor(Table: GanttTable){

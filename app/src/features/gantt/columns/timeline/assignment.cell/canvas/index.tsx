@@ -17,9 +17,9 @@ const SchedulingCanvas = observer(
             <Box position="absolute" left={0} top={0} right={0} bottom={0}>
                 <svg width={Gantt.Dimensions.timelineWidth} height={ROW_HEIGHT}>
                     {(schedulingProps.isDragging ||
-                        Gantt.Timeline.TimelineEvent.isDragging ||
+                        Gantt.Timeline.Drag.isDragging ||
                         Assignment.Canvas.isHoveringAllocation ||
-                        Assignment.hasAllocationDragEvent) && (
+                        Assignment.Canvas.isDraggingAllocation) && (
                         <OutOfBounds
                             Canvas={Assignment.Canvas}
                             rectProps={{ onMouseUp: schedulingProps.onMouseUp }}

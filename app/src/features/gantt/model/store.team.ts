@@ -13,11 +13,13 @@ export class TeamStore {
         GanttStore: GanttStore,
         Transport: GanttTransport,
         data: TeamMemberJson[]
+
     ) {
         makeAutoObservable(this, {}, { autoBind: true });
         this.GanttStore = GanttStore;
         this.Transport = Transport;
         this.resolveMany(data);
+
     }
 
     getTeamMemberById(id: string) {

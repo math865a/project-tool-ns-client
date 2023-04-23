@@ -8,6 +8,7 @@ import { GanttTimelineBoundary } from "./timeline.boundary";
 import { GanttTimelineIntervals } from "./timeline.intervals";
 import { GanttTimelineZoom } from "./timeline.zoom";
 import { GanttTimelineDrag } from "./timeline.drag";
+import { GanttTimelineSlide } from "./timeline.slide";
 
 export class GanttTimeline {
     Gantt: Gantt;
@@ -16,21 +17,22 @@ export class GanttTimeline {
     Drag: GanttTimelineDrag;
     Intervals: GanttTimelineIntervals;
     Boundary: GanttTimelineBoundary;
+    Slide: GanttTimelineSlide;
 
     constructor(Gantt: Gantt, start: string, end: string) {
         makeAutoObservable(this, {}, { autoBind: true });
         this.Gantt = Gantt;
+        this.Zoom = new GanttTimelineZoom(this);
+        this.Drag = new GanttTimelineDrag(this);
+        this.Boundary = new GanttTimelineBoundary(this);
+        this.Intervals = new GanttTimelineIntervals(this);
+        this.Slide = new GanttTimelineSlide(this);
         this.init(start, end);
     }
 
     init(start: string, end: string) {
         const nodeSpan = this.getNodeSpan(start, end);
         this.Interval = new GanttInterval(nodeSpan.start, nodeSpan.end);
-        this.Zoom = new GanttTimelineZoom(this);
-        this.Intervals = new GanttTimelineIntervals(this);
-        this.Drag = new GanttTimelineDrag(this);
-
-        this.Boundary = new GanttTimelineBoundary(this);
     }
     captureNodeSpan(){
         this.Interval.update(this.nodeSpan.start, this.nodeSpan.end)

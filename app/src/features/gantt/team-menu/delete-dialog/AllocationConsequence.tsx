@@ -14,7 +14,7 @@ const AllocationConsequence = observer(
             <ListItem key={Allocation.id} disablePadding>
                 <ListItemIcon>
                     <Typography fontSize={12} fontWeight="bold">
-                        {Allocation.Assignment?.Task?.wbs}
+                        {Allocation.Assignment?.Task?.Row.wbs}
                     </Typography>
                 </ListItemIcon>
                 <ListItemText
@@ -30,11 +30,11 @@ const AllocationConsequence = observer(
                         maxWidth: "70%",
                     }}
                     primary={Allocation.Assignment?.Task?.name}
-                    secondary={Allocation.Interval.displayInterval}
+                    secondary={Allocation.Interval.display.intervals.long}
                 />
                 <ListItemSecondaryAction>
                     <Typography fontSize={12}>
-                        {Allocation.totalHours + " timer"}
+                        {Allocation.Timesheet.stats.timesheet.total + " timer"}
                     </Typography>
                 </ListItemSecondaryAction>
             </ListItem>

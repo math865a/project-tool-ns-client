@@ -19,7 +19,7 @@ export const GanttGrid = observer(() => {
                     apiRef={Gantt.Table.api}
                     columns={ganttColumns}
                     rows={Gantt.Table.Rows}
-                    getTreeDataPath={(row) => row.path}
+                    getTreeDataPath={(row) => row.Row.path}
                     groupingColDef={treeColumn}
                     rowThreshold={0}
                     isGroupExpandedByDefault={(row) => {

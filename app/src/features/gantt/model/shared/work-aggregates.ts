@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { Timesheet } from "../allocation";
 import { GanttInterval } from "./interval";
+import { makeAutoObservable } from "mobx";
 
 abstract class Parent {
     Timesheets: Timesheet[];
@@ -8,7 +9,9 @@ abstract class Parent {
 }
 
 export class WorkAggregates {
-    constructor(private Parent: Parent) {}
+    constructor(private Parent: Parent) {
+        makeAutoObservable(this, {}, { autoBind: true })
+    }
 
     private get workBreakdown() {
         return {

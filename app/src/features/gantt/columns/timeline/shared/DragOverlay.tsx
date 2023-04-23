@@ -6,7 +6,7 @@ import { useTimelineDrag } from "../../../TimelineDragProvider";
 const TimelineDragOverlay = observer(() => {
     const {
         Gantt: {
-            Timeline: { TimelineDrag: M },
+            Timeline: { Slide: M },
             Dimensions,
         },
     } = useWorkpackage();
@@ -16,16 +16,16 @@ const TimelineDragOverlay = observer(() => {
     if (!M.isDragging) return null;
     return (
         <Box
-            width={Dimensions.dialogDimensions.width}
-            height={Dimensions.dialogDimensions.height}
+            width={Dimensions.width}
+            height={Dimensions.height}
             position="absolute"
             top={0}
             left={0}
             sx={{ zIndex: (theme) => theme.zIndex.tooltip }}
         >
             <svg
-                width={Dimensions.dialogDimensions.width}
-                height={Dimensions.dialogDimensions.height}
+                width={Dimensions.width}
+                height={Dimensions.height}
                 style={{
                     position: "absolute",
                     left: 0,
@@ -34,8 +34,8 @@ const TimelineDragOverlay = observer(() => {
                 }}
             >
                 <rect
-                    width={Dimensions.dialogDimensions.width}
-                    height={Dimensions.dialogDimensions.height}
+                    width={Dimensions.width}
+                    height={Dimensions.height}
                     x={0}
                     y={0}
                     fill="transparent"
@@ -50,4 +50,4 @@ const TimelineDragOverlay = observer(() => {
 });
 
 export default TimelineDragOverlay;
-//left={Dimensions.dialogDimensions.width - Dimensions.timelineWidth}
+//left={Dimensions.width - Dimensions.timelineWidth}

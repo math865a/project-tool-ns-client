@@ -46,7 +46,7 @@ const TeamMemberItem = observer(({ TeamMember, divider }: Props) => {
             >
                 <ListItemAvatar sx={{ minWidth: 40 }}>
                     <Avatars.Individual
-                        subject={TeamMember.resource}
+                        subject={TeamMember.Resource}
                         size={27}
                         fontSize={13}
                     />

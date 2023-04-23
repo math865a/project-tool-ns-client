@@ -17,7 +17,7 @@ const PlanningSection = observer(() => {
             startActions={<GanttDialog />}
             endActions={<PlanningSectionFooter />}
         >
-            {Gantt.isEmpty ? (
+            {Gantt.Table.Rows.length === 1 ? (
                 <Fallback.Empty
                     text="Der er ikke oprettet nogle leverancer endnu."
                     icon={faChartSimpleHorizontal}

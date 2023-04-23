@@ -7,7 +7,7 @@ const WorkBreakdownsSection = observer(() => {
     const { Gantt } = useWorkpackage();
     return (
         <Page.Section title="Timefordeling" xs={4} overflowX overflowY>
-            {Gantt.isEmpty ? (
+            {Gantt.Table.Rows.length === 1 ? (
                 <Fallback.Empty/>
             ) : (
                 <TeamPie />
