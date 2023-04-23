@@ -17,7 +17,7 @@ export const useProjectManagerOptions = (socket?: Socket) => {
     const loadOptions = () => {
         setIsLoadingOptions(true);
         setHasLoaded(false);
-        socket?.emit("project-manager-options", {}, updateOptions);
+        socket?.emit("get:project-manager-options", {}, updateOptions);
     };
 
     const clearOptions = () => {
