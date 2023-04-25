@@ -6,7 +6,7 @@ function getText(boundary: int) {
     const date = boundary.start as dt;
     if (date.quarter === 1) {
         return {
-            primary: "Q" + date.toFormat("q yyyy"),
+            primary: "Q" + date.toFormat("q yy"),
             secondary: "",
             bold: true,
         };

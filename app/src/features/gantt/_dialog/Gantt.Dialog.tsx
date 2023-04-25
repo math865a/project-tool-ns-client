@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "@remix-run/react";
 import { observer } from "mobx-react-lite";
 import { GanttContent } from "./Gantt.Content";
 import { GanttFooter } from "./Gantt.Footer";
-import { GanttToolbar } from "./Gantt.Toolbar";
+import { GanttDialogToolbar } from "./Gantt.Toolbar";
 
 export const GanttDialog = observer(() => {
     const navigate = useNavigate();
@@ -30,7 +30,7 @@ export const GanttDialog = observer(() => {
             }}
             onKeyDown={handleKeyDown}
         >
-            <GanttToolbar />
+            <GanttDialogToolbar />
             <GanttContent />
             <GanttFooter />
             <Outlet />

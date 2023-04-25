@@ -46,7 +46,7 @@ export class AllocationBar {
     }
 
     save() {
-        this.Delta.save(this.rect.x1, this.rect.x2);
+        this.Delta.save(this.iRect.x1 + this.delta.dx, this.iRect.x2 + this.delta.dx + this.delta.dw);
         this.dragDirection = "none";
     }
 
@@ -68,9 +68,8 @@ export class AllocationBar {
     get bounds() {
         return {
             x: this.TaskBar?.rect.x1 ?? this.iRect.x1,
-            w:
-                (this.TaskBar?.iRect.w ?? this.iRect.w) +
-                (this.TaskBar?.Delta.dw ?? this.Delta.dw),
+            w: this.TaskBar?.rect.w ?? this.iRect.w
+             
         };
     }
 

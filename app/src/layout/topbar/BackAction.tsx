@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "@remix-run/react";
 import _ from "lodash";
 import { useMemo } from "react";
 import { Action, Symbol } from "~/src/design-system";
-import { pageMap } from "../sidebar/_page-map";
+import { allPages } from "../sidebar/_page-map";
 
 export interface IBackActionProps {
     title?: string;
@@ -20,8 +20,8 @@ export default function BackAction(props: IBackActionProps) {
     const navigate = useNavigate();
 
     const page = useMemo(() => {
-        return _.values(pageMap).find((page) =>
-            pathname.startsWith(page.activeUrl)
+        return allPages.find((page) =>
+            pathname.startsWith(page.to as string)
         );
     }, [pathname]);
 
@@ -29,7 +29,7 @@ export default function BackAction(props: IBackActionProps) {
         if (props?.title) {
             return props.title;
         } else if (page) {
-            return page.text;
+            return page.title;
         } else {
             return "";
         }

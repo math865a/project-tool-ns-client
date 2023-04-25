@@ -118,7 +118,7 @@ export class GanttInterval {
         const weekendCount = this.intervals.weekendDays.length;
         const dayCount = this.intervals.days.length;
         const isFinished = this.dt.end < dt.now();
-        const workDayCount = dayCount - weekendCount;
+        const workDayCount = this.intervals.workDays.length;
         const workdaysPassed = this.getWorkDaysPassed(isFinished, workDayCount);
         const workdaysLeft = workDayCount - workdaysPassed;
         const workdaysSince = Math.round(
@@ -136,6 +136,8 @@ export class GanttInterval {
 
     getWorkDaysPassed(isFinished: boolean, workDayCount: number) {
         if (isFinished) return workDayCount;
+        if (this.dt.start > dt.now()) return 0;
+        return this.intervals.workDays.filter(d => d < dt.now()).length;
         const now = dt.now();
         if (now > (this.interval.start as dt)) {
             const interval = int.fromDateTimes(this.interval.start as dt, now);
@@ -147,7 +149,6 @@ export class GanttInterval {
     get ratios() {
         const { workDays, workDaysComplete, workDaysRemaining } = this.counts;
         const result = {
-            workDays: workDaysComplete / workDays,
             workDaysLeft: workDaysRemaining / workDays,
             workDaysComplete: workDaysComplete / workDays,
         };

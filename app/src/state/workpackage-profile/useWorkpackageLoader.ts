@@ -1,9 +1,9 @@
 import { useRouteLoaderData } from "@remix-run/react";
-import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId/route";
+import { WorkpackageProfile } from "~/src/_definitions";
 
 export const useWorkpackageLoader = () => {
     const data = useRouteLoaderData(
         "routes/app.workpackages_.$workpackageId"
-    ) as WorkpackageLoader;
+    ) as WorkpackageProfile;
     return data;
 };

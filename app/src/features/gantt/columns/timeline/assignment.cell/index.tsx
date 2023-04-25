@@ -13,21 +13,23 @@ import { AllocationDndProvider } from "./dnd";
 export const AssignmentTimelineCell = observer(
     ({ Assignment }: { Assignment: Assignment }) => {
         return (
-            <Box
-                width="100%"
-                minWidth="100%"
-                maxWidth="100%"
-                height={ROW_HEIGHT}
-                position="relative"
-            >
-                <Closures />
-                <Can I={Action.Write} a={Subject.Workpackages}>
-                    <SchedulingCanvas Assignment={Assignment} />
-                </Can>
-                <AllocationDndProvider Assignment={Assignment}>
+            <AllocationDndProvider Assignment={Assignment}>
+                <Box
+                    width="100%"
+                    minWidth="100%"
+                    maxWidth="100%"
+                    height={ROW_HEIGHT}
+                    position="relative"
+                    sx={{ overflowX: "hidden", overflowY: "hidden" }}
+                >
+                    <Closures />
+                    <Can I={Action.Write} a={Subject.Workpackages}>
+                        <SchedulingCanvas Assignment={Assignment} />
+                    </Can>
+
                     <RenderAllocations Assignment={Assignment} />
-                </AllocationDndProvider>
-            </Box>
+                </Box>
+            </AllocationDndProvider>
         );
     }
 );

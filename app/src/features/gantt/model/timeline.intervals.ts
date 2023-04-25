@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { DateTime as dt, Interval as int } from "luxon";
-import { computed, makeAutoObservable } from "mobx";
+import { autorun, computed, makeAutoObservable } from "mobx";
 
 import * as F from "./timeline-intervals"
 import { type IInterval } from "./timeline-intervals/_types";

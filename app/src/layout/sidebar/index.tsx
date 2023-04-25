@@ -1,10 +1,11 @@
 import { Box, Drawer } from "@mui/material";
+import { Directory } from "~/src/design-system";
 import Brand from "./Brand";
-import PageLinks from "./PageLinks";
 import SessionLinks from "./SessionLinks";
+import { useLinks } from "./useLinks";
 
 export default function Sidebar({ drawerWidth }: { drawerWidth: number }) {
-
+    const links = useLinks()
     return (
         <Drawer
             sx={{
@@ -31,7 +32,9 @@ export default function Sidebar({ drawerWidth }: { drawerWidth: number }) {
         >
             <Box flexGrow={1}>
                 <Brand />
-                <PageLinks/>
+                <Box flexGrow={1} pt={2}>
+                <Directory.PageLinks links={links} orientation="column" />
+                </Box>
             </Box>
             <SessionLinks/>
 

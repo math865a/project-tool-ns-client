@@ -11,6 +11,7 @@ export const TaskBar = observer(({ Activity }: { Activity: Activity }) => {
             height={Bar.rect.h}
             sx={{ backgroundColor: Activity.Style.fill, borderRadius: 0.5 }}
             component={Paper}
+            variant="outlined"
         />
     );
 });

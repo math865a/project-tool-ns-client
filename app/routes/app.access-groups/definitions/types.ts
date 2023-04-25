@@ -1,7 +1,7 @@
 import { generateId } from "~/util";
 import _ from "lodash";
 import { defaultColors } from "~/src/design-system/controls/color-picker/defaultColors";
-import { pageMap } from "~/src/layout/sidebar/_page-map";
+import { pages } from "~/src/layout/sidebar/_page-map";
 
 export class Permissions {
     read: boolean;
@@ -32,7 +32,7 @@ export class AccessGroupRecord {
         this.isAdmin = false;
         this.users = []
         this.permissions = _.fromPairs(
-            _.map(_.keys(pageMap), (pageName) => [pageName, new Permissions()])
+            _.map(pages, (pageName) => [pageName, new Permissions()])
         );
     }
 }

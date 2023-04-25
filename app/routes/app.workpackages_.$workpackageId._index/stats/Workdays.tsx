@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite";
 import { useWorkpackage } from "~/src/state";
-import { scaleLinear } from "@visx/scale";
+import { scaleUtc } from "@visx/scale";
 import { computed } from "mobx";
 import { Box, Paper, Typography } from "@mui/material";
 import { useElementSize, useHover, useMergedRef } from "@mantine/hooks";
 import { DateTime } from "luxon";
 
-export const WorkStatus = observer(() => {
+export const Workdays = observer(() => {
     const {
         Gantt: {
             Store: {
@@ -18,14 +18,15 @@ export const WorkStatus = observer(() => {
     const { ref: sizeRef, width } = useElementSize();
 
     const scale = computed(() => {
-        return scaleLinear({
-            domain: [0, Plan?.Work.raw.total ?? 0],
+        return scaleUtc({
+            domain: [Plan?.Interval.t.s ?? 0, Plan?.Interval.t.f ?? 0],
             range: [0, width],
         });
     });
 
     const indicatorWidth = computed(() => {
-        return scale.get()(Plan?.Work.raw.completed ?? 0);
+        const now = DateTime.now().toMillis();
+        return scale.get()(now);
     });
 
     const hoverText = computed(() => {
@@ -33,17 +34,28 @@ export const WorkStatus = observer(() => {
         if (Plan.Interval.isFinished)
             return Plan.Interval.display.counts.long.workDays;
         return (
-            Plan.Interval.counts.workDaysComplete +
-            " / " +
-            Plan.Interval.counts.workDays +
-            " arbejdsdage"
+            Plan.Interval.counts.workDaysRemaining + " dage tilbage (" + Plan.Interval.display.percentages.workDaysLeft + ")"
         );
     });
 
     const displayText = computed(() => {
         if (!Plan) return "";
+        if (Plan.Interval.isFinished) {
+            return (
+                "Færdig for " +
+                Math.abs(
+                    Math.round(
+                        Plan.Interval.dt.end.diffNow().shiftTo("days").days
+                    )
+                ) +
+                " dage siden"
+            );
+        }
         return (
-            Plan.Work.work.completed + " / " + Plan.Work.work.total + " timer"
+            Plan.Interval.counts.workDaysComplete +
+            " / " +
+            Plan.Interval.counts.workDays +
+            " dage (" + Plan.Interval.display.percentages.workDaysComplete + ")"
         );
     });
 
@@ -55,7 +67,7 @@ export const WorkStatus = observer(() => {
         <Box
             flexGrow={1}
             ref={ref}
-            height={30}
+            height={27.5}
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -64,8 +76,8 @@ export const WorkStatus = observer(() => {
             overflow="hidden"
             component={Paper}
             variant="outlined"
-            mt={0.5}
-            mr={2}
+            mt={1}
+            maxWidth={200}
             boxSizing="content-box"
             borderColor="#28282860"
             sx={{ cursor: "default" }}

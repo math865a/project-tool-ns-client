@@ -6,6 +6,5 @@ export const schema = yup.object({
         .string()
         .required("En finanskilde skal være tilknyttet"),
     name: yup.string().optional(),
-    description: yup.string().optional(),
     serialNo: yup.string().required("Du mangler at angive et serienr."),
 });

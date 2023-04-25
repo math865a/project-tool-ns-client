@@ -33,12 +33,6 @@ export class GanttTimelineDrag {
         }
     };
 
-    onDragEnd = () => {
-        this.Bars.forEach((d) => d.save());
-        this.Timeline.Boundary.reset();
-        this.Bar = null;
-    };
-
     private get ActivityBars() {
         return this.Timeline.Gantt.Store.ActivityStore.Activities.map(
             (d) => d.Bar
@@ -54,6 +48,20 @@ export class GanttTimelineDrag {
     private get Bars() {
         return [...this.ActivityBars, ...this.AllocationBars];
     }
+
+    private get SpectatorBars(){
+        return this.Bars.filter((d) => d !== this.Bar);
+    }
+
+    onDragEnd = () => {
+        if (!this.Bar) return;
+        this.SpectatorBars.forEach((d) => d.save());
+        this.Bar?.save()
+        this.Timeline.Boundary.reset();
+        this.Bar = null;
+    };
+
+
 
     get snapWidth() {
         return this.Timeline.convert.deltaToPixel(

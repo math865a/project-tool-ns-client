@@ -1,23 +1,21 @@
 import { faTimes, faTrash } from "@fortawesome/pro-light-svg-icons";
-import { ListItemIcon, ListItemText, MenuItem, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
+import { TeamMember } from "gantt-models";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
+import { useWorkpackage } from "useWorkpackage";
+import { Action as A, Subject } from "~/src/_definitions";
 import {
     Action,
-    ConfirmationDialog,
-    Dialog,
-    Symbol,
+    Dialog
 } from "~/src/design-system";
-import { useWorkpackage } from "useWorkpackage";
-import ConsequencesBody from "./ConsequencesBody";
-import { TeamMember } from "gantt-models";
 import { Can } from "~/src/session-user";
-import { Action as A, Subject } from "~/src/_definitions";
+import ConsequencesBody from "./ConsequencesBody";
 
 const TeamMemberDelete = observer(
     ({ TeamMember }: { TeamMember: TeamMember }) => {
         const {
-            Gantt: { TeamStore },
+            Gantt: { Store: {TeamStore} },
         } = useWorkpackage();
 
         const [removeConfOpen, setRemoveConfOpen] = useState<boolean>(false);
@@ -54,7 +52,7 @@ const TeamMemberDelete = observer(
                 </Can>
                 <Dialog.Modal open={removeConfOpen}>
                     <Dialog.Title
-                        title={`Vil du fjerne ${TeamMember.resource.name} (${TeamMember.resourceType.name}) fra dit team?`}
+                        title={`Vil du fjerne ${TeamMember.Resource.name} (${TeamMember.ResourceType.name}) fra dit team?`}
                         subtitle="Teammedlemmet har allokkeringer tildelt. Dette betyder, at nedenstående allokeringer også vil blive slettet, hvis du sletter teammedlemmet."
                     />
                     <Dialog.Body sx={{ pb: 0 }}>

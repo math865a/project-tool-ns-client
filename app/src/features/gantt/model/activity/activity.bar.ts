@@ -17,7 +17,7 @@ export class ActivityBar {
             this.Activity.Store.GanttStore.Gantt.Timeline,
             this.Activity.Interval
         );
-        this.hRatio = this.Activity.kind === "Delivery" ? 0.25 : 0.45;
+        this.hRatio = this.Activity.kind === "Delivery" ? 0.3 : 0.45;
     }
 
     syncModifier(delta: Delta, type?: TimelineEventType) {
@@ -77,17 +77,17 @@ export class ActivityBar {
     get ownRect() {
         const { x1, x2, w, h, y } = this.iRect;
         return {
-            x1: x1 + this.Delta.snap.dx,
-            x2: x2 + (w + this.Delta.snap.dw),
-            w: w + this.Delta.snap.dw,
+            x1: x1 + this.Delta.dx,
+            x2: x2 + this.Delta.dx + this.Delta.dw,
+            w: w + this.Delta.dw,
             h: h,
             y: y,
         };
     }
 
     private get childrenRect() {
-        const minChild = _.minBy(this.Children, (d) => d.ownRect.x1);
-        const maxChild = _.maxBy(this.Children, (d) => d.ownRect.x2);
+        const minChild = _.minBy(this.Children, (d) => d.rect.x1) as ActivityBar | undefined;
+        const maxChild = _.maxBy(this.Children, (d) => d.rect.x2) as ActivityBar | undefined;
 
         if (!minChild || !maxChild) {
             return this.ownRect;

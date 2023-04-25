@@ -1,14 +1,13 @@
 import { useElementSize } from "@mantine/hooks";
 import { Box, Stack } from "@mui/material";
-import { useLoaderData } from "@remix-run/react";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { Action, Subject } from "~/src/_definitions";
 import ProjectManagerRoot from "~/src/components/project-manager/ProjectManagerRoot";
 import { PlanDays, PlanPeriod, PlanWork } from "~/src/features";
 import { Can } from "~/src/session-user";
-import { useWorkpackage } from "~/src/state";
-import { WorkpackageLoader } from "../route";
+import { useWorkpackage, useWorkpackageLoader } from "~/src/state";
+
 
 export const PlanningSectionFooter = observer(() => {
     const {
@@ -19,7 +18,7 @@ export const PlanningSectionFooter = observer(() => {
 
     const {
         managers: { projectManager },
-    } = useLoaderData<WorkpackageLoader>();
+    } = useWorkpackageLoader()
 
     const { ref, height } = useElementSize();
 

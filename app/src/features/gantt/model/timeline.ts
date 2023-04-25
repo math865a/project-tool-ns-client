@@ -25,7 +25,7 @@ export class GanttTimeline {
         this.Zoom = new GanttTimelineZoom(this);
         this.Drag = new GanttTimelineDrag(this);
         this.Boundary = new GanttTimelineBoundary(this);
-        this.Intervals = new GanttTimelineIntervals(this);
+
         this.Slide = new GanttTimelineSlide(this);
         this.init(start, end);
     }
@@ -33,6 +33,7 @@ export class GanttTimeline {
     init(start: string, end: string) {
         const nodeSpan = this.getNodeSpan(start, end);
         this.Interval = new GanttInterval(nodeSpan.start, nodeSpan.end);
+        this.Intervals = new GanttTimelineIntervals(this);
     }
     captureNodeSpan(){
         this.Interval.update(this.nodeSpan.start, this.nodeSpan.end)
@@ -92,7 +93,7 @@ export class GanttTimeline {
 
     get convert() {
         return {
-            deltaToPixel: (t: number) => this.xScale(t),
+            deltaToPixel: (t: number) => this.dtScale(t),
             pixelToDelta: (x: number) => this.dtScale.invert(x),
             timeToPixel: (t: number) => this.xScale(t),
             pixelToTime: (x: number) => this.xScale.invert(x),

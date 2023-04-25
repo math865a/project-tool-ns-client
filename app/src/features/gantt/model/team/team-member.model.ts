@@ -24,6 +24,10 @@ export class TeamMember {
         this.ResourceType = new ResourceType(props.resourceType);
     }
 
+    get Deliveries(){
+        return this.Store.GanttStore.ActivityStore.Deliveries.filter((d) => d.Team.includes(this));
+    }
+
     get Assignments() {
         return this.Store.GanttStore.AssignmentStore.Assignments.filter(
             (a) => a.agentId === this.id

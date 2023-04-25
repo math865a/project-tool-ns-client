@@ -1,13 +1,12 @@
 import { Box, Stack } from "@mui/material";
 import { useParams } from "@remix-run/react";
-import { Page } from "design";
+import { Directory, Page } from "design";
 import invariant from "tiny-invariant";
 import {
-    DeleteAction,
     AddUserAction,
+    DeleteAction,
     FavoriteAction,
-    useLinks,
-    PageLink,
+    useLinks
 } from "./header";
 
 export default function HeaderSection() {
@@ -24,11 +23,7 @@ export default function HeaderSection() {
                 alignItems="center"
                 justifyContent="space-between"
             >
-                <Stack display="flex" direction="row" spacing={1}>
-                    {links.map((d) => (
-                        <PageLink {...d} key={d.to} />
-                    ))}
-                </Stack>
+                <Directory.PageLinks links={links} />
                 <Stack direction="row" spacing={1} alignItems="center">
                     <AddUserAction />
                     <FavoriteAction />

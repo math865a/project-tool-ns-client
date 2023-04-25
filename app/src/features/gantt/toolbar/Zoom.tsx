@@ -10,7 +10,7 @@ export const TimelineZoom = observer(() => {
     } = useGantt();
 
     return (
-        <Box width={200}>
+        <Box width={250}>
             <Stack direction="row" alignItems="center" spacing={1}>
                 {/* <Typography fontSize={12}>Zoom</Typography> */}
                 <Action.Symbol

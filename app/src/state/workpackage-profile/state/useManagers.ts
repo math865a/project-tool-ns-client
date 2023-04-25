@@ -3,7 +3,7 @@ import { useOptions } from "~/src/hooks/options/useOptions";
 import { useOptionState } from "~/src/hooks/options/useOptionState";
 import { HandleOptionsStageToggle } from "~/src/hooks/options/_types";
 import { useLoaderData } from "@remix-run/react";
-import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId/route";
+import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId._index/route";
 
 export const useManagers = () => {
     const {

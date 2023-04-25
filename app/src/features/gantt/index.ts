@@ -1,9 +1,7 @@
-export * from './Gantt.Content';
-export * from './Gantt.Dialog';
-export * from './Gantt.Footer';
+export * from './_dialog';
 export * from './Gantt.Grid';
 export * from './Gantt.NoRows';
-export * from './Gantt.Toolbar';
+export * from './_dialog/Gantt.Toolbar';
 export * from './TimelineDragProvider';
 export * from './assignment-menu';
 export * from './columns';
@@ -15,3 +13,4 @@ export * from './team-menu';
 export * from './toolbar';
 export * from './types';
 export * from './useGantt';
+export * from "./_page"

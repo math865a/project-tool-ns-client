@@ -1,6 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import { useMemo, useState } from "react";
-import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId/route";
+import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId._index/route";
 import { ContractNode, FinancialSourceNode } from "~/src/_definitions";
 
 

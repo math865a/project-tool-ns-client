@@ -1,6 +1,6 @@
 
 import { useLoaderData } from "@remix-run/react";
-import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId/route";
+import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId._index/route";
 import { Stage } from "~/src/_definitions";
 import { useOptionState } from "~/src/hooks/options/useOptionState";
 

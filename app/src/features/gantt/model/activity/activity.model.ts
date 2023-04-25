@@ -89,7 +89,7 @@ export class Activity {
 
     get Children() {
         return this.children
-            .map((d) => this.Store.getActvitityById(d))
+            .map((d) => this.Store.Activities.find(x => x.id === d))
             .filter((d) => d) as Activity[];
     }
 

@@ -1,9 +1,9 @@
-import { Divider, Stack, Typography } from "@mui/material";
-import { Page } from "~/src/design-system";
-import { PageLink, links } from "./header";
-import { useMemo } from "react";
+import { Stack, Typography } from "@mui/material";
+import { Directory, Page } from "~/src/design-system";
 import { useLocation } from "@remix-run/react";
 import _ from "lodash";
+import { useMemo } from "react";
+import { links } from "./link-map";
 
 export default function HeaderSection() {
     const location = useLocation();
@@ -13,15 +13,7 @@ export default function HeaderSection() {
     }, [location.pathname]);
 
     return (
-        <Page.Header
-            actions={
-                <Stack display="flex" direction="row" spacing={1}>
-                    {links.map((d) => (
-                        <PageLink {...d} key={d.to} />
-                    ))}
-                </Stack>
-            }
-        >
+        <Page.Header actions={<Directory.PageLinks links={links} />}>
             <Stack>
                 <Typography fontSize={14} fontWeight="bold">
                     {activeLink?.title ?? links[0].title}

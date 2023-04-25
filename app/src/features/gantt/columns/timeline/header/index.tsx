@@ -2,30 +2,34 @@ import { Box } from "@mui/material";
 import { useGridApiContext } from "@mui/x-data-grid-pro";
 import { Axis } from "@visx/axis";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useWorkpackage } from "useWorkpackage";
 import { HEADER_HEIGHT } from "gantt/constants";
 import { useTimelineDrag } from "../shared";
 import { HeaderTick } from "./HeaderTick";
+import { useElementSize } from "@mantine/hooks";
 
 export const TimelineHeader = observer(() => {
     const { Gantt } = useWorkpackage();
 
-    const api = useGridApiContext();
+    const { ref, width } = useElementSize();
 
     useEffect(() => {
-        Gantt.Dimensions.updateTimelineWidth =
-            api.current.getColumn("timeline").computedWidth;
-    }, []);
+        if (width !== 0 && width !== Gantt.Dimensions.timelineWidth) {
+            Gantt.Dimensions.updateTimelineWidth = width;
+        }
+    }, [width]);
 
     const { onMouseDown } = useTimelineDrag();
 
     return (
         <Box
-            width={Gantt.Dimensions.timelineWidth}
-            height={HEADER_HEIGHT}
-            component="div"
-            position="relative"
+            position="absolute"
+            left={0}
+            top={0}
+            bottom={0}
+            right={0}
+            ref={ref}
             sx={{ cursor: Gantt.Timeline.Slide.cursor }}
             onMouseDown={onMouseDown}
         >
@@ -33,6 +37,7 @@ export const TimelineHeader = observer(() => {
                 width={Gantt.Dimensions.timelineWidth}
                 height={HEADER_HEIGHT}
                 style={{ position: "absolute", left: 0, top: 0 }}
+                key={Gantt.Dimensions.timelineWidth}
             >
                 <Axis
                     orientation="top"

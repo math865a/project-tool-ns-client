@@ -30,14 +30,11 @@ const Bar = observer(({ Allocation }: { Allocation: Allocation }) => {
     };
 
     return (
-        <Can I={Action.Write} a={Subject.Workpackages} passThrough>
-            {(allowed) => (
+ 
                 <Box
                     ref={dragRef}
                     style={{
-                        transform: CSS.Translate.toString(
-                            Allocation.Bar.transform
-                        ),
+                       
                     }}
                     onDoubleClick={handleClick}
                     sx={{
@@ -48,7 +45,10 @@ const Bar = observer(({ Allocation }: { Allocation: Allocation }) => {
                         height: Allocation.Bar.iRect.h,
                         width: Allocation.Bar.rect.w,
                         textDecoration: "none",
-                        cursor: !allowed ? "pointer" : undefined,
+                        cursor: "pointer",//!allowed ? "pointer" : undefined,
+                        transform: CSS.Translate.toString(
+                            Allocation.Bar.transform
+                        ),
                     }}
                     onMouseEnter={() =>
                         Allocation.Interaction.updateBarHovering(true)
@@ -62,8 +62,8 @@ const Bar = observer(({ Allocation }: { Allocation: Allocation }) => {
                         isDragging={isDragging}
                     />
 
-                    {allowed && (
-                        <>
+                 {/*   {allowed && (
+                        <>*/}
                             <div
                                 {...attributes}
                                 {...listeners}
@@ -119,17 +119,19 @@ const Bar = observer(({ Allocation }: { Allocation: Allocation }) => {
                                     zIndex: 401,
                                 }}
                             />
-                        </>
-                    )}
+                       {/* </>
+                    )}*/}
 
                     <BarContent
                         Allocation={Allocation}
                         width={Allocation.Bar.rect.w}
                     />
                 </Box>
-            )}
-        </Can>
+       
     );
 });
 
 export default Bar;
+
+/*       <Can I={Action.Write} a={Subject.Workpackages} passThrough>
+            {(allowed) => (*/

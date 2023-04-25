@@ -1,57 +1,45 @@
 import { observer } from "mobx-react-lite";
 import { useWorkpackage } from "~/src/state";
-import { scaleUtc } from "@visx/scale";
+import { scaleLinear } from "@visx/scale";
 import { computed } from "mobx";
 import { Box, Paper, Typography } from "@mui/material";
 import { useElementSize, useHover, useMergedRef } from "@mantine/hooks";
 import { DateTime } from "luxon";
 
-export const Workdays = observer(() => {
+export const WorkStatus = observer(() => {
     const {
         Gantt: {
-            Store: {ActivityStore: {Plan}}
+            Store: {
+                ActivityStore: { Plan },
+            },
         },
     } = useWorkpackage();
 
     const { ref: sizeRef, width } = useElementSize();
 
     const scale = computed(() => {
-        return scaleUtc({
-            domain: [
-                Plan?.Interval.t.s ?? 0, Plan?.Interval.t.f ?? 0
-            ],
+        return scaleLinear({
+            domain: [0, Plan?.Work.raw.total ?? 0],
             range: [0, width],
         });
     });
 
     const indicatorWidth = computed(() => {
-        const now = DateTime.now().toMillis();
-        return scale.get()(now);
+        return scale.get()(Plan?.Work.raw.completed ?? 0);
     });
 
     const hoverText = computed(() => {
         if (!Plan) return "";
-        if (Plan.Interval.isFinished) return Plan.Interval.display.counts.long.workDays;
-        return Plan.Interval.counts.workDaysComplete + " / " + Plan.Interval.counts.workDays + " arbejdsdage";
-
+        if (Plan.Interval.isFinished)
+            return Plan.Interval.display.counts.long.workDays;
+        return Plan.Work.work.remaining + "t (" + Plan.Work.display.remainingRatio + ") tilbage" ;
     });
 
     const displayText = computed(() => {
         if (!Plan) return "";
-        if (Plan.Interval.isFinished) {
-            return (
-                "Færdig for " +
-                Math.abs(
-                    Math.round(
-                        (Plan.Interval.dt.end)
-                            .diffNow()
-                            .shiftTo("days").days
-                    )
-                ) +
-                " dage siden"
-            );
-        }
-        return Plan.Interval.counts.workDaysRemaining + " arbejdsdage tilbage";
+        return (
+            Plan.Work.display.completed + " / " + Plan.Work.display.total + "t (" + Plan.Work.display.completedRatio + ")"
+        );
     });
 
     const { ref: hoverRef, hovered } = useHover();
@@ -62,7 +50,7 @@ export const Workdays = observer(() => {
         <Box
             flexGrow={1}
             ref={ref}
-            height={30}
+            height={27.5}
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -71,11 +59,11 @@ export const Workdays = observer(() => {
             overflow="hidden"
             component={Paper}
             variant="outlined"
-            mt={0.5}
-            mr={2}
+            mt={1}
+            maxWidth={200}
             boxSizing="content-box"
             borderColor="#28282860"
-            sx={{cursor: "default"}}
+            sx={{ cursor: "default" }}
         >
             <Box
                 position="absolute"

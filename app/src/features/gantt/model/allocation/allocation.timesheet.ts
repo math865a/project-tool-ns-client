@@ -13,7 +13,7 @@ export class Timesheet {
             overtimeMinutes: number;
         }
     ) {
-        makeAutoObservable(this, {}, { autoBind: true })
+        makeAutoObservable(this, {}, { autoBind: true });
         this.Interval = Interval;
         if (timesheet) {
             this.defaultMinutes = timesheet.defaultMinutes;
@@ -37,10 +37,7 @@ export class Timesheet {
     }
 
     private get dailyWork() {
-        return (
-            this.timesheetHours.total /
-            this.Interval.counts.workDays
-        );
+        return this.timesheetHours.total / this.Interval.counts.workDays;
     }
 
     get weeklyWork() {
@@ -56,14 +53,22 @@ export class Timesheet {
         });
     }
 
+    get dayWork() {
+        return _.map(this.Interval.intervals.workDays, (d) => {
+            return {
+                dt: d,
+                iso: d.toISODate() as string,
+                work: this.dailyWork,
+            };
+        });
+    }
+
     private get workHoursCompleted() {
-        const { workDaysComplete } = this.Interval.counts;
-        return workDaysComplete * this.dailyWork;
+        return this.Interval.counts.workDaysComplete * this.dailyWork;
     }
 
     private get workHoursRemaining() {
-        const { workDaysRemaining } = this.Interval.counts;
-        return workDaysRemaining * this.dailyWork;
+        return this.Interval.counts.workDaysRemaining * this.dailyWork;
     }
 
     get stats() {

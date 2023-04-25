@@ -1,5 +1,5 @@
 import { DialogActions, Stack } from "@mui/material";
-import { PlanWork, PlanPeriod, PlanDays } from "./footer";
+import { PlanWork, PlanPeriod, PlanDays } from "../footer";
 
 export function GanttFooter() {
     return (

@@ -1,7 +1,7 @@
 import { useGridApiRef } from "@mui/x-data-grid-pro";
 import { useLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId/route";
+import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId._index/route";
 import { Gantt } from "~/src/features";
 import { useSocketContext } from "~/src/socket";
 

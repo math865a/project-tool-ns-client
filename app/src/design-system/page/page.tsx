@@ -1,7 +1,7 @@
 import type { DraggableSyntheticListeners } from "@dnd-kit/core";
 import { CSS, Transform } from "@dnd-kit/utilities";
 import { faCircle, faPipe } from "@fortawesome/pro-light-svg-icons";
-import { disableInteraction } from  "~/styles";
+import { disableInteraction } from "~/styles";
 import {
     Box,
     BoxProps,
@@ -14,11 +14,13 @@ import {
     Typography,
     Unstable_Grid2 as Grid,
     Divider,
+    ListItemIcon,
+    ListItemText,
 } from "@mui/material";
 
-import { Link } from "@remix-run/react";
+import { Link, useLocation } from "@remix-run/react";
 import React, { createContext, useEffect, useMemo, useRef } from "react";
-import { IconDef, Symbol, SymbolProps } from "../index";
+import { Directory, IPageLink, IconDef, Symbol, SymbolProps } from "../index";
 import { Child } from "../types";
 
 function Root({
@@ -75,18 +77,17 @@ function Header({
     children = <Box />,
     actions = <Box />,
     pb,
-    divider = false
+    divider = false,
 }: {
     children?: Child | Child[];
     actions?: Child | Child[];
     pb?: number;
-    divider?: boolean
+    divider?: boolean;
 }) {
     return (
         <>
             <Grid xs={12}>
                 <Box
-       
                     flexGrow={1}
                     display="flex"
                     justifyContent="space-between"
@@ -96,9 +97,92 @@ function Header({
                     {children}
                     <Box>{actions}</Box>
                 </Box>
-                {divider && <Divider/>}
+                {divider && <Divider />}
             </Grid>
         </>
+    );
+}
+
+export interface IActionBarProps {
+    icon?: IconDef;
+    title?: string;
+    subtitle?: string;
+    links?: IPageLink[];
+    actions?: Child | Child[];
+    maxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+}
+
+function ActionBar({
+    icon,
+    title,
+    subtitle,
+    links,
+    actions,
+    maxWidth,
+}: IActionBarProps) {
+    const location = useLocation();
+
+    const activeLink = useMemo(() => {
+        if (!links) return undefined;
+        const match = links.find((link) =>
+            link.to?.includes(location.pathname)
+        );
+        if (match) return match;
+        const l =
+            links?.filter((link) => link.to?.includes(location.pathname)) ?? [];
+        if (l.length === 1) {
+            return l[0];
+        } else if (l.length > 1) {
+            return l.find((d) => d.root === false);
+        }
+        return undefined;
+    }, [links, location.pathname]);
+
+    const titleProps = useMemo(() => {
+        if (activeLink) {
+            return {
+                title: activeLink.title,
+                icon: activeLink.icon,
+                subtitle: activeLink.subtitle,
+            };
+        } else if (title) {
+            return {
+                title,
+                icon,
+                subtitle,
+            };
+        }
+        return undefined;
+    }, [activeLink, title, icon, subtitle]);
+
+    const PageLinks = useMemo(() => {
+        if (!links) return undefined;
+        return <Directory.PageLinks links={links} />;
+    }, [links]);
+
+    const Actions = useMemo(() => {
+        if (!actions) return undefined;
+        return (
+            <Stack direction="row" spacing={1} alignItems="center">
+                {actions}
+            </Stack>
+        );
+    }, [actions]);
+
+    return (
+        <Grid xs={12}>
+            <Container maxWidth={maxWidth}>
+                <Box
+                    flexGrow={1}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                >
+                    <Box>{PageLinks}</Box>
+                    <Box>{Actions}</Box>
+                </Box>
+            </Container>
+        </Grid>
     );
 }
 
@@ -242,7 +326,6 @@ const Section = React.forwardRef<HTMLDivElement, ISectionProps>(
 
         return (
             <Grid
-                ref={ref}
                 xs={xs}
                 sm={sm}
                 lg={lg}
@@ -251,7 +334,7 @@ const Section = React.forwardRef<HTMLDivElement, ISectionProps>(
                 xxl={xxl}
                 alignSelf={alignSelf}
             >
-                <SectionUI {...rest} />
+                <SectionUI {...rest} ref={ref} />
             </Grid>
         );
     }
@@ -331,7 +414,6 @@ const SectionUI = React.forwardRef<HTMLDivElement, ISectionUIProps>(
     ) => {
         return (
             <Paper
-                ref={ref}
                 sx={{
                     height,
                     maxHeight: maxHeight || height,
@@ -350,6 +432,7 @@ const SectionUI = React.forwardRef<HTMLDivElement, ISectionUIProps>(
                     backgroundColor,
                     borderColor: disableBorder ? "transparent" : undefined,
                     transition,
+                    position: "relative",
                     transform: transform
                         ? CSS.Transform.toString(transform)
                         : undefined,
@@ -359,7 +442,6 @@ const SectionUI = React.forwardRef<HTMLDivElement, ISectionUIProps>(
                 {...handleProps}
             >
                 <Box
-                    flexGrow={1}
                     display="flex"
                     alignItems="center"
                     justifyContent="space-between"
@@ -414,9 +496,11 @@ const SectionUI = React.forwardRef<HTMLDivElement, ISectionUIProps>(
                             {startActions}
                         </Box>
                         <Box
+                            ref={ref}
                             display="flex"
                             flexGrow={1}
                             maxHeight="100%"
+                            height="100%"
                             sx={{
                                 overflowY: overflowY ? undefined : "hidden",
                                 overflowX: overflowX ? undefined : "hidden",
@@ -456,4 +540,5 @@ export const Page = {
     Root,
     SectionUI,
     SubLayout,
+    ActionBar,
 };

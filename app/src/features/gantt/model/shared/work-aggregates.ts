@@ -2,6 +2,7 @@ import _ from "lodash";
 import { Timesheet } from "../allocation";
 import { GanttInterval } from "./interval";
 import { makeAutoObservable } from "mobx";
+import { formatDecimal } from "~/util";
 
 abstract class Parent {
     Timesheets: Timesheet[];
@@ -10,7 +11,7 @@ abstract class Parent {
 
 export class WorkAggregates {
     constructor(private Parent: Parent) {
-        makeAutoObservable(this, {}, { autoBind: true })
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     private get workBreakdown() {
@@ -31,17 +32,11 @@ export class WorkAggregates {
     }
 
     private get workHoursCompleted() {
-        return _.sumBy(
-            this.Parent.Timesheets,
-            (d) => d.stats.completed
-        );
+        return _.sumBy(this.Parent.Timesheets, (d) => d.stats.completed);
     }
 
     private get workHoursRemaining() {
-        return _.sumBy(
-            this.Parent.Timesheets,
-            (d) => d.stats.remaining
-        );
+        return _.sumBy(this.Parent.Timesheets, (d) => d.stats.remaining);
     }
 
     private get workHoursCompletedRatio() {
@@ -61,19 +56,40 @@ export class WorkAggregates {
             remaining: this.workHoursRemaining,
             completedRatio: this.workHoursCompletedRatio,
             remainingRatio: this.workHoursRemainingRatio,
-            dailyWork: this.workBreakdown.total / this.Parent.Interval.counts.workDays,
+            dailyWork:
+                this.workBreakdown.total / this.Parent.Interval.counts.workDays,
         };
     }
 
+    get dayWork() {
+        return _.sortBy(
+            _.map(
+                _.groupBy(
+                    _.map(this.Parent.Timesheets, (d) => d.dayWork).flat(),
+                    (d) => d.iso
+                ),
+                (d) => {
+                    return {
+                        dt: d[0].dt,
+                        iso: d[0].iso,
+                        date: d[0].dt.toJSDate(),
+                        work: _.sumBy(d, (d) => d.work),
+                    };
+                }
+            ),
+            (d) => d.dt
+        );
+    }
+
     get work() {
-        return _.mapValues(this.raw, (d) => _.round(d, 2));
+        return _.mapValues(this.raw, (d) => _.round(d, 1));
     }
 
     get display() {
         return _.mapValues(this.work, (v, k) => {
             if (k === "completedRatio" || k === "remainingRatio")
-                return `${v * 100}%`;
-            return v + "t";
+                return `${Math.round(v * 100)}%`;
+            return formatDecimal(v);
         });
     }
 }

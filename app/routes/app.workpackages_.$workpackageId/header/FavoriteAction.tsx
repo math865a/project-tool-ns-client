@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId/route";
+import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId._index/route";
 import { FavoriteToggle, useSession } from "~/src";
 
 export function FavoriteAction() {

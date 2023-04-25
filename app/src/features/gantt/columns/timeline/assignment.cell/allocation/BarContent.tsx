@@ -1,5 +1,6 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { Allocation } from "gantt-models";
+import _ from "lodash";
 import { observer } from "mobx-react-lite";
 import { disableInteraction } from "~/styles";
 import { formatDecimal } from "~/util";
@@ -42,17 +43,17 @@ const BarContent = observer(
                         <Stack
                             direction="row"
                             alignItems="center"
-                            spacing={0.5}
+                            spacing={0.2}
                         >
                             <Typography
-                                fontSize={13}
+                                fontSize={12}
                                 sx={{ fontVariant: "tabular-nums" }}
                                 letterSpacing={0.3}
                             >
                                 {Allocation.Timesheet.stats.timesheet.total}
                             </Typography>
                             <Typography
-                                fontSize={11}
+                                fontSize={9}
                                 sx={{
                                     fontVariant: "tabular-nums",
                                 }}
@@ -70,17 +71,17 @@ const BarContent = observer(
                             <Stack
                                 direction="row"
                                 alignItems="center"
-                                spacing={0.5}
+                                spacing={0.2}
                             >
                                 <Typography
-                                    fontSize={13}
+                                    fontSize={12}
                                     sx={{ fontVariant: "tabular-nums" }}
                                     letterSpacing={0.3}
                                 >
                                     {Allocation.Interval.counts.workDays}
                                 </Typography>
                                 <Typography
-                                    fontSize={11}
+                                    fontSize={9}
                                     sx={{
                                         fontVariant: "tabular-nums",
                                     }}
@@ -96,21 +97,21 @@ const BarContent = observer(
                         <Stack
                             direction="row"
                             alignItems="center"
-                            spacing={0.5}
+                            spacing={0.2}
                         >
                             <Typography
-                                fontSize={13}
+                                fontSize={12}
                                 sx={{ fontVariant: "tabular-nums" }}
                                 letterSpacing={0.3}
                             >
                                 {Allocation.Timesheet.stats.dailyWork === 0
                                     ? "-"
                                     : formatDecimal(
-                                          Allocation.Timesheet.stats.dailyWork
+                                          _.round(Allocation.Timesheet.stats.dailyWork, 1)
                                       )}
                             </Typography>
                             <Typography
-                                fontSize={11}
+                                fontSize={9}
                                 sx={{
                                     fontVariant: "tabular-nums",
                                 }}

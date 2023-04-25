@@ -23,7 +23,6 @@ export const HeaderTick = observer((props: TickRendererProps) => {
     const width = computed(() => {
         return Gantt.Timeline.Drag.snapWidth * days.get();
     });
-
     const theme = useTheme();
 
     return (

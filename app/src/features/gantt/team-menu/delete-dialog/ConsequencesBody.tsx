@@ -17,7 +17,7 @@ const ConsequencesBody = observer(
     ({ TeamMember }: { TeamMember: TeamMember }) => {
 
         const AllocationDeliveries = computed(() => {
-            return _.map(_.sortBy(TeamMember.Deliveries as Activity[], d => d.sequence), (d) => ({
+            return _.map(_.sortBy(TeamMember.Deliveries as Activity[], d => d.Row.sequence), (d) => ({
                 Delivery: d,
                 Allocations: _.filter(
                     TeamMember.Allocations,
@@ -33,7 +33,7 @@ const ConsequencesBody = observer(
                         <ListItem key={Delivery.id}>
                             <ListItemIcon>
                                 <Typography fontSize={12} fontWeight="bold">    
-                                    {Delivery.wbs}
+                                    {Delivery.Row.wbs}
                                 </Typography>
                             </ListItemIcon>
                             <ListItemText
@@ -52,7 +52,7 @@ const ConsequencesBody = observer(
                             />
                             <ListItemSecondaryAction>
                                 <Typography fontSize={12} fontWeight="bold">
-                                    {_.sumBy(Allocations, d => d.totalHours) + " timer"}
+                                    {TeamMember.workStats.timesheet.total + " timer"}
                                 </Typography>
                             </ListItemSecondaryAction>
                         </ListItem>
