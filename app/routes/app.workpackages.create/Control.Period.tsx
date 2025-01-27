@@ -1,8 +1,8 @@
 import { DateRange, DateRangePicker } from "@mui/x-date-pickers-pro";
 import { useMemo } from "react";
-import { useWatch, useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { DateTime as dt } from "luxon";
-import { TextField, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import { FormUI, PickerDay } from "~/src/design-system";
 
 export default function PeriodControl() {
@@ -44,7 +44,10 @@ export default function PeriodControl() {
                         onChange={handleChange}
                         displayWeekNumber
                         slots={{ day: PickerDay }}
-                        slotProps={{desktopPaper:  {sx: {px: 1, borderRadius: 4}}, textField: {variant: "outlined", size: "small"} }}
+                        slotProps={{
+                            desktopPaper: { sx: { px: 1, borderRadius: 4 } },
+                            textField: { variant: "outlined", size: "small" },
+                        }}
                         sx={{
                             "& .MuiDateRangeCalendar-monthContainer": {
                                 px: 1,
