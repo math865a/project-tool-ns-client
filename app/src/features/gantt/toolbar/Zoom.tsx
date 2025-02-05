@@ -1,8 +1,8 @@
-import { faMinus, faPlus } from "@fortawesome/pro-light-svg-icons";
-import { Box, Stack, Typography, Slider } from "@mui/material";
+import { Box, Slider, Stack } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { Action } from "~/src/design-system";
 import { useGantt } from "useGantt";
+import { IconMinus, IconPlus } from "@tabler/icons-react";
 
 export const TimelineZoom = observer(() => {
     const Gantt = useGantt();
@@ -12,7 +12,7 @@ export const TimelineZoom = observer(() => {
             <Stack direction="row" alignItems="center" spacing={1}>
                 {/* <Typography fontSize={12}>Zoom</Typography> */}
                 <Action.Symbol
-                    icon={faMinus}
+                    icon={IconMinus}
                     title="Zoom ud"
                     onClick={() => Gantt.Timeline.zoom(-1)}
                     disabled={
@@ -29,7 +29,7 @@ export const TimelineZoom = observer(() => {
                     }
                 />
                 <Action.Symbol
-                    icon={faPlus}
+                    icon={IconPlus}
                     title="Zoom ind"
                     onClick={() => Gantt.Timeline.zoom(1)}
                     disabled={

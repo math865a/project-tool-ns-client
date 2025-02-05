@@ -1,9 +1,9 @@
-import { FormErrorResponse, FormResponse } from "@math865a/project-tool.types";
 import { useActionData, useNavigation } from "@remix-run/react";
 import _ from "lodash";
 import { useEffect } from "react";
 import { Path, useFormContext } from "react-hook-form";
 import { useNotifications } from "../components";
+import { FormResponse } from "~/src";
 
 export const useServerValidation = <
     T extends { [index: string]: any } = { [index: string]: any }
@@ -27,7 +27,7 @@ export const useServerValidation = <
                     updateErrorMessage(actionData.message);
                 }
             } else {
-                reset(getValues())
+                reset(getValues());
                 if (updateErrorMessage) {
                     updateErrorMessage(null);
                 }

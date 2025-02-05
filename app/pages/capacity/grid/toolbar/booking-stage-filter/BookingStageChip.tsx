@@ -1,8 +1,8 @@
-import { BookingStageNode } from "@math865a/project-tool.types";
 import { Chip } from "@mui/material";
 import { computed } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useBoard } from "../../../_provider";
+import { BookingStageNode } from "~/pages/capacity/_definitions";
 
 export const BookingStageChip = observer(
     ({ node }: { node: BookingStageNode }) => {

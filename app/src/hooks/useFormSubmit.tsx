@@ -1,13 +1,10 @@
-import { FormResponse } from "@math865a/project-tool.types";
 import { useSubmit } from "@remix-run/react";
-import { useState } from "react";
-import { FieldValues } from "react-hook-form";
-import { useFormContext } from "react-hook-form";
+import { FieldValues, useFormContext } from "react-hook-form";
 import { Socket } from "socket.io-client";
 import { useInform } from "../design-system/feedback/info";
 import { useSocketContext } from "../socket";
 import { toFormData } from "~/util";
-
+import { FormResponse } from "~/src";
 
 interface UseSubmitProps<
     I extends FieldValues = FieldValues,
@@ -15,7 +12,6 @@ interface UseSubmitProps<
 > {
     transform?: (values: I) => O;
     afterSubmit?: (data: I | O) => void;
-
 }
 
 export interface UseActionSubmitProps<
@@ -32,10 +28,9 @@ export interface UseSocketSubmitProps<
 > extends UseSubmitProps<I, O> {
     message: string;
     callback?: (data: FormResponse) => any;
-    inform: ReturnType<typeof useInform>["inform"]
-    socket?: Socket
+    inform: ReturnType<typeof useInform>["inform"];
+    socket?: Socket;
 }
-
 
 const useActionSubmit = <
     I extends FieldValues = FieldValues,
@@ -71,7 +66,7 @@ const useSocketSubmit = <
     afterSubmit,
     callback,
     inform,
-    socket: socketProp
+    socket: socketProp,
 }: UseSocketSubmitProps<I, O, C>) => {
     const socketContext = useSocketContext();
     const { reset } = useFormContext();
@@ -79,24 +74,25 @@ const useSocketSubmit = <
     const socket = socketProp || socketContext;
 
     const handleResponse = (values: O | I, response: FormResponse) => {
-        if (response.status === "error" && response?.message){
-            inform(response.message, "error")
-        } else if (response.status === "ok" && response.message){
-            inform(response.message, "success")
-            afterSubmit && afterSubmit(values)
-            reset(values)
+        if (response.status === "error" && response?.message) {
+            inform(response.message, "error");
+        } else if (response.status === "ok" && response.message) {
+            inform(response.message, "success");
+            afterSubmit && afterSubmit(values);
+            reset(values);
         }
         callback && response && callback(response);
-    }
+    };
 
     const onSubmit = (values: I) => {
         const data = transform ? transform(values) : values;
-   
-        socket?.emit(message, data, (response: FormResponse) => handleResponse(data, response));
+
+        socket?.emit(message, data, (response: FormResponse) =>
+            handleResponse(data, response)
+        );
     };
 
-    return onSubmit
-   
+    return onSubmit;
 };
 
 export const formSubmit = {

@@ -1,13 +1,12 @@
 import { withEmotionCache } from "@emotion/react";
-import { config } from "@fortawesome/fontawesome-svg-core";
-import iconStyles from "@fortawesome/fontawesome-svg-core/styles.css";
+
 import {
     Box,
     Typography,
     unstable_useEnhancedEffect as useEnhancedEffect,
 } from "@mui/material";
 import { LicenseInfo } from "@mui/x-data-grid-pro";
-import { MetaFunction, json } from "@remix-run/node";
+import { json, MetaFunction } from "@remix-run/node";
 import {
     Links,
     LiveReload,
@@ -15,7 +14,7 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
-    useCatch
+    useCatch,
 } from "@remix-run/react";
 import { ClientStylesContext, theme } from "mui-config";
 import * as React from "react";
@@ -40,12 +39,8 @@ export function links() {
         },
         {
             rel: "stylesheet",
-            href: iconStyles,
+            href: calendarStyles,
         },
-        {
-            rel: "stylesheet",
-            href: calendarStyles
-        }
     ];
 }
 
@@ -54,19 +49,18 @@ export const meta: MetaFunction = () => ({
     title: "Project Tool",
     viewport: "width=device-width,initial-scale=1",
 });
-config.autoAddCss = false;
+
 LicenseInfo.setLicenseKey(
     "d4f90511f17268f99082e440321d4f14Tz01MzgxMSxFPTE2OTkzMTI0ODk1NDMsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI="
 );
-
 
 interface DocumentProps {
     children: React.ReactNode;
     title?: string;
 }
 
-export async function loader(){
-    return json(namespaces)
+export async function loader() {
+    return json(namespaces);
 }
 
 const Document = withEmotionCache(

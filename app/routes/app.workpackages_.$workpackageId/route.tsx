@@ -1,4 +1,3 @@
-import { FormResponse } from "@math865a/project-tool.types";
 import { json, LoaderArgs, redirect } from "@remix-run/node";
 import { Outlet, useRouteLoaderData } from "@remix-run/react";
 import { ClientOnly } from "remix-utils";
@@ -6,7 +5,7 @@ import { sendRequest } from "session";
 import { SocketProvider } from "socket";
 import invariant from "tiny-invariant";
 import { getServiceUrl } from "~/server";
-import { HasAccess, Subject, WorkpackageProfile } from "~/src";
+import { FormResponse, HasAccess, Subject, WorkpackageProfile } from "~/src";
 import { Page } from "~/src/design-system";
 import BackAction from "~/src/layout/topbar/BackAction";
 import { WorkpackageProvider } from "~/src/state";

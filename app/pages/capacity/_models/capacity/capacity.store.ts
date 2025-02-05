@@ -1,9 +1,5 @@
 import { normalize } from "~/util";
-import {
-    Bound,
-    CapacityBatchFilter,
-    CapacityJson,
-} from "@math865a/project-tool.types";
+
 import _ from "lodash";
 import { computed } from "mobx";
 import { getRoot, Model, model, modelAction, prop } from "mobx-keystone";
@@ -14,6 +10,11 @@ import { CapacityStats } from "./capacity-stats";
 import { CapacityStyle } from "./capacity-style";
 import { Capacity } from "./capacity.model";
 import { DateTime as dt } from "luxon";
+import {
+    Bound,
+    CapacityBatchFilter,
+    CapacityJson,
+} from "~/pages/capacity/_definitions";
 
 @model("capacity-store")
 export class CapacityStore extends Model({
@@ -36,6 +37,7 @@ export class CapacityStore extends Model({
             tf: (d.interval.end as dt).toFormat("yyyy-MM-dd"),
         }));
     }
+
     @modelAction
     loadBatch(rows: string[], bounds: Bound[]) {
         const filter = this.Filter.filter;
@@ -73,7 +75,7 @@ export class CapacityStore extends Model({
     };
 
     @modelAction
-    resolve(json: CapacityJson) {
+    resolve(json: any) {
         let Row: Capacity | undefined = _.find(
             this.Capacities,
             (d) => d.id === json.id

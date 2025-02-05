@@ -1,21 +1,17 @@
-import { faChevronDown, faChevronUp } from "@fortawesome/pro-light-svg-icons";
-import { FormOption } from "@math865a/project-tool.types";
 import {
     Box,
     ListItemText,
     MenuItem,
     OutlinedInput,
     Select,
-    TextField,
     Typography,
 } from "@mui/material";
-import _ from "lodash";
 import { useState } from "react";
-import { Path, useWatch } from "react-hook-form";
-import { FieldValues, useFormContext } from "react-hook-form";
+import { FieldValues, Path, useFormContext, useWatch } from "react-hook-form";
 import { FormUI } from "../forms";
 import { Symbol } from "../symbol";
 import { disableInteraction } from "~/styles";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
 interface DefaultProps<T extends FieldValues = FieldValues> {
     name: Path<T>;
@@ -75,7 +71,7 @@ function Text<T extends FieldValues = FieldValues>({
 
 interface SelectProps<T extends FieldValues = FieldValues>
     extends DefaultProps<T> {
-    options: FormOption[];
+    options: any[];
 }
 
 function Dropdown<T extends FieldValues = FieldValues>({
@@ -101,7 +97,7 @@ function Dropdown<T extends FieldValues = FieldValues>({
         return (
             <Box mr={2} minHeight={5}>
                 {(isHovering || open) && (
-                    <Symbol icon={open ? faChevronDown : faChevronUp} />
+                    <Symbol icon={open ? IconChevronDown : IconChevronUp} />
                 )}
             </Box>
         );
@@ -124,11 +120,9 @@ function Dropdown<T extends FieldValues = FieldValues>({
             sx={{
                 width: width,
                 py: 0,
-               
             }}
             size="small"
             value={value}
-       
             error={errors[name] !== undefined}
             SelectDisplayProps={{
                 style: {

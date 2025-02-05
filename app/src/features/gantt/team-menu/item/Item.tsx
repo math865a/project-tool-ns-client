@@ -26,20 +26,10 @@ const TeamMemberItem = observer(({ TeamMember, divider }: Props) => {
                 secondaryAction={
                     <Stack
                         direction="row"
-            
                         alignItems="center"
                         sx={{ minWidth: "max-content" }}
                     >
-                        {/*<Action.Symbol
-                            icon={faRightLeft}
-                            title="Byt ud"
-                            onClick={(event) =>
-                                handleOpenSwap(event, itemRef.current)
-                            }
-                            disabled={TeamMember.Assignments.length === 0 || TeamStore.TeamMembers.length === 1}
-                        />*/}
-                        <TeamMemberDelete TeamMember={TeamMember}/>
-
+                        <TeamMemberDelete TeamMember={TeamMember} />
                     </Stack>
                 }
                 sx={{ pl: 1, py: 1 }}

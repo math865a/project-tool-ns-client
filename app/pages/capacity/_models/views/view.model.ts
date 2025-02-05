@@ -1,6 +1,5 @@
-import { CapacityViewJson } from '@math865a/project-tool.types';
-import _ from 'lodash';
-import { computed } from 'mobx';
+import _ from "lodash";
+import { computed } from "mobx";
 import {
     getRoot,
     idProp,
@@ -8,10 +7,10 @@ import {
     model,
     modelAction,
     prop,
-} from 'mobx-keystone';
-import { CapacityBoard } from '../../_controllers/_board';
+} from "mobx-keystone";
+import { CapacityBoard } from "../../_controllers/_board";
 
-@model('capacity-view')
+@model("capacity-view")
 export class CapacityView extends Model({
     id: idProp.typedAs<string>(),
     name: prop<string>().withSetter(),
@@ -21,29 +20,6 @@ export class CapacityView extends Model({
     isDefault: prop<boolean>().withSetter(),
     showResourcesWithNoBookings: prop<boolean>().withSetter(),
 }) {
-    @modelAction
-    updateName = (name: string) => {
-        this.setName(name);
-        this.Store.saveName(this.id, name);
-    };
-
-    @modelAction
-    toggleDefault = () => {
-        const wasDefault = _.clone(this.isDefault);
-        this.setIsDefault(!this.isDefault);
-        this.Store.updateDefaultView(this.id, wasDefault);
-    };
-
-    @modelAction
-    toggle = () => {
-        this.View.setView(this);
-    };
-
-    @modelAction
-    delete(){
-        this.Store.deleteCapacityView(this)
-    }
-
     @computed
     get RowStore() {
         return getRoot<CapacityBoard>(this).RowStore;
@@ -94,5 +70,28 @@ export class CapacityView extends Model({
     }
 
     @modelAction
-    update(json: CapacityViewJson) {}
+    updateName = (name: string) => {
+        this.setName(name);
+        this.Store.saveName(this.id, name);
+    };
+
+    @modelAction
+    toggleDefault = () => {
+        const wasDefault = _.clone(this.isDefault);
+        this.setIsDefault(!this.isDefault);
+        this.Store.updateDefaultView(this.id, wasDefault);
+    };
+
+    @modelAction
+    toggle = () => {
+        this.View.setView(this);
+    };
+
+    @modelAction
+    delete() {
+        this.Store.deleteCapacityView(this);
+    }
+
+    @modelAction
+    update(json: any) {}
 }

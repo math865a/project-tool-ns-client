@@ -1,6 +1,6 @@
-import { FormResponse } from "@math865a/project-tool.types";
 import { createContext, useContext } from "react";
 import { Child, Feedback } from "~/src/design-system";
+import { FormResponse } from "~/src";
 
 const Context = createContext<
     | {

@@ -1,4 +1,3 @@
-import { faPencil } from "@fortawesome/pro-light-svg-icons";
 import { useHover } from "@mantine/hooks";
 import { Box, Menu, Typography } from "@mui/material";
 import {
@@ -10,6 +9,7 @@ import { useMemo } from "react";
 import { Action } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import UserPicker from "./UserPicker";
+import { IconPencil } from "@tabler/icons-react";
 
 export interface UsersCellProps {
     id: GridRowId;
@@ -57,7 +57,7 @@ export default function UsersCell({
                 >
                     {isEditing && (hovered || menuProps.open) && (
                         <Action.Symbol
-                            icon={faPencil}
+                            icon={IconPencil}
                             title="Rediger"
                             onClick={handleOpen}
                         />

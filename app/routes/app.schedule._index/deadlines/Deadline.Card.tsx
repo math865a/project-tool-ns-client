@@ -2,11 +2,9 @@ import {
     Box,
     Card,
     CardActions,
-    CardContent,
     CardHeader,
     Chip,
     Divider,
-    Paper,
     Stack,
     Tooltip,
     Typography,
@@ -14,13 +12,13 @@ import {
 } from "@mui/material";
 import { IDeadlineTask } from "../_state/useDeadlines";
 import { useMemo } from "react";
-import { Avatars, Symbol } from "~/src/design-system";
+import { Avatars } from "~/src/design-system";
 import _ from "lodash";
 import { formatDecimal } from "~/util/format";
-import { faClock, faTimer } from "@fortawesome/pro-light-svg-icons";
 import { useElementSize } from "@mantine/hooks";
-import { useSession } from "~/src";
 import { useSummary } from "../_state";
+import { IconClock } from "@tabler/icons-react";
+import { useSession } from "~/src/session-user";
 
 export function DeadlineCard({
     title,
@@ -181,7 +179,7 @@ export function DeadlineCard({
                             pr={1}
                             maxWidth={50}
                         >
-                            <Symbol icon={faClock} />
+                            <IconClock />
                             <Typography
                                 fontSize={12}
                                 pt={0.25}

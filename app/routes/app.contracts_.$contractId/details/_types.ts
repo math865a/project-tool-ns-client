@@ -1,5 +1,5 @@
-import { ContractNode } from "@math865a/project-tool.types"
-import { UseFormReturn } from "react-hook-form"
+import { UseFormReturn } from "react-hook-form";
+import { ContractNode } from "~/src";
 
-export type EditValues = Omit<ContractNode, "id"> & {contractId: string}
-export type EditForm = UseFormReturn<EditValues>
+export type EditValues = Omit<ContractNode, "id"> & { contractId: string };
+export type EditForm = UseFormReturn<EditValues>;

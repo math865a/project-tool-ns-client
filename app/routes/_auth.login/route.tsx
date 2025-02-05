@@ -1,10 +1,10 @@
-import { FetchError, JwtHeader, LoginDto } from "@math865a/project-tool.types";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { ActionArgs, json } from "@remix-run/node";
 import { Link, useActionData } from "@remix-run/react";
 import { createSession, sendRequest } from "../../session.server";
 import { safeRedirect } from "../../util/safeRedirect";
 import { getServiceUrl } from "~/server";
+import { JwtHeader } from "~/src";
 
 export const handle = {
     Title: () => "Log Ind",
@@ -32,13 +32,13 @@ export let action = async ({ request }: ActionArgs) => {
             ),
         });
     } catch (e: any) {
-        console.log(e)
+        console.log(e);
         return json(e);
     }
 };
 
 export default function Login() {
-    const actionData = useActionData<FetchError>();
+    const actionData = useActionData<any>();
 
     return (
         <form method="post">

@@ -1,6 +1,4 @@
-import { faCheck, faTimes } from "@fortawesome/pro-solid-svg-icons";
 import {
-    Button,
     Dialog,
     DialogActions,
     DialogContent,
@@ -9,16 +7,16 @@ import {
     Typography,
     useTheme,
 } from "@mui/material";
-import { useState } from "react";
 import { Action } from "../action";
 import { Child } from "../types";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 export interface IConfirmationDialogProps {
     open: boolean;
     onConfirm?: () => void;
     onCancel?: () => void;
     title?: string;
-    subtitle?: string
+    subtitle?: string;
     text?: string;
     body?: Child | Child[];
     actions?: Child | Child[];
@@ -45,9 +43,9 @@ export function ConfirmationDialog({
     confirmText = "Bekræft",
     cancelVariant = "outlined",
     confirmVariant = "contained",
-    fullWidth
+    fullWidth,
 }: IConfirmationDialogProps) {
-    const theme = useTheme()
+    const theme = useTheme();
 
     return (
         <Dialog
@@ -76,8 +74,8 @@ export function ConfirmationDialog({
                         <Action.TextButton
                             text={cancelText}
                             onClick={onCancel}
-                            icon={faTimes}
-                            symbolProps={{color: theme.palette.error.main}}
+                            icon={IconX}
+                            symbolProps={{ color: theme.palette.error.main }}
                         />
                     )}
 
@@ -86,8 +84,8 @@ export function ConfirmationDialog({
                         <Action.TextButton
                             text={confirmText}
                             onClick={onConfirm}
-                            icon={faCheck}
-                            symbolProps={{color: theme.palette.success.main}}
+                            icon={IconCheck}
+                            symbolProps={{ color: theme.palette.success.main }}
                         />
                     )}
                 </Stack>

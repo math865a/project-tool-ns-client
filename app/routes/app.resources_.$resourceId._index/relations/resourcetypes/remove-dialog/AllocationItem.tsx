@@ -1,20 +1,19 @@
-import { faCircle } from "@fortawesome/pro-solid-svg-icons";
 import {
     ListItem,
     ListItemIcon,
     ListItemSecondaryAction,
     ListItemText,
-    Typography
+    Typography,
 } from "@mui/material";
 import { Symbol } from "~/src/design-system";
 import { IDeletionAllocation } from "../useResourceTypeDeletion";
-
+import { IconCircle } from "@tabler/icons-react";
 
 export function AllocationItem(a: IDeletionAllocation) {
     return (
         <ListItem key={a.taskName}>
             <ListItemIcon>
-                <Symbol icon={faCircle} size={0.3} />
+                <Symbol icon={IconCircle} />
             </ListItemIcon>
             <ListItemText
                 sx={{ maxWidth: "80%" }}
@@ -29,7 +28,8 @@ export function AllocationItem(a: IDeletionAllocation) {
                     maxWidth: "70%",
                 }}
                 primary={a.taskName}
-                secondary={a.startDate + " til " + a.endDate} />
+                secondary={a.startDate + " til " + a.endDate}
+            />
             <ListItemSecondaryAction>
                 <Typography fontSize={12}>{a.hours}</Typography>
             </ListItemSecondaryAction>

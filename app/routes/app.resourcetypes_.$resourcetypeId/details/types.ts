@@ -1,5 +1,10 @@
-import { ResourceTypeNode } from "@math865a/project-tool.types"
-import { UseFormReturn } from "react-hook-form"
+import { UseFormReturn } from "react-hook-form";
+import { ResourceTypeNode } from "~/src";
 
-export type ResourceTypeEditValues = Omit<ResourceTypeNode, "id" | "category"> & {resourceTypeId: string}
-export type ResourceTypeEditForm = UseFormReturn<ResourceTypeEditValues>
+export type ResourceTypeEditValues = Omit<
+    ResourceTypeNode,
+    "id" | "category"
+> & {
+    resourceTypeId: string;
+};
+export type ResourceTypeEditForm = UseFormReturn<ResourceTypeEditValues>;

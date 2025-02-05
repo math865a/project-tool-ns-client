@@ -1,8 +1,8 @@
-import { faUserMinus, faUserPlus } from "@fortawesome/pro-light-svg-icons";
 import { Form, useLoaderData } from "@remix-run/react";
-import { Action as A, Can, Subject, usePermissions } from "~/src";
+import { Action as A, Can, Subject } from "~/src";
 import { Action } from "~/src/design-system";
 import { ProjectManagerLoader } from "../route";
+import { IconUserMinus, IconUserPlus } from "@tabler/icons-react";
 
 export function ToggleResourceAction() {
     const {
@@ -22,7 +22,7 @@ function AddResourceAction() {
             <Action.TextLink
                 to="create/resource"
                 text="Opret som ressource"
-                icon={faUserPlus}
+                icon={IconUserPlus}
             />
         </Can>
     );
@@ -32,7 +32,7 @@ function DeleteResourceAction() {
     return (
         <Can I={A.Delete} a={Subject.Resources}>
             <Form method="post" action="?/deleteResource">
-                <Action.TextButton text="Slet ressource" icon={faUserMinus} />
+                <Action.TextButton text="Slet ressource" icon={IconUserMinus} />
             </Form>
         </Can>
     );

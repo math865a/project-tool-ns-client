@@ -1,22 +1,21 @@
-import { TimelineWorkpackageJson } from '@math865a/project-tool.types';
-import _ from 'lodash';
-import { Model, model, modelAction, prop } from 'mobx-keystone';
-import { TimelineTaskPeriod } from './task-period';
-import { TimelineTaskWork } from './task-work';
-import { TimelineTask } from './task.model';
-import { TimelineWorkpackage } from './workpackage.model';
+import _ from "lodash";
+import { Model, model, modelAction, prop } from "mobx-keystone";
+import { TimelineTaskPeriod } from "./task-period";
+import { TimelineTaskWork } from "./task-work";
+import { TimelineTask } from "./task.model";
+import { TimelineWorkpackage } from "./workpackage.model";
 
-@model('timeline-store')
+@model("timeline-store")
 export class TimelineStore extends Model({
     Workpackages: prop<TimelineWorkpackage[]>(() => []),
 }) {
     @modelAction
-    resolveMany(workpackages: TimelineWorkpackageJson[]) {
+    resolveMany(workpackages: any[]) {
         workpackages.forEach((workpackage) => this.resolve(workpackage));
     }
 
     @modelAction
-    resolve(workpackage: TimelineWorkpackageJson) {
+    resolve(workpackage: any) {
         let Model = _.find(this.Workpackages, (d) => d.id === workpackage.id);
         if (Model) {
             Model.update(workpackage);
@@ -27,7 +26,7 @@ export class TimelineStore extends Model({
     }
 
     @modelAction
-    createWorkpackageModel(json: TimelineWorkpackageJson) {
+    createWorkpackageModel(json: any) {
         return new TimelineWorkpackage({
             id: json.id,
             name: json.name,
@@ -36,14 +35,14 @@ export class TimelineStore extends Model({
             stage: json.stage,
             bookingStage: json.bookingStage,
             Tasks: json.tasks.map(
-                (task) =>
+                (task: any) =>
                     new TimelineTask({
                         id: task.id,
                         taskName: task.taskName,
                         deliveryName: task.deliveryName,
                         Period: new TimelineTaskPeriod(task.period),
                         Work: new TimelineTaskWork(task.work),
-                        color: task.color
+                        color: task.color,
                     })
             ),
         });

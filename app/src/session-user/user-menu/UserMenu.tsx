@@ -1,4 +1,3 @@
-import { faUser, faDoorOpen } from "@fortawesome/pro-light-svg-icons";
 import {
     ButtonBase,
     List,
@@ -10,9 +9,10 @@ import {
     Menu,
 } from "@mui/material";
 import { useMenuState } from "~/src/hooks/useMenu";
-import { Link, useNavigate, Form } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import { Avatars, Symbol } from "~/src/design-system";
 import { useSession } from "../SessionContextProvider";
+import { IconDoorExit, IconUser } from "@tabler/icons-react";
 
 export function UserMenu(
     props: Omit<ReturnType<typeof useMenuState>, "handleOpen">
@@ -53,7 +53,7 @@ export function UserMenu(
                             sx={{ textDecoration: "none", color: "inherit" }}
                         >
                             <ListItemIcon>
-                                <Symbol icon={faUser} size={1.1} />
+                                <Symbol icon={IconUser} size={1.1} />
                             </ListItemIcon>
                             <ListItemText primary="Kontodetaljer" />
                         </ListItemButton>
@@ -66,7 +66,7 @@ export function UserMenu(
                                 onClick={props.onClose}
                             >
                                 <ListItemIcon>
-                                    <Symbol icon={faDoorOpen} size={1.1} />
+                                    <Symbol icon={IconDoorExit} size={1.1} />
                                 </ListItemIcon>
                                 <ListItemText primary="Log ud" />
                             </ListItemButton>

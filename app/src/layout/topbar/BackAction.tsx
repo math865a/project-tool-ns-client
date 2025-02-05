@@ -1,10 +1,10 @@
-import { faChevronLeft } from "@fortawesome/pro-light-svg-icons";
 import { Box, ButtonBase, Stack, Typography } from "@mui/material";
-import { Link, useLocation, useNavigate } from "@remix-run/react";
+import { useLocation, useNavigate } from "@remix-run/react";
 import _ from "lodash";
 import { useMemo } from "react";
 import { Action, Symbol } from "~/src/design-system";
 import { pageMap } from "../sidebar/_page-map";
+import { IconChevronLeft } from "@tabler/icons-react";
 
 export interface IBackActionProps {
     title?: string;
@@ -61,7 +61,7 @@ export default function BackAction(props: IBackActionProps) {
             <Box maxWidth="max-content">
                 <ButtonBase onClick={handleClick}>
                     <Stack direction="row" alignItems="center" spacing={1}>
-                        <Symbol icon={faChevronLeft} size={0.9} />
+                        <Symbol icon={IconChevronLeft} size={0.9} />
                         <PageTitle title={title} />
                     </Stack>
                 </ButtonBase>
@@ -72,7 +72,7 @@ export default function BackAction(props: IBackActionProps) {
     } else if (props?.hideTitle && backTo) {
         return (
             <Action.Symbol
-                icon={faChevronLeft}
+                icon={IconChevronLeft}
                 iconSize={0.9}
                 onClick={handleClick}
                 title="Gå tilbage"

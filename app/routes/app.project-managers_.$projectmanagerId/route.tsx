@@ -1,9 +1,4 @@
-import {
-    ActionArgs,
-    LoaderArgs,
-    json,
-    redirect,
-} from "@remix-run/node";
+import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { getServiceUrl } from "~/server";
 import { sendRequest } from "~/session.server";
@@ -15,9 +10,9 @@ import { IProjectManagerProfile } from "./types";
 import { useRouteLoaderData } from "@remix-run/react";
 import BackAction from "~/src/layout/topbar/BackAction";
 import { namedAction } from "remix-utils";
-import { FormResponse } from "@math865a/project-tool.types";
+
 import { parseRequest } from "~/util/formData";
-import { HasAccess, Subject } from "~/src";
+import { FormResponse, HasAccess, Subject } from "~/src";
 
 export const handle = {
     BackAction: <PageContext />,

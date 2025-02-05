@@ -1,9 +1,8 @@
-import { faTimes } from "@fortawesome/pro-solid-svg-icons";
-import { Box, DialogTitle, Divider, Stack, Typography } from "@mui/material";
-import { useParams } from "@remix-run/react";
+import { Box, DialogTitle, Stack, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { Action } from "~/src/design-system";
 import { Allocation } from "gantt-models";
+import { IconX } from "@tabler/icons-react";
 
 export const Title = observer(
     ({
@@ -25,13 +24,12 @@ export const Title = observer(
                         </Typography>
                     </Stack>
                     <Box>
-                    <Action.Symbol
-                        icon={faTimes}
-                        title="Luk"
-                        onClick={handleClose}
-                    />    
+                        <Action.Symbol
+                            icon={IconX}
+                            title="Luk"
+                            onClick={handleClose}
+                        />
                     </Box>
-            
                 </Box>
             </DialogTitle>
         );

@@ -1,7 +1,7 @@
-import { ProjectManager } from "@math865a/project-tool.types";
 import { IWorkpackageIdentity } from "../workpackage";
 import { Interval } from "luxon";
 import { Stage } from "../stage";
+import { ProjectManager } from "~/src";
 
 export interface IRawEvent {
     id: string;
@@ -30,5 +30,5 @@ export interface IEvent extends Omit<IRawEvent, "start" | "end"> {
     end: Date;
     workDays: number;
     dailyWork: number;
-    interval: Interval
+    interval: Interval;
 }

@@ -1,18 +1,13 @@
-import {
-    faBriefcase,
-    faBusinessTime,
-    faUserTie,
-} from '@fortawesome/pro-light-svg-icons';
-import { Symbol } from 'design';
-import { disableInteraction } from  "~/styles";
-import { Box, Divider, Stack, Tooltip, Typography } from '@mui/material';
-import { Link } from '@remix-run/react';
-import { observer } from 'mobx-react-lite';
-import React, { useMemo } from 'react';
-import { ROW_PADDING } from '../controllers/_constants';
-import { TimelineWorkpackage } from '../models/workpackage.model';
-import { useTimeline } from '../task-timeline.provider';
-import TaskBar from './task-bar';
+import { disableInteraction } from "~/styles";
+import { Box, Divider, Stack, Tooltip, Typography } from "@mui/material";
+import { Link } from "@remix-run/react";
+import { observer } from "mobx-react-lite";
+import React, { useMemo } from "react";
+import { ROW_PADDING } from "../controllers/_constants";
+import { TimelineWorkpackage } from "../models/workpackage.model";
+import { useTimeline } from "../task-timeline.provider";
+import TaskBar from "./task-bar";
+import { IconBriefcase, IconClock, IconUser } from "@tabler/icons-react";
 
 const WorkpackageRow = observer(
     ({ Workpackage }: { Workpackage: TimelineWorkpackage }) => {
@@ -78,7 +73,7 @@ const WorkpackageDetails = observer(
                 <Stack spacing={0.75} alignItems="center" direction="row">
                     <Tooltip title="Arbejdspakke">
                         <Box>
-                            <Symbol icon={faBriefcase} />
+                            <IconBriefcase />
                         </Box>
                     </Tooltip>
 
@@ -88,9 +83,9 @@ const WorkpackageDetails = observer(
                         to={`/app/workpackages/${Workpackage.id}`}
                         color="inherit"
                         sx={{
-                            textDecoration: 'none',
-                            '&:hover': {
-                                textDecoration: 'underline',
+                            textDecoration: "none",
+                            "&:hover": {
+                                textDecoration: "underline",
                             },
                         }}
                     >
@@ -101,7 +96,7 @@ const WorkpackageDetails = observer(
                 <Stack spacing={0.75} alignItems="center" direction="row">
                     <Tooltip title="Projektleder">
                         <Box>
-                            <Symbol icon={faUserTie} />
+                            <IconUser />
                         </Box>
                     </Tooltip>
                     <Typography
@@ -110,9 +105,9 @@ const WorkpackageDetails = observer(
                         to={`/app/resources/${Workpackage.projectManager.id}`}
                         color="inherit"
                         sx={{
-                            textDecoration: 'none',
-                            '&:hover': {
-                                textDecoration: 'underline',
+                            textDecoration: "none",
+                            "&:hover": {
+                                textDecoration: "underline",
                             },
                         }}
                     >
@@ -154,7 +149,7 @@ const WorkpackageDetails = observer(
                 <Divider orientation="vertical" flexItem />
                 <Tooltip title="Arbejdstimer">
                     <Stack spacing={0.75} alignItems="center" direction="row">
-                        <Symbol icon={faBusinessTime} />
+                        <IconClock />
 
                         <Typography fontSize={12} sx={disableInteraction}>
                             {Workpackage.displayWork}
@@ -177,7 +172,7 @@ const Today = observer(
                 zIndex={1}
                 sx={{
                     ...disableInteraction,
-                    position: 'absolute',
+                    position: "absolute",
                     top: 0,
                     left: 0,
                     backgroundColor: (theme) => theme.palette.divider,
@@ -189,14 +184,3 @@ const Today = observer(
         );
     }
 );
-
-/*        <svg width={Calendar.xToday} height={Workpackage.h} style={{position: "absolute", top: 0, left: 0, zIndex: 10}}>
-            <rect
-                width={Calendar.xToday}
-                x={0}
-                y={0}
-                height={Workpackage.h}
-                fill="#CECECE"
-            />
-        </svg>
-        </Box>*/

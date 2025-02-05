@@ -1,19 +1,19 @@
-import { CapacityJson, RowMode, ViewMode } from '@math865a/project-tool.types';
-import { computed, when } from 'mobx';
+import { computed, when } from "mobx";
 import {
     getRoot,
     idProp,
     Model,
     model,
     modelAction,
-    prop
-} from 'mobx-keystone';
-import { CapacityBoard } from '../../_controllers/_board';
-import { CapacityInterval } from './capacity-interval';
-import { CapacityStats } from './capacity-stats';
-import { CapacityStyle } from './capacity-style';
+    prop,
+} from "mobx-keystone";
+import { CapacityBoard } from "../../_controllers/_board";
+import { CapacityInterval } from "./capacity-interval";
+import { CapacityStats } from "./capacity-stats";
+import { CapacityStyle } from "./capacity-style";
+import { RowMode, ViewMode } from "~/pages/capacity/_definitions";
 
-@model('capacity-model')
+@model("capacity-model")
 export class Capacity extends Model({
     id: idProp.typedAs<string>(),
     viewMode: prop<ViewMode>(),
@@ -23,35 +23,9 @@ export class Capacity extends Model({
     Stats: prop<CapacityStats>(),
     Style: prop<CapacityStyle>(),
 }) {
-    onAttachedToRootStore() {
-       /* const removeListener = reaction(
-            () => this.shouldDelete,
-            (shouldDelete) => {
-                if (shouldDelete) {
-                    this.remove()
-                }
-            },
-            { equals: comparer.shallow }
-        );*/
-
-        const dispose = when(() => this.Column === undefined || this.hasViewModeChanged === true || this.isNotVisible, () => this.remove())
-
-        return () => {
-            dispose()
-        }
-        /*return () => {
-            removeListener();
-        };*/
-    }
-
     @computed
-    get Store(){
-        return getRoot<CapacityBoard>(this).CapacityStore
-    }
-
-    @modelAction
-    remove(){
-        this.Store.removeCapacity(this)
+    get Store() {
+        return getRoot<CapacityBoard>(this).CapacityStore;
     }
 
     @computed
@@ -85,11 +59,42 @@ export class Capacity extends Model({
     }
 
     @computed
-    get isNotVisible(){
-        return !this.Pagination.visibleRows.some(d => d.id === this.rowId)
+    get isNotVisible() {
+        return !this.Pagination.visibleRows.some((d) => d.id === this.rowId);
     }
 
+    onAttachedToRootStore() {
+        /* const removeListener = reaction(
+             () => this.shouldDelete,
+             (shouldDelete) => {
+                 if (shouldDelete) {
+                     this.remove()
+                 }
+             },
+             { equals: comparer.shallow }
+         );*/
+
+        const dispose = when(
+            () =>
+                this.Column === undefined ||
+                this.hasViewModeChanged === true ||
+                this.isNotVisible,
+            () => this.remove()
+        );
+
+        return () => {
+            dispose();
+        };
+        /*return () => {
+            removeListener();
+        };*/
+    }
 
     @modelAction
-    update(json: CapacityJson) {}
+    remove() {
+        this.Store.removeCapacity(this);
+    }
+
+    @modelAction
+    update(json: any) {}
 }

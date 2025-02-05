@@ -1,7 +1,6 @@
-import { FormResponse } from "@math865a/project-tool.types";
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import { ResourceAgent } from "~/src";
+import { FormResponse, ResourceAgent } from "~/src";
 
 export interface IDeletionAllocation {
     taskName: string;
@@ -47,13 +46,13 @@ export const useResourceTypeDeletion = () => {
         if (consequencesFetcher.data && resourceType) {
             if (consequencesFetcher.data.length === 0) {
                 handleDelete();
-            }
-            else {
-                setConsequences(consequencesFetcher.data as IDeletionConsequence[]);
+            } else {
+                setConsequences(
+                    consequencesFetcher.data as IDeletionConsequence[]
+                );
                 setDialogOpen(true);
                 setIsLoading(false);
             }
-
         }
     }, [consequencesFetcher.data]);
 

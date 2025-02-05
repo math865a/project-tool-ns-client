@@ -1,10 +1,18 @@
-import { BookingStageNode, ProjectManager, StageNode, TimelineWorkpackageJson } from "@math865a/project-tool.types";
 import _ from "lodash";
 import { computed } from "mobx";
-import { getRoot, idProp, model, Model, modelAction, prop } from "mobx-keystone";
+import {
+    getRoot,
+    idProp,
+    model,
+    Model,
+    modelAction,
+    prop,
+} from "mobx-keystone";
 import { TimelineController } from "../controllers/controller";
-import { BAR_HEIGHT, ROW_PADDING} from "../controllers/_constants";
+import { BAR_HEIGHT, ROW_PADDING } from "../controllers/_constants";
 import { TimelineTask } from "./task.model";
+import { ProjectManager } from "~/src";
+import { BookingStageNode } from "~/pages/capacity/_definitions";
 
 @model("timeline-workpackage")
 export class TimelineWorkpackage extends Model({
@@ -12,43 +20,43 @@ export class TimelineWorkpackage extends Model({
     name: prop<string>(),
     systematicName: prop<string>(),
     projectManager: prop<ProjectManager>(),
-    stage: prop<StageNode>(),
+    stage: prop<BookingStageNode>(),
     bookingStage: prop<BookingStageNode>(),
-    Tasks: prop<TimelineTask[]>()
-}){
-
+    Tasks: prop<TimelineTask[]>(),
+}) {
     @computed
-    get Placement(){
-        return getRoot<TimelineController>(this).Placement
-    }
-
-    onAttachedToRootStore(){
-        this.Placement.placeTasks(this.Tasks.map(d => d.Bar))
+    get Placement() {
+        return getRoot<TimelineController>(this).Placement;
     }
 
     @computed
-    get h(){
-        return (_.maxBy(this.Tasks, d => d.Bar.y)?.Bar.y ?? 0) + BAR_HEIGHT + (2*ROW_PADDING)
+    get h() {
+        return (
+            (_.maxBy(this.Tasks, (d) => d.Bar.y)?.Bar.y ?? 0) +
+            BAR_HEIGHT +
+            2 * ROW_PADDING
+        );
     }
 
     @computed
-    get work(){
-        return _.sumBy(this.Tasks, d => d.Work.work)
+    get work() {
+        return _.sumBy(this.Tasks, (d) => d.Work.work);
     }
 
     @computed
-    get displayWork(){
-        return `${this.work} timer`
+    get displayWork() {
+        return `${this.work} timer`;
     }
 
     @computed
-    get isHoveringTask(){
-        return _.some(this.Tasks, d => d.isHovering)
+    get isHoveringTask() {
+        return _.some(this.Tasks, (d) => d.isHovering);
+    }
+
+    onAttachedToRootStore() {
+        this.Placement.placeTasks(this.Tasks.map((d) => d.Bar));
     }
 
     @modelAction
-    update(json: TimelineWorkpackageJson){
-
-    }
-
+    update(json: any) {}
 }

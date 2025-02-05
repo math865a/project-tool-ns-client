@@ -1,19 +1,14 @@
-import {
-    ProjectManager,
-    UpdateProjectManagerDto
-} from "@math865a/project-tool.types";
 import { useParams } from "@remix-run/react";
 import { useState } from "react";
 import { Socket } from "socket.io-client";
 import invariant from "tiny-invariant";
-import { useProjectManagerMenu } from "../ProjectManagerMenuProvider";
+import { ProjectManager } from "~/src";
 
 export const useProjectManager = (
-
     initialManager: ProjectManager,
     socketMessage: string,
     rawOptions: ProjectManager[],
-    socket?: Socket,
+    socket?: Socket
 ) => {
     const { workpackageId } = useParams();
     invariant(workpackageId);
@@ -22,7 +17,7 @@ export const useProjectManager = (
         useState<ProjectManager>(initialManager);
 
     const persistProjectManager = (projectManagerId: string) => {
-        const dto: UpdateProjectManagerDto = {
+        const dto = {
             workpackageId: workpackageId,
             projectManagerId: projectManagerId,
         };

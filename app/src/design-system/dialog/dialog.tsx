@@ -1,4 +1,3 @@
-import { faTimes } from "@fortawesome/pro-light-svg-icons";
 import {
     Box,
     Breakpoint,
@@ -7,7 +6,6 @@ import {
     DialogActionsProps,
     DialogContent,
     DialogContentProps,
-    DialogProps,
     DialogTitle,
     Stack,
     Typography,
@@ -15,6 +13,7 @@ import {
 } from "@mui/material";
 
 import { Action, Child, IconDef, Symbol, SymbolProps } from "../index";
+import { IconX } from "@tabler/icons-react";
 
 export interface IDialogProps {
     children?: Child | Child[];
@@ -23,7 +22,7 @@ export interface IDialogProps {
     maxWidth?: Breakpoint;
     scroll?: "paper" | "body";
     hideCloseAction?: boolean;
-    disableCloseOnClickAway?: boolean
+    disableCloseOnClickAway?: boolean;
 }
 
 function Modal({
@@ -48,7 +47,7 @@ function Modal({
                 {!hideCloseAction && onClose && (
                     <Action.Symbol
                         iconSize={1.1}
-                        icon={faTimes}
+                        icon={IconX}
                         title="Luk"
                         onClick={onClose}
                     />

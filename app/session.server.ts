@@ -1,6 +1,6 @@
-import { FormErrorResponse, JwtHeader, SignedJwtToken } from "@math865a/project-tool.types";
 import { createCookieSessionStorage, json, redirect } from "@remix-run/node";
-import {Duration as dur} from "luxon"
+import { Duration as dur } from "luxon";
+import { FormErrorResponse, JwtHeader, SignedJwtToken } from "~/src";
 
 export const sessionStorage = createCookieSessionStorage({
     cookie: {
@@ -54,13 +54,14 @@ export async function createSession({
     redirectTo: string;
 }) {
     const session = await getSession(request);
-    if (!session) return json(new FormErrorResponse({message: "Der skete en fejl"}));
+    if (!session)
+        return json(new FormErrorResponse({ message: "Der skete en fejl" }));
     session.set(SESSION_KEY, jwtToken.access_token);
     return redirect(redirectTo, {
         headers: {
             "Set-Cookie": await sessionStorage.commitSession(session, {
                 maxAge: remember
-                    ? dur.fromObject({months: 1}).toMillis()
+                    ? dur.fromObject({ months: 1 }).toMillis()
                     : undefined,
             }),
         },

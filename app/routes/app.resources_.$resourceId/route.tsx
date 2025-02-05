@@ -2,16 +2,10 @@ import { Outlet } from "@remix-run/react";
 import { HasAccess, ResourceProfile, Subject } from "~/src";
 import { Page } from "~/src/design-system";
 import HeaderSection from "./Header.Section";
-import {
-    ActionArgs,
-    LoaderArgs,
-    json,
-    redirect,
-} from "@remix-run/node";
+import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { sendRequest } from "~/session.server";
 import { getServiceUrl } from "~/server";
-import { FormResponse } from "@math865a/project-tool.types";
 
 export async function loader({
     request,
@@ -29,7 +23,7 @@ export type ResourceLoader = typeof loader;
 export async function action({ request, params }: ActionArgs) {
     invariant(params.resourceId);
     if (request.method === "DELETE") {
-        const result: FormResponse = await sendRequest(request, {
+        const result: any = await sendRequest(request, {
             url: getServiceUrl("resources", params.resourceId),
             method: "DELETE",
         });

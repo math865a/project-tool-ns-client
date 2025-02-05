@@ -1,26 +1,22 @@
 import {
-    faChevronDown,
-    faChevronRight
-} from "@fortawesome/pro-solid-svg-icons";
-import {
     Collapse,
     List,
     ListItem,
     ListItemIcon,
     ListItemSecondaryAction,
     ListItemText,
-    Typography
+    Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { Action } from "~/src/design-system";
 import { IDeletionConsequence } from "../useResourceTypeDeletion";
 import { AllocationItem } from "./AllocationItem";
+import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 
 export function WorkpackageItem(wp: IDeletionConsequence) {
     const [open, setOpen] = useState<boolean>(false);
 
-    if (wp.allocations.length === 0)
-        return null;
+    if (wp.allocations.length === 0) return null;
 
     return (
         <>
@@ -28,8 +24,9 @@ export function WorkpackageItem(wp: IDeletionConsequence) {
                 <ListItemIcon sx={{ minWidth: 50 }}>
                     <Action.Symbol
                         title={open ? "Luk" : "Se allokkeringer"}
-                        icon={open ? faChevronDown : faChevronRight}
-                        onClick={() => setOpen((prev) => !prev)} />
+                        icon={open ? IconChevronDown : IconChevronRight}
+                        onClick={() => setOpen((prev) => !prev)}
+                    />
                 </ListItemIcon>
                 <ListItemText
                     primaryTypographyProps={{
@@ -43,7 +40,8 @@ export function WorkpackageItem(wp: IDeletionConsequence) {
                         maxWidth: "80%",
                     }}
                     primary={wp.systematicName}
-                    secondary={wp.name} />
+                    secondary={wp.name}
+                />
                 <ListItemSecondaryAction>
                     <Typography fontSize={12} fontWeight="bold">
                         {wp.totalWork}

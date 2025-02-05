@@ -1,4 +1,4 @@
-import { GridColDef, GridActionsColDef } from "@mui/x-data-grid-pro";
+import { GridColDef } from "@mui/x-data-grid-pro";
 import { DateTime as dt } from "luxon";
 import { useMemo } from "react";
 import v from "voca";
@@ -127,9 +127,13 @@ export const useColumns = (rowState: Props) => {
                 align: "center",
                 type: "boolean",
                 valueGetter: (props) => props.row.isDeactivated,
-                renderCell: props => <Grid.BooleanCell value={props.value} title={props.value ? "Er deaktiveret" : "Er aktiveret"} />,
+                renderCell: (props) => (
+                    <Grid.BooleanCell
+                        value={props.value}
+                        title={props.value ? "Er deaktiveret" : "Er aktiveret"}
+                    />
+                ),
                 editable: false,
-            
             },
             {
                 field: "isResource",
@@ -138,7 +142,14 @@ export const useColumns = (rowState: Props) => {
                 align: "center",
                 type: "boolean",
                 valueGetter: (props) => props.row.isResource,
-                renderCell: props => <Grid.BooleanCell value={props.value} title={props.value ? "Er ressource" : "Er ikke ressource"}/>,
+                renderCell: (props) => (
+                    <Grid.BooleanCell
+                        value={props.value}
+                        title={
+                            props.value ? "Er ressource" : "Er ikke ressource"
+                        }
+                    />
+                ),
                 editable: false,
             },
             {
@@ -148,7 +159,16 @@ export const useColumns = (rowState: Props) => {
                 align: "center",
                 type: "boolean",
                 valueGetter: (props) => props.row.isProjectManager,
-                renderCell: props => <Grid.BooleanCell value={props.value} title={props.value ? "Er projektleder" : "Er ikke projektleder"}/>,
+                renderCell: (props) => (
+                    <Grid.BooleanCell
+                        value={props.value}
+                        title={
+                            props.value
+                                ? "Er projektleder"
+                                : "Er ikke projektleder"
+                        }
+                    />
+                ),
                 editable: false,
             },
         ];
@@ -170,76 +190,3 @@ export const useColumns = (rowState: Props) => {
 
     return columns;
 };
-
-/*{
-                    const isInEditMode =
-                        rowModesModel[id]?.mode === GridRowModes.Edit;
-
-                    if (isInEditMode) {
-                        return [
-                            <Tooltip title="Gem" placement="top" arrow>
-                                <GridActionsCellItem
-                                    icon={
-                                        <Symbol
-                                            icon={faSave}
-                                            size={1}
-                                            color="inherit"
-                                        />
-                                    }
-                                    label="Save"
-                                    onClick={handleSaveClick(id)}
-                                />
-                            </Tooltip>,
-                            <Tooltip title="Fortryd" placement="top" arrow>
-                                <GridActionsCellItem
-                                    icon={
-                                        <Symbol
-                                            icon={faTimes}
-                                            size={1}
-                                            color="inherit"
-                                        />
-                                    }
-                                    label="Cancel"
-                                    className="textPrimary"
-                                    onClick={handleCancelClick(id)}
-                                    color="inherit"
-                                />
-                            </Tooltip>,
-                        ];
-                    } else if (isEditing) {
-                        return [];
-                    }
-
-                    return [
-                        <Tooltip title="Rediger" placement="top" arrow>
-                            <GridActionsCellItem
-                                icon={
-                                    <Symbol
-                                        icon={faPenToSquare}
-                                        size={1}
-                                        color="inherit"
-                                    />
-                                }
-                                label="Edit"
-                                className="textPrimary"
-                                onClick={handleEditClick(id)}
-                                color="inherit"
-                            />
-                        </Tooltip>,
-                        <Tooltip title="Slet" placement="top" arrow>
-                            <GridActionsCellItem
-                                icon={
-                                    <Symbol
-                                        icon={faTrash}
-                                        size={1}
-                                        color="inherit"
-                                    />
-                                }
-                                label="Delete"
-                                onClick={handleDeleteClick(id)}
-                                color="inherit"
-                            />
-                        </Tooltip>,
-                    ];
-                },
-            }*/

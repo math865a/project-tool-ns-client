@@ -1,8 +1,8 @@
-import { faTrash } from "@fortawesome/pro-light-svg-icons";
 import { useLoaderData, useSubmit } from "@remix-run/react";
 import { Action, ConfirmationDialog } from "design";
 import { useState } from "react";
 import { loader } from "../route";
+import { IconTrash } from "@tabler/icons-react";
 
 export function DeleteAction() {
     const { node } = useLoaderData<typeof loader>();
@@ -13,14 +13,6 @@ export function DeleteAction() {
 
     const handleDelete = () => {
         setOpen(false);
-        /*submit(
-            {},
-            {
-                action: `/app/financialsources/${node.id}`,
-                method: "delete",
-                replace: true,
-            }
-        );*/
     };
 
     const handleOpen = () => {
@@ -34,7 +26,7 @@ export function DeleteAction() {
         <>
             <Action.TextButton
                 text="Slet"
-                icon={faTrash}
+                icon={IconTrash}
                 onClick={handleOpen}
                 disabled={true}
             />

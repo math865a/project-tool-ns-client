@@ -1,4 +1,3 @@
-import { FormOption } from "@math865a/project-tool.types";
 import { ResourceTypeOption } from "~/src/_definitions";
 import { Controls, FormUI } from "~/src/design-system";
 import { ResourceTypesControl } from "./Control.Resourcetypes";
@@ -8,12 +7,12 @@ export function ResourceControls({
     prefix,
     resourceTypes,
     calendars,
-    autoFocus = false
+    autoFocus = false,
 }: {
     resourceTypes: ResourceTypeOption[];
-    calendars: FormOption[];
+    calendars: any[];
     prefix?: string;
-    autoFocus?: boolean
+    autoFocus?: boolean;
 }) {
     const names = useMemo(() => {
         if (prefix) {
@@ -58,7 +57,10 @@ export function ResourceControls({
                     adornmentText="kr/t"
                 />
             </FormUI.HStack>
-            <ResourceTypesControl options={resourceTypes} name={names.resourceTypes} />
+            <ResourceTypesControl
+                options={resourceTypes}
+                name={names.resourceTypes}
+            />
             <Controls.Default.Dropdown
                 name={names.calendar}
                 label="Kalender"

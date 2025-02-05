@@ -1,5 +1,4 @@
-import { faStar as notDefaultStar } from "@fortawesome/pro-light-svg-icons";
-import { faStar as defaultStar } from "@fortawesome/pro-solid-svg-icons";
+import { IconStar, IconStarFilled } from "@tabler/icons-react";
 import { Action } from "design";
 import { observer } from "mobx-react-lite";
 import { CapacityView } from "~/pages/capacity/_models";
@@ -8,7 +7,7 @@ const MakeDefaultAction = observer(
     ({ CapacityView }: { CapacityView: CapacityView }) => {
         return (
             <Action.Symbol
-                icon={CapacityView.isDefault ? defaultStar : notDefaultStar}
+                icon={CapacityView.isDefault ? IconStarFilled : IconStar}
                 symbolProps={{
                     color: CapacityView.isDefault ? "#F6DB79" : undefined,
                 }}

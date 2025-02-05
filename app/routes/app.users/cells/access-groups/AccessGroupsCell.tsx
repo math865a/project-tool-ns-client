@@ -1,4 +1,3 @@
-import { faPencil } from "@fortawesome/pro-light-svg-icons";
 import { useHover } from "@mantine/hooks";
 import { Box, Menu } from "@mui/material";
 import {
@@ -12,6 +11,7 @@ import { Action } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import AccessGroupsPicker from "./AccessGroupsPicker";
 import { AccessGroupsDisplay } from "./Display";
+import { IconPencil } from "@tabler/icons-react";
 
 export interface AccessGroupsCellProps {
     id: GridRowId;
@@ -72,7 +72,7 @@ export function AccessGroupsCell(props: AccessGroupsCellProps) {
                 >
                     {isEditing && (hovered || menuProps.open) && (
                         <Action.Symbol
-                            icon={faPencil}
+                            icon={IconPencil}
                             title="Rediger"
                             onClick={handleOpen}
                         />
@@ -90,7 +90,10 @@ export function AccessGroupsCell(props: AccessGroupsCellProps) {
                     },
                 }}
             >
-                <AccessGroupsPicker value={props.value} handleToggle={handleToggle} />
+                <AccessGroupsPicker
+                    value={props.value}
+                    handleToggle={handleToggle}
+                />
             </Menu>
         </>
     );

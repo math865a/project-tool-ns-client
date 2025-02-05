@@ -1,10 +1,10 @@
-import { faTrash } from "@fortawesome/pro-light-svg-icons";
 import { useLoaderData, useSubmit, useTransition } from "@remix-run/react";
 import { Action, ConfirmationDialog, Fallback } from "design";
 import { useState } from "react";
 import { Can } from "~/src/session-user";
 import { Action as A, Subject } from "~/src/_definitions";
 import { WorkpackageLoader } from "../route";
+import { IconTrash } from "@tabler/icons-react";
 
 export function DeleteAction() {
     const {
@@ -46,7 +46,7 @@ export function DeleteAction() {
                 {(allowed) => (
                     <Action.TextButton
                         text="Slet"
-                        icon={faTrash}
+                        icon={IconTrash}
                         onClick={handleOpen}
                         disabled={!allowed}
                     />

@@ -1,15 +1,7 @@
-import { faTimes } from "@fortawesome/pro-solid-svg-icons";
-import {
-    Alert,
-    AlertColor,
-    Snackbar,
-    Typography,
-    Portal,
-    Box,
-    useTheme,
-} from "@mui/material";
+import { AlertColor, Portal, Snackbar, useTheme } from "@mui/material";
 import { useMemo } from "react";
 import { Action, Child } from "~/src/design-system";
+import { IconX } from "@tabler/icons-react";
 
 export interface IInfoProps {
     message?: string;
@@ -38,7 +30,7 @@ export default function Info({
         return (
             <>
                 <Action.Symbol
-                    icon={faTimes}
+                    icon={IconX}
                     onClick={() => handleClose("action")}
                     title="luk"
                 />
@@ -75,7 +67,7 @@ export default function Info({
                     autoHideDuration={autoHideDuration}
                     action={
                         <Action.Symbol
-                            icon={faTimes}
+                            icon={IconX}
                             onClick={() => handleClose("action")}
                             title="luk"
                             sx={{ color: "#fff" }}

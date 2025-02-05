@@ -1,6 +1,4 @@
-import { faInfoCircle } from "@fortawesome/pro-light-svg-icons";
 import {
-    Box,
     Button,
     IconButton,
     Portal,
@@ -14,8 +12,10 @@ import {
 import { Dialog } from "../dialog";
 import { Symbol } from "../symbol";
 import { Inform, useInform } from "./info";
+import { IconInfoCircle } from "@tabler/icons-react";
 
 interface ISnackbarProps extends SnackbarProps {}
+
 function Snackbar({ autoHideDuration = 4000, ...rest }: SnackbarProps) {
     if (typeof window === "undefined") return null;
     return (
@@ -77,16 +77,14 @@ function InfoTooltip({ text, placement = "top" }: IInfoTooltipProps) {
                 },
             }}
         >
-           
-                <IconButton
-                    size="small"
-                    disableFocusRipple
-                    disableTouchRipple
-                    sx={{ cursor: "default" }}
-                >
-                    <Symbol icon={faInfoCircle} size={0.9} />
-                </IconButton>
-          
+            <IconButton
+                size="small"
+                disableFocusRipple
+                disableTouchRipple
+                sx={{ cursor: "default" }}
+            >
+                <Symbol icon={IconInfoCircle} size={0.9} />
+            </IconButton>
         </Tooltip>
     );
 }

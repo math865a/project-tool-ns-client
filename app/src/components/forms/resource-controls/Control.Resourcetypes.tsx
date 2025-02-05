@@ -1,4 +1,3 @@
-import { FormOption } from "@math865a/project-tool.types";
 import {
     Autocomplete,
     AutocompleteChangeDetails,
@@ -34,12 +33,14 @@ export function ResourceTypesControl({
                 value={resourceTypes}
                 options={options}
                 multiple
-                isOptionEqualToValue={(option, value) => _.isEqual(option, value)}
+                isOptionEqualToValue={(option, value) =>
+                    _.isEqual(option, value)
+                }
                 onChange={(
                     e,
                     value,
                     reason,
-                    details: AutocompleteChangeDetails<FormOption> | undefined
+                    details: AutocompleteChangeDetails<any> | undefined
                 ) => {
                     if (reason === "selectOption" && details) {
                         if (

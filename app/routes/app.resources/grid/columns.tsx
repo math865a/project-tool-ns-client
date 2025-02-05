@@ -1,16 +1,19 @@
-import { ResourceViewRow } from "@math865a/project-tool.types";
+//import { ResourceViewRow }
 import { GridColDef } from "@mui/x-data-grid-pro";
 
-import _ from "lodash"
+import _ from "lodash";
 import { Grid } from "~/src/design-system";
 import { IdentityCell } from "./Identity.Cell";
-export const columns: GridColDef<ResourceViewRow>[] = [
+
+export const columns: GridColDef<any>[] = [
     {
         field: "linkCell",
         headerName: "",
         width: 50,
         align: "center",
-        renderCell: (props) => <Grid.LinkCell to={`${props.row.node.id}`} id={props.row.node.id}/>
+        renderCell: (props) => (
+            <Grid.LinkCell to={`${props.row.node.id}`} id={props.row.node.id} />
+        ),
     },
     {
         field: "name",
@@ -31,7 +34,10 @@ export const columns: GridColDef<ResourceViewRow>[] = [
     {
         field: "cost.default",
         headerName: "Kostpris",
-        valueGetter: (props) =>  props.row.node.costDefault !== 0 ? props.row.node.costDefault + " kr/t" : "-",
+        valueGetter: (props) =>
+            props.row.node.costDefault !== 0
+                ? props.row.node.costDefault + " kr/t"
+                : "-",
         headerAlign: "center",
         align: "center",
         width: 145,
@@ -39,7 +45,10 @@ export const columns: GridColDef<ResourceViewRow>[] = [
     {
         field: "cost.overtime",
         headerName: "Kostpris (overtid)",
-        valueGetter: (props) => props.row.node.costOvertime !== 0 ? props.row.node.costOvertime + " kr/t" : "-",
+        valueGetter: (props) =>
+            props.row.node.costOvertime !== 0
+                ? props.row.node.costOvertime + " kr/t"
+                : "-",
         headerAlign: "center",
         align: "center",
         width: 145,

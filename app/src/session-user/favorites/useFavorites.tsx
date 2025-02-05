@@ -8,7 +8,10 @@ import {
 } from "~/src/_definitions";
 import { useMenuState } from "~/src/hooks/useMenu";
 
-export const useFavorites = (initialFavorites: Favorite[], socket?: Socket) => {
+export const useFavorites = (
+    initialFavorites: Favorite[] = [],
+    socket?: Socket
+) => {
     const [favorites, setFavorites] = useState<Favorite[]>(initialFavorites);
 
     const groupedFavorites = useGroupedFavorites(favorites);

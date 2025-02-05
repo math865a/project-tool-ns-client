@@ -1,7 +1,8 @@
-import { faArrowDown } from "@fortawesome/pro-light-svg-icons";
 import { compressAmount } from "~/util";
 import { Box, Stack, Tooltip, Typography, useTheme } from "@mui/material";
 import { Symbol } from "design";
+import { IconArrowDown } from "@tabler/icons-react";
+
 export function CostStat({ cost }: { cost: number }) {
     const theme = useTheme();
 
@@ -10,7 +11,7 @@ export function CostStat({ cost }: { cost: number }) {
             <Tooltip title="Omkostninger">
                 <Box>
                     <Symbol
-                        icon={faArrowDown}
+                        icon={IconArrowDown}
                         color={theme.palette.error.main}
                         size={0.8}
                     />

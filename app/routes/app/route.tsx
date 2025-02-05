@@ -1,5 +1,5 @@
 import { Toolbar } from "@mui/material";
-import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
+import { ActionArgs, json, LoaderArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 import { Layout } from "design";
 import { getServiceUrl } from "~/server";
@@ -20,6 +20,7 @@ export async function loader({ request }: LoaderArgs) {
         if (data.user.isDeactivated) {
             throw await logout(request);
         }
+        console.log(data);
 
         return json({
             ...data,

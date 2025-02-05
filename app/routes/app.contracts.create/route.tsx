@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography } from "@mui/material";
-import { ActionArgs, LoaderArgs, json, redirect } from "@remix-run/node";
+import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import { formSubmit } from "~/src/hooks/useFormSubmit";
 import ServerValidation from "~/src/hooks/useServerValidation";
 import { parseRequest } from "~/util/formData";
 import { schema } from "./schema";
-import { FormResponse } from "@math865a/project-tool.types";
+import { FormResponse } from "~/src";
 
 export async function loader({ request }: LoaderArgs) {
     await requireAuth(request);
@@ -26,41 +26,34 @@ export async function loader({ request }: LoaderArgs) {
 }
 
 export async function action({ request }: ActionArgs) {
-    const result: FormResponse = await sendRequest(
-        request,
-        {
-            url: getServiceUrl("contracts"),
-            method: "POST",
-            body: await parseRequest(request),
-        }
-    );
+    const result: FormResponse = await sendRequest(request, {
+        url: getServiceUrl("contracts"),
+        method: "POST",
+        body: await parseRequest(request),
+    });
     if (result.status === "ok") {
         return redirect("..");
     }
     return json(result);
 }
 
-
 export default function CreateForm() {
-    const record = useLoaderData<typeof loader>()
+    const record = useLoaderData<typeof loader>();
 
     const methods = useForm({
         defaultValues: record,
         resolver: yupResolver(schema),
     });
 
-    const handleClose = useDialogCloseRedirect(
-        "/app/contracts",
-        methods.reset
-    );
+    const handleClose = useDialogCloseRedirect("/app/contracts", methods.reset);
 
     const onSubmit = formSubmit.useActionSubmit();
 
-    const [errorMessage, setErrorMessage] = useState<string | null>(null)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const updateErrorMessage = (message: string | null) => {
-        setErrorMessage(message)
-    }
+        setErrorMessage(message);
+    };
 
     return (
         <Dialog.Modal open onClose={handleClose} maxWidth="sm">
@@ -72,7 +65,11 @@ export default function CreateForm() {
                     <ServerValidation updateErrorMessage={updateErrorMessage} />
                     <Dialog.Title title="Opret kontrakt" />
                     <Dialog.Body>
-                        {errorMessage ? <Typography pb={1} color="error">{errorMessage}</Typography> : null}
+                        {errorMessage ? (
+                            <Typography pb={1} color="error">
+                                {errorMessage}
+                            </Typography>
+                        ) : null}
                         <FormUI.VStack>
                             <Controls.Default.Text
                                 name="name"

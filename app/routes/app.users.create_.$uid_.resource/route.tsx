@@ -1,13 +1,11 @@
-import { FormResponse } from "@math865a/project-tool.types";
-import { useLoaderData, useNavigate } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
-import { useForm } from "react-hook-form";
 import invariant from "tiny-invariant";
 import { getServiceUrl } from "~/server";
 import { sendRequest } from "~/session.server";
 import { IResourceFormOptons, ResourceForm } from "~/src/components/forms";
-import { Dialog } from "~/src/design-system";
 import { parseRequest } from "~/util/formData";
+import { FormResponse } from "~/src";
 
 export async function loader({ request, params }: LoaderArgs): Promise<{
     options: IResourceFormOptons;
@@ -23,12 +21,12 @@ export async function loader({ request, params }: LoaderArgs): Promise<{
 export async function action({ request, params }: ActionArgs) {
     invariant(params.uid);
     const result: FormResponse = await sendRequest(request, {
-        url:  getServiceUrl("resources"),
+        url: getServiceUrl("resources"),
         method: "POST",
         body: await parseRequest(request),
     });
-    if (result.status === "ok"){
-        return redirect("../")
+    if (result.status === "ok") {
+        return redirect("../");
     }
     return json(result);
 }

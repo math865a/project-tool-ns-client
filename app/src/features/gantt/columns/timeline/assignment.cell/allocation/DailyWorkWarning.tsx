@@ -1,8 +1,8 @@
-import { faExclamation } from "@fortawesome/pro-solid-svg-icons";
 import { Box } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { Action } from "~/src/design-system";
 import { Allocation } from "gantt-models";
+import { IconExclamationMark } from "@tabler/icons-react";
 
 export const DailyWorkWarning = observer(
     ({
@@ -24,7 +24,7 @@ export const DailyWorkWarning = observer(
                     alignItems="center"
                 >
                     <Action.Symbol
-                        icon={faExclamation}
+                        icon={IconExclamationMark}
                         iconSize={1.2}
                         sx={{ color: "#E91B0C" }}
                         title="Denne allokering har mere end 8 timer pr. dag."

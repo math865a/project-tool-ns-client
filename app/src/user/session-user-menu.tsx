@@ -1,6 +1,5 @@
-import { faDoorOpen, faLock, faUser } from '@fortawesome/pro-light-svg-icons';
-import { Action, Symbol } from 'design';
-import { getAvatarName, getContrastColor } from '~/util';
+import { Symbol } from "design";
+import { getAvatarName, getContrastColor } from "~/util";
 import {
     Avatar,
     ButtonBase,
@@ -11,16 +10,15 @@ import {
     ListItemIcon,
     ListItemText,
     Menu,
-    MenuItem,
     Typography,
-    useTheme,
-} from '@mui/material';
-import { Link, useSubmit } from '@remix-run/react';
-import { useState } from 'react';
-import { useSession } from '../session-user';
+} from "@mui/material";
+import { Link, useSubmit } from "@remix-run/react";
+import { useState } from "react";
+import { useSession } from "../session-user";
+import { IconDoorExit, IconUser } from "@tabler/icons-react";
 
 export default function SessionUser() {
-    const {user} = useSession();
+    const { user } = useSession();
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
 
@@ -36,7 +34,7 @@ export default function SessionUser() {
 
     return (
         <>
-            <ButtonBase onClick={handleOpen} sx={{ borderRadius: '50%', p: 1 }}>
+            <ButtonBase onClick={handleOpen} sx={{ borderRadius: "50%", p: 1 }}>
                 <UserAvatar />
             </ButtonBase>
             <SessionMenu
@@ -49,7 +47,7 @@ export default function SessionUser() {
 }
 
 function UserAvatar({ size = 30 }: { size?: number }) {
-    const {user} = useSession();
+    const { user } = useSession();
 
     return (
         <Avatar sx={{ backgroundColor: user.color, width: size, height: size }}>
@@ -73,12 +71,11 @@ function SessionMenu({
     onClose: () => void;
     anchorEl: HTMLElement | null;
 }) {
-
-    const {user} = useSession();
+    const { user } = useSession();
     const submit = useSubmit();
     const handleSignOut = () => {
         //usersocket?.emit("sign-out", {})
-        submit({}, { method: 'post', replace: true, action: '/app' });
+        submit({}, { method: "post", replace: true, action: "/app" });
     };
 
     return (
@@ -86,10 +83,17 @@ function SessionMenu({
             open={open}
             onClose={onClose}
             anchorEl={anchorEl}
-            PaperProps={{ sx: { py: 0, minWidth: 150, backgroundColor: "#fff", borderRadius: 4 } }}
+            PaperProps={{
+                sx: {
+                    py: 0,
+                    minWidth: 150,
+                    backgroundColor: "#fff",
+                    borderRadius: 4,
+                },
+            }}
             sx={{
                 py: 0,
-                '& .MuiList-root': {
+                "& .MuiList-root": {
                     paddingBottom: 0.25,
                     paddingTop: 0,
                 },
@@ -104,9 +108,13 @@ function SessionMenu({
             <ListItem sx={{ flexGrow: 1 }}>
                 <List sx={{ flexGrow: 1 }}>
                     <ListItem dense>
-                        <ListItemButton component={Link} to="/app/session" sx={{textDecoration: "none", color: "inherit"}}>
+                        <ListItemButton
+                            component={Link}
+                            to="/app/session"
+                            sx={{ textDecoration: "none", color: "inherit" }}
+                        >
                             <ListItemIcon>
-                                <Symbol icon={faUser} />
+                                <Symbol icon={IconUser} />
                             </ListItemIcon>
                             <ListItemText primary="Kontodetaljer" />
                         </ListItemButton>
@@ -114,7 +122,7 @@ function SessionMenu({
                     <ListItem dense>
                         <ListItemButton onClick={handleSignOut}>
                             <ListItemIcon>
-                                <Symbol icon={faDoorOpen} />
+                                <Symbol icon={IconDoorExit} />
                             </ListItemIcon>
                             <ListItemText primary="Log ud" />
                         </ListItemButton>

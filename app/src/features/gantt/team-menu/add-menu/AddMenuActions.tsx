@@ -1,7 +1,7 @@
-import { faCheck, faTimes } from "@fortawesome/pro-light-svg-icons";
 import { TeamMemberJson } from "gantt/types";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { Action } from "~/src/design-system";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 export default function AddMenuActions({
     selected,
@@ -26,14 +26,14 @@ export default function AddMenuActions({
             <Stack direction="row" alignItems="center" spacing={1}>
                 <Action.TextButton
                     text="Annuller"
-                    icon={faTimes}
+                    icon={IconX}
                     sx={{ color: theme.palette.error.main }}
                     onClick={handleCancel}
                 />
                 <Action.TextButton
                     text="Tilføj"
                     disabled={selected.length === 0}
-                    icon={faCheck}
+                    icon={IconCheck}
                     sx={{ color: theme.palette.success.main }}
                     onClick={handleConfirm}
                 />

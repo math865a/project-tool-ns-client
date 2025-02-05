@@ -1,9 +1,9 @@
-import { faCalendar } from "@fortawesome/pro-light-svg-icons";
 import { Menu } from "@mui/material";
 import { DateRangeCalendar } from "@mui/x-date-pickers-pro";
 import { Action, PickerDay } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import { useCapacityCharts } from "../_state";
+import { IconCalendar } from "@tabler/icons-react";
 
 export function DateRangePicker() {
     const {
@@ -15,11 +15,11 @@ export function DateRangePicker() {
     return (
         <>
             <Action.TextButton
-                icon={faCalendar}
+                icon={IconCalendar}
                 text={displayRange}
                 onClick={handleOpen}
                 reverse
-                textProps={{fontWeight: "bold", fontSize: 12}}
+                textProps={{ fontWeight: "bold", fontSize: 12 }}
             />
 
             <Menu

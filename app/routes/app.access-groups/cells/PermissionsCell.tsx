@@ -1,16 +1,19 @@
 import {
-    faEye,
-    faEyeSlash,
-    faPencil,
-    faPencilSlash,
-    faTrash,
-    faTrashSlash,
-} from "@fortawesome/pro-light-svg-icons";
-import { GridRenderEditCellParams, useGridApiContext, useGridApiRef } from "@mui/x-data-grid-pro";
+    GridRenderEditCellParams,
+    useGridApiContext,
+} from "@mui/x-data-grid-pro";
 import { useMemo } from "react";
-import { Action, IconDef, Symbol } from "~/src/design-system";
+import { Action, IconDef } from "~/src/design-system";
 import { AccessGroupRow, Permissions } from "../definitions/types";
-import { Stack, Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
+import {
+    IconEdit,
+    IconEditOff,
+    IconEye,
+    IconEyeSpark,
+    IconTrash,
+    IconTrashOff,
+} from "@tabler/icons-react";
 
 export default function PermissionsCell({
     id,
@@ -23,12 +26,12 @@ export default function PermissionsCell({
     const apiRef = useGridApiContext();
 
     const handleToggle = (permission: keyof Permissions) => {
-        console.log(id, value, field)
+        console.log(id, value, field);
         if (!value || !isEditing) return;
         const newValue = {
             ...value,
-            [permission]: !value[permission]
-        }
+            [permission]: !value[permission],
+        };
         apiRef.current.setEditCellValue({ id, field, value: newValue });
     };
 
@@ -85,16 +88,16 @@ function Permission({
     }, [value, active, inactive]);
 
     return (
-            <Action.Symbol
+        <Action.Symbol
             title={actionProps.title}
-                disableFocusRipple={disabled}
-                disableRipple={disabled}
-                disableTouchRipple={disabled}
-                iconSize={0.9}
-                icon={actionProps.icon}
-                onClick={() => onToggle(permission)}
-                sx={{ cursor: disabled ? "default" : "pointer" }}
-            />
+            disableFocusRipple={disabled}
+            disableRipple={disabled}
+            disableTouchRipple={disabled}
+            iconSize={0.9}
+            icon={actionProps.icon}
+            onClick={() => onToggle(permission)}
+            sx={{ cursor: disabled ? "default" : "pointer" }}
+        />
     );
 }
 
@@ -112,31 +115,31 @@ const permissionIconMap: {
 } = {
     read: {
         active: {
-            icon: faEye,
+            icon: IconEye,
             title: "Kan læse",
         },
         inactive: {
-            icon: faEyeSlash,
+            icon: IconEyeSpark,
             title: "Kan ikke læse",
         },
     },
     write: {
         active: {
-            icon: faPencil,
+            icon: IconEdit,
             title: "Kan redigere",
         },
         inactive: {
-            icon: faPencilSlash,
+            icon: IconEditOff,
             title: "Kan ikke redigere",
         },
     },
     delete: {
         active: {
-            icon: faTrash,
+            icon: IconTrash,
             title: "Kan slette",
         },
         inactive: {
-            icon: faTrashSlash,
+            icon: IconTrashOff,
             title: "kan ikke slette",
         },
     },

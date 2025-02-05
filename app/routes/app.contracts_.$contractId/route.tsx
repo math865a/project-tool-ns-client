@@ -1,4 +1,3 @@
-import { ContractProfile, FormResponse } from "@math865a/project-tool.types";
 import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
 import { Page } from "design";
 import { sendRequest } from "session";
@@ -8,12 +7,8 @@ import BackAction from "~/src/layout/topbar/BackAction";
 import { parseRequest } from "~/util/formData";
 import { HeaderSection } from "./Header.Section";
 import { DetailsSection } from "./Details.Section";
-import {
-    useLoaderData,
-    useMatches,
-    useRouteLoaderData,
-} from "@remix-run/react";
-import { HasAccess, Subject } from "~/src";
+import { useRouteLoaderData } from "@remix-run/react";
+import { ContractProfile, FormResponse, HasAccess, Subject } from "~/src";
 
 export const handle = {
     BackAction: <PageContext />,

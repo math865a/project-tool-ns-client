@@ -1,8 +1,8 @@
-import { faPencil } from "@fortawesome/pro-light-svg-icons";
-import { Stack, Typography, Box } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { CapacityView } from "~/pages/capacity/_models";
 import { Action } from "~/src/design-system";
+import { IconPencil } from "@tabler/icons-react";
 
 const ViewItemDisplay = observer(
     ({
@@ -24,7 +24,7 @@ const ViewItemDisplay = observer(
                     {isHovering && (
                         <Action.Symbol
                             onClick={updateIsEditing}
-                            icon={faPencil}
+                            icon={IconPencil}
                             iconSize={0.9}
                             title="Rediger navn"
                         />

@@ -1,7 +1,7 @@
-import { faPlus } from "@fortawesome/pro-solid-svg-icons";
 import { useTheme } from "@mui/material";
 import { Form } from "@remix-run/react";
 import { Action, Page } from "~/src/design-system";
+import { IconPlus } from "@tabler/icons-react";
 
 export default function HeaderSection() {
     const theme = useTheme();
@@ -11,7 +11,7 @@ export default function HeaderSection() {
             actions={
                 <Form method="get" action="create">
                     <Action.TextButton
-                        icon={faPlus}
+                        icon={IconPlus}
                         symbolProps={{ color: theme.palette.success.main }}
                         text="Opret bruger"
                         type="submit"

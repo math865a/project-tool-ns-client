@@ -1,13 +1,13 @@
-import { faCalendar } from '@fortawesome/pro-light-svg-icons';
-import { getDateTime } from '~/util';
-import { Box, Menu, Slider, Stack, Typography } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers-pro';
-import { Action } from 'design';
-import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
-import { useTimeline } from '../task-timeline.provider';
-const TimelineControls = observer(() => {
+import { getDateTime } from "~/util";
+import { Box, Menu, Slider, Stack, Typography } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers-pro";
+import { Action } from "design";
+import { observer } from "mobx-react-lite";
+import { useState } from "react";
+import { useTimeline } from "../task-timeline.provider";
+import { IconCalendarEvent } from "@tabler/icons-react";
 
+const TimelineControls = observer(() => {
     return (
         <Stack direction="row" alignItems="center" spacing={2}>
             <DateControl />
@@ -47,7 +47,7 @@ const DateControl = observer(() => {
     return (
         <>
             <Action.TextButton
-                icon={faCalendar}
+                icon={IconCalendarEvent}
                 text="Gå til dato"
                 onClick={(event) =>
                     setAnchorEl((prev) => (prev ? null : event.currentTarget))

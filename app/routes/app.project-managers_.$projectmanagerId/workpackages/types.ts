@@ -1,5 +1,4 @@
-import { ProjectManager } from "@math865a/project-tool.types";
-import { Stage } from "~/src/_definitions";
+import { ProjectManager, Stage } from "~/src/_definitions";
 
 export class ViewRow {
     public readonly id: string;

@@ -1,8 +1,8 @@
-import { faLock, faThumbsUp } from "@fortawesome/pro-light-svg-icons";
 import { Box, Typography, useTheme } from "@mui/material";
+import { IconLock } from "@tabler/icons-react";
 import { Symbol } from "~/src/design-system";
 
-export default function PasswordChanged({message}: {message: string}) {
+export default function PasswordChanged({ message }: { message: string }) {
     const theme = useTheme();
     return (
         <Box
@@ -15,7 +15,7 @@ export default function PasswordChanged({message}: {message: string}) {
             py={3}
         >
             <Symbol
-                icon={faLock}
+                icon={IconLock}
                 size={4}
                 color={theme.palette.text.secondary}
             />

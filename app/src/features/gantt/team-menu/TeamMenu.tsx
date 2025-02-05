@@ -1,4 +1,3 @@
-import { faInfoCircle, faUsersSlash } from "@fortawesome/pro-light-svg-icons";
 import {
     Box,
     Fade,
@@ -15,6 +14,7 @@ import { useGantt } from "useGantt";
 import { Action, Fallback, Symbol } from "~/src/design-system";
 import AddTeamMembersMenu from "./add-menu";
 import TeamMemberItem from "./item/Item";
+import { IconInfoCircle, IconUsersMinus } from "@tabler/icons-react";
 
 export const TeamMenu = observer(
     (props: {
@@ -46,7 +46,7 @@ export const TeamMenu = observer(
             if (items.get().length === 0) {
                 return (
                     <Fallback.Empty
-                        icon={faUsersSlash}
+                        icon={IconUsersMinus}
                         height={100}
                         text="Dit team er tomt."
                         direction="column"
@@ -109,7 +109,7 @@ export const TeamMenu = observer(
                             disableTouchRipple
                             sx={{ cursor: "default" }}
                         >
-                            <Symbol icon={faInfoCircle} size={0.9} />
+                            <Symbol icon={IconInfoCircle} size={0.9} />
                         </IconButton>
                     </Tooltip>
                     <Action.TextButton text="Luk" onClick={props.onClose} />

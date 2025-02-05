@@ -1,10 +1,10 @@
-import { faCalendar } from "@fortawesome/pro-light-svg-icons";
 import { Box, Menu } from "@mui/material";
 import { DateRange, DateRangeCalendar } from "@mui/x-date-pickers-pro";
 import { DateTime as dt } from "luxon";
 import { useMemo } from "react";
 import { Action, PickerDay } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
+import { IconCalendar } from "@tabler/icons-react";
 
 export default function PeriodAction({
     updatePeriod,
@@ -30,7 +30,7 @@ export default function PeriodAction({
     return (
         <Box display="flex" flexGrow={1} justifyContent="flex-end">
             <Action.TextButton
-                icon={faCalendar}
+                icon={IconCalendar}
                 text={displayPeriod}
                 onClick={handleOpen}
                 ptText={0.25}

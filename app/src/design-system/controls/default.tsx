@@ -1,24 +1,25 @@
-import { FormOption } from "@math865a/project-tool.types";
 import {
     Checkbox,
     FormControlLabel,
+    InputProps,
     ListItemText,
     MenuItem,
     OutlinedInput,
-    Select,
-    Typography,
-    RadioGroup as MuiRadioGroup,
     Radio as MuiRadio,
+    RadioGroup as MuiRadioGroup,
+    Select,
     Stack,
-    Chip,
-    Box,
-    InputProps,
+    Typography,
 } from "@mui/material";
-import { useEffect } from "react";
-import { Path, useWatch } from "react-hook-form";
-import { FieldValues, useFormContext } from "react-hook-form";
-import { Child, FormUI, IconDef, Symbol, SymbolProps } from "~/src/design-system";
-import { ColorPickerControl } from "~/src/design-system";
+import { FieldValues, Path, useFormContext, useWatch } from "react-hook-form";
+import {
+    Child,
+    ColorPickerControl,
+    FormUI,
+    IconDef,
+    Symbol,
+    SymbolProps,
+} from "~/src/design-system";
 
 interface DefaultProps<T extends FieldValues = FieldValues> {
     name: Path<T>;
@@ -37,8 +38,8 @@ interface TextProps<T extends FieldValues = FieldValues>
     minRows?: number;
     maxRows?: number;
     placeholder?: string;
-    type?: InputProps["type"]
-    helperText?: Child
+    type?: InputProps["type"];
+    helperText?: Child;
 }
 
 function Text<T extends FieldValues = FieldValues>({
@@ -55,7 +56,7 @@ function Text<T extends FieldValues = FieldValues>({
     maxRows,
     placeholder,
     type,
-    helperText
+    helperText,
 }: TextProps<T>) {
     const {
         register,
@@ -70,26 +71,26 @@ function Text<T extends FieldValues = FieldValues>({
             errorText={errors[name]?.message as string | undefined}
         >
             <Stack justifyContent="flex-start" spacing={0.5}>
-            <OutlinedInput
-                placeholder={placeholder}
-                readOnly={disabled}
-                fullWidth
-                autoFocus={autoFocus}
-                multiline={rows || minRows || maxRows ? true : false}
-                rows={rows}
-                minRows={minRows}
-                maxRows={maxRows}
-                type={type}
-                {...register(name)}
-                size="small"
-                error={errors[name] !== undefined}
-                endAdornment={
-                    adornmentText && (
-                        <FormUI.TextAdornment text={adornmentText} />
-                    )
-                }
-            />
-            {helperText}
+                <OutlinedInput
+                    placeholder={placeholder}
+                    readOnly={disabled}
+                    fullWidth
+                    autoFocus={autoFocus}
+                    multiline={rows || minRows || maxRows ? true : false}
+                    rows={rows}
+                    minRows={minRows}
+                    maxRows={maxRows}
+                    type={type}
+                    {...register(name)}
+                    size="small"
+                    error={errors[name] !== undefined}
+                    endAdornment={
+                        adornmentText && (
+                            <FormUI.TextAdornment text={adornmentText} />
+                        )
+                    }
+                />
+                {helperText}
             </Stack>
         </FormUI.Label>
     );
@@ -118,7 +119,7 @@ function Color<T extends FieldValues = FieldValues>({
 
 interface SelectProps<T extends FieldValues = FieldValues>
     extends DefaultProps<T> {
-    options: FormOption[];
+    options: any[];
     multiple?: boolean;
 }
 
@@ -210,12 +211,15 @@ function Boolean<T extends FieldValues = FieldValues>({
                 <Checkbox
                     readOnly={disabled}
                     name={name}
-                    onChange={ disabled ? undefined : (e, v) =>
-                        setValue(name, v as T[typeof name], {
-                            shouldValidate: true,
-                            shouldDirty: true,
-                            shouldTouch: true,
-                        })
+                    onChange={
+                        disabled
+                            ? undefined
+                            : (e, v) =>
+                                  setValue(name, v as T[typeof name], {
+                                      shouldValidate: true,
+                                      shouldDirty: true,
+                                      shouldTouch: true,
+                                  })
                     }
                     checked={value}
                     size="small"

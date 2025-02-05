@@ -1,6 +1,6 @@
-import { ResourceNode } from "@math865a/project-tool.types";
 import { Box, Typography } from "@mui/material";
 import { Avatars } from "~/src/design-system";
+import { ResourceNode } from "~/src";
 
 export function IdentityCell({ node }: { node: ResourceNode }) {
     return (
@@ -11,7 +11,7 @@ export function IdentityCell({ node }: { node: ResourceNode }) {
                 variant="body1"
                 color="rgba(0,0,0,0.87)"
                 sx={{
-                    textRendering: "optimizeLegibility"
+                    textRendering: "optimizeLegibility",
                 }}
             >
                 {node.name}

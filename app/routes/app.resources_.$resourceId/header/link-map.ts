@@ -1,29 +1,29 @@
-import { faCalendarWeek, faChartSimple, faCalendar, faListUl } from "@fortawesome/pro-light-svg-icons";
 import { useParams } from "@remix-run/react";
 import { useMemo } from "react";
 import invariant from "tiny-invariant";
+import { IconChartArea, IconList } from "@tabler/icons-react";
 
 export const useLinks = () => {
-
-    const {resourceId} = useParams();
+    const { resourceId } = useParams();
     invariant(resourceId);
 
     const links = useMemo(() => {
         return [
             {
                 to: `/app/resources/${resourceId}`,
-                icon: faChartSimple,
+                //icon: faChartSimple,
+                Icon: IconChartArea,
                 title: "Overblik",
-                root: true
+                root: true,
             },
             {
                 to: `/app/resources/${resourceId}/tasks`,
-                icon: faListUl,
+                //icon: faListUl,
+                Icon: IconList,
                 title: "Opgaver",
-            }
-        ]
-    },[resourceId])
+            },
+        ];
+    }, [resourceId]);
 
     return links;
-
-}
+};

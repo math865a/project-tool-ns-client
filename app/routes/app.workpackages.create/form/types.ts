@@ -1,6 +1,4 @@
-import { FormOption } from "@math865a/project-tool.types";
 import { ProjectManager, Stage } from "~/src";
-
 
 export class CreateValues {
     public readonly name: string;
@@ -15,8 +13,8 @@ export class CreateValues {
 }
 
 export class CreateOptions {
-    public readonly contractOptions: FormOption[];
-    public readonly financialSourceOptions: FormOption[];
+    public readonly contractOptions: any[];
+    public readonly financialSourceOptions: any[];
     public readonly projectManagerOptions: ProjectManager[];
     public readonly stageOptions: Stage[];
 }

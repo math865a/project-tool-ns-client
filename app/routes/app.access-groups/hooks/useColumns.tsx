@@ -1,9 +1,9 @@
 import {
-    faPenToSquare,
-    faSave,
-    faTimes,
-    faTrash,
-} from "@fortawesome/pro-light-svg-icons";
+    IconDeviceFloppy,
+    IconPencil,
+    IconTrash,
+    IconX,
+} from "@tabler/icons-react";
 import { Tooltip, Typography } from "@mui/material";
 import {
     GridActionsCellItem,
@@ -13,7 +13,6 @@ import {
 import { useLoaderData } from "@remix-run/react";
 import _ from "lodash";
 import { useMemo } from "react";
-import { Symbol } from "~/src/design-system";
 import AccessGroupColor from "../cells/AccessGroupColor";
 import PermissionsCell from "../cells/PermissionsCell";
 import UsersCell from "../cells/users-cell/UserCountCell";
@@ -108,11 +107,7 @@ export const useColumns = ({
                             <Tooltip title="Gem" placement="top" arrow>
                                 <GridActionsCellItem
                                     icon={
-                                        <Symbol
-                                            icon={faSave}
-                                            size={1}
-                                            color="inherit"
-                                        />
+                                        <IconDeviceFloppy color={"inherit"} />
                                     }
                                     label="Save"
                                     onClick={handleSaveClick(id)}
@@ -120,13 +115,7 @@ export const useColumns = ({
                             </Tooltip>,
                             <Tooltip title="Fortryd" placement="top" arrow>
                                 <GridActionsCellItem
-                                    icon={
-                                        <Symbol
-                                            icon={faTimes}
-                                            size={1}
-                                            color="inherit"
-                                        />
-                                    }
+                                    icon={<IconX color={"inherit"} />}
                                     label="Cancel"
                                     className="textPrimary"
                                     onClick={handleCancelClick(id)}
@@ -141,13 +130,7 @@ export const useColumns = ({
                     return [
                         <Tooltip title="Rediger" placement="top" arrow>
                             <GridActionsCellItem
-                                icon={
-                                    <Symbol
-                                        icon={faPenToSquare}
-                                        size={1}
-                                        color="inherit"
-                                    />
-                                }
+                                icon={<IconPencil color={"inherit"} />}
                                 label="Edit"
                                 className="textPrimary"
                                 onClick={handleEditClick(id)}
@@ -156,13 +139,7 @@ export const useColumns = ({
                         </Tooltip>,
                         <Tooltip title="Slet" placement="top" arrow>
                             <GridActionsCellItem
-                                icon={
-                                    <Symbol
-                                        icon={faTrash}
-                                        size={1}
-                                        color="inherit"
-                                    />
-                                }
+                                icon={<IconTrash color={"inherit"} />}
                                 label="Delete"
                                 onClick={handleDeleteClick(id)}
                                 color="inherit"

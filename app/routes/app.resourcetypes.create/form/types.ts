@@ -1,7 +1,4 @@
-import { CreateResourceTypeDto, FormOption } from "@math865a/project-tool.types";
-
-
-export type CreateValues = Omit<CreateResourceTypeDto, "id" | "resources" | "typeNo"> & {
-    resources: FormOption[];
+export type CreateValues = Omit<any, "id" | "resources" | "typeNo"> & {
+    resources: any[];
     typeNo: string | undefined;
-}
+};

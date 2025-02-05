@@ -1,4 +1,4 @@
-import { ViewMode } from "@math865a/project-tool.types";
+import { ViewMode } from "~/pages/capacity/_definitions/view-mode";
 
 export class CreateCapacityViewDto {
     public readonly viewId: string;
@@ -7,5 +7,5 @@ export class CreateCapacityViewDto {
     public readonly bookingStages: string[];
     public readonly order: 1 | -1;
     public readonly showResourcesWithNoBookings: boolean;
-    public readonly viewMode: ViewMode
+    public readonly viewMode: ViewMode;
 }

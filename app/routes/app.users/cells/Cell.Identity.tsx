@@ -1,8 +1,6 @@
-import { faUser } from "@fortawesome/pro-light-svg-icons";
 import { Box, Stack, Tooltip, Typography } from "@mui/material";
-import { Symbol } from "~/src/design-system";
 import { UserRow } from "../definitions";
-
+import { IconUser } from "@tabler/icons-react";
 
 export function IdentityCell({ node }: { node: UserRow }) {
     return (
@@ -20,7 +18,7 @@ export function IdentityCell({ node }: { node: UserRow }) {
                 {node.isSessionUser && (
                     <Tooltip title="Mig">
                         <Box>
-                            <Symbol icon={faUser} size={1}/>
+                            <IconUser />
                         </Box>
                     </Tooltip>
                 )}

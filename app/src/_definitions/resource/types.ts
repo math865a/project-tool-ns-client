@@ -3,6 +3,15 @@ export class ResourceProfile {
     public readonly resourcetypes: ResourceAgent[];
 }
 
+export interface ResourceNode {
+    id: string;
+    name: string;
+    color: string;
+    initials: string;
+    costDefault: number;
+    costOvertime: number;
+}
+
 export class ResourceRecord {
     public readonly id: string;
     public readonly uid?: string;

@@ -5,15 +5,14 @@ import { Fallback, Page } from "~/src/design-system";
 import GridSection from "./Grid.Section";
 import HeaderSection from "./Header.Section";
 import { useRowState } from "./hooks/useRowState";
-import { Action, Can, Subject } from "~/src";
+import { Action, Can, FormResponse, Subject } from "~/src";
 import { AccessGroupRow, AccessGroupsViewData } from "./definitions/types";
 import { parseRequest } from "~/util/formData";
-import { FormResponse } from "@math865a/project-tool.types";
 import BackAction from "~/src/layout/topbar/BackAction";
 
 export const handle = {
-    BackAction: <BackAction title="Adgangsgrupper" noBack/>,
-}
+    BackAction: <BackAction title="Adgangsgrupper" noBack />,
+};
 
 export async function loader({
     request,

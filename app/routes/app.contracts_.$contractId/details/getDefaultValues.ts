@@ -1,4 +1,4 @@
-import { ContractNode } from "@math865a/project-tool.types";
+import { ContractNode } from "~/src";
 
 export function getDefaultValues(node: ContractNode) {
     const { name, abbrevation, id } = node;

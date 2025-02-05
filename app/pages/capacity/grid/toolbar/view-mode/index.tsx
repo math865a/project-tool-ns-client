@@ -1,18 +1,13 @@
-import {
-    faCalendarDay,
-    faCalendarRange,
-    faCalendarWeek
-} from "@fortawesome/pro-light-svg-icons";
-import { ViewMode } from "@math865a/project-tool.types";
-import {
-    Paper, styled,
-    ToggleButton,
-    ToggleButtonGroup
-} from "@mui/material";
+import { Paper, styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { Symbol } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import { useBoard } from "../../../_provider";
+import {
+    IconCalendarEvent,
+    IconCalendarMonth,
+    IconCalendarWeek,
+} from "@tabler/icons-react";
+import { ViewMode } from "~/pages/capacity/_definitions";
 
 const ViewModeControl = observer(() => {
     const View = useBoard().View;
@@ -41,15 +36,15 @@ const ViewModeControl = observer(() => {
                     onChange={(o, value: any) => handleClick(value)}
                 >
                     <ToggleButton value={ViewMode.Month} key={ViewMode.Month}>
-                        <Symbol icon={faCalendarRange} size={1.1} />
+                        <IconCalendarMonth />
                     </ToggleButton>
 
                     <ToggleButton value={ViewMode.Week} key={ViewMode.Week}>
-                        <Symbol icon={faCalendarWeek} size={1.1} />
+                        <IconCalendarWeek />
                     </ToggleButton>
 
                     <ToggleButton value={ViewMode.Day} key={ViewMode.Day}>
-                        <Symbol icon={faCalendarDay} size={1.1} />
+                        <IconCalendarEvent />
                     </ToggleButton>
                 </StyledToggleButtonGroup>
             </Paper>

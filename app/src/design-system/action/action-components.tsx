@@ -6,19 +6,18 @@ import {
     ButtonBaseProps,
     ButtonProps,
     IconButton,
+    IconButtonProps,
     Tooltip,
+    TooltipProps,
     Typography,
     TypographyProps,
-    IconButtonProps,
-    TooltipProps,
-    BoxProps,
 } from "@mui/material";
 import { Link as RemixLink } from "@remix-run/react";
 import React, { forwardRef, useMemo } from "react";
 import {
     Child,
-    Symbol as SymbolComponent,
     IconDef,
+    Symbol as SymbolComponent,
     SymbolProps,
 } from "../index";
 
@@ -59,7 +58,6 @@ const SymbolBase = React.forwardRef<
 >(({ icon, iconSize = 0.9, symbolProps, to, handleProps, ...rest }, ref) => {
     if (to) {
         return (
-
             <IconButton
                 {...rest}
                 {...handleProps}
@@ -67,17 +65,20 @@ const SymbolBase = React.forwardRef<
                 component={RemixLink}
                 to={to}
                 prefetch="intent"
-                sx={{borderRadius: "50%", width: "min-content", height: "min-content"}}
+                sx={{
+                    borderRadius: "50%",
+                    width: "min-content",
+                    height: "min-content",
+                }}
             >
                 <SymbolComponent icon={icon} size={iconSize} {...symbolProps} />
             </IconButton>
-          
         );
     }
 
     return (
-        <IconButton {...rest} ref={ref} {...handleProps} >
-            <SymbolComponent icon={icon} size={iconSize} {...symbolProps}/>
+        <IconButton {...rest} ref={ref} {...handleProps}>
+            <SymbolComponent icon={icon} size={iconSize} {...symbolProps} />
         </IconButton>
     );
 });
@@ -151,13 +152,15 @@ export interface TextButtonProps {
 
 export type TextLinkProps = TextButtonProps & { to: string };
 
-const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps & ButtonProps>(
+const TextButton = React.forwardRef<
+    HTMLButtonElement,
+    TextButtonProps & ButtonProps
+>(
     (
-
         {
             text,
             icon,
-            iconSize = 0.9,
+            iconSize = 20,
             fontSize = 13,
             spacing = 1,
             symbolProps = {},
@@ -168,7 +171,8 @@ const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps & ButtonP
             textProps = {},
             justText,
             ...buttonProps
-        }, ref
+        },
+        ref
     ) => {
         return (
             <Button
@@ -186,16 +190,28 @@ const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps & ButtonP
                 <SymbolComponent
                     icon={icon}
                     size={iconSize}
-                    {...{...symbolProps, color: !icon ? "transparent" : buttonProps?.disabled ? "grey.400" : symbolProps.color ? symbolProps.color : "inherit"}}
+                    {...{
+                        ...symbolProps,
+                        color: !icon
+                            ? "transparent"
+                            : buttonProps?.disabled
+                            ? "grey.400"
+                            : symbolProps.color
+                            ? symbolProps.color
+                            : "inherit",
+                    }}
                 />
                 <Typography
-                    
                     pb={pbText}
                     pt={ptText}
                     fontSize={fontSize}
                     pr={!icon || !reverse ? 0 : spacing}
                     pl={!icon || reverse ? 0 : spacing}
-                    color={theme => buttonProps?.disabled ? theme.palette.grey[400]: textColor}
+                    color={(theme) =>
+                        buttonProps?.disabled
+                            ? theme.palette.grey[400]
+                            : textColor
+                    }
                     {...textProps}
                 >
                     {text}
@@ -253,7 +269,16 @@ function TextLink({
             <SymbolComponent
                 icon={icon}
                 size={iconSize}
-                {...{...symbolProps, color: !icon ? "transparent" : disabled ? "grey.400" : symbolProps.color ? symbolProps.color : "inherit"}}
+                {...{
+                    ...symbolProps,
+                    color: !icon
+                        ? "transparent"
+                        : disabled
+                        ? "grey.400"
+                        : symbolProps.color
+                        ? symbolProps.color
+                        : "inherit",
+                }}
             />
             <Typography
                 pb={pbText}
@@ -261,7 +286,10 @@ function TextLink({
                 fontSize={fontSize}
                 pr={!icon || !reverse ? 0 : spacing}
                 pl={!icon || reverse ? 0 : spacing}
-                sx={{color: theme => disabled ? theme.palette.grey[400]: textColor}}
+                sx={{
+                    color: (theme) =>
+                        disabled ? theme.palette.grey[400] : textColor,
+                }}
                 {...textProps}
             >
                 {text}

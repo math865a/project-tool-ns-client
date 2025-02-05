@@ -1,14 +1,16 @@
-import { ResourceTypeViewRow } from "@math865a/project-tool.types";
+//import { ResourceTypeViewRow }
 import { GridColDef } from "@mui/x-data-grid-pro";
 import { Grid } from "~/src/design-system";
 
-export const columns: GridColDef<ResourceTypeViewRow>[] = [
+export const columns: GridColDef<any>[] = [
     {
         field: "linkCell",
         headerName: "",
         width: 50,
         align: "center",
-        renderCell: (props) => <Grid.LinkCell to={`${props.row.node.id}`} id={props.row.node.id}/>
+        renderCell: (props) => (
+            <Grid.LinkCell to={`${props.row.node.id}`} id={props.row.node.id} />
+        ),
     },
     {
         field: "contract",
@@ -22,7 +24,7 @@ export const columns: GridColDef<ResourceTypeViewRow>[] = [
         field: "name",
         headerName: "Navn",
         headerAlign: "center",
-        flex:1,
+        flex: 1,
         valueGetter: (props) => props.row.node.name,
     },
 
@@ -39,9 +41,9 @@ export const columns: GridColDef<ResourceTypeViewRow>[] = [
         minWidth: 120,
         headerAlign: "center",
         align: "center",
-        valueGetter: (props) =>props.row.node.typeNo,
-        valueFormatter: props =>  "Type " + props.value
-     },
+        valueGetter: (props) => props.row.node.typeNo,
+        valueFormatter: (props) => "Type " + props.value,
+    },
     {
         field: "resourceCount",
         headerName: "Ressourcer",
@@ -55,7 +57,10 @@ export const columns: GridColDef<ResourceTypeViewRow>[] = [
         headerAlign: "center",
         minWidth: 140,
         align: "center",
-        valueGetter: (props) => props.row.node.salesDefault !== 0 ? props.row.node.salesDefault + " kr/t" : "-",
+        valueGetter: (props) =>
+            props.row.node.salesDefault !== 0
+                ? props.row.node.salesDefault + " kr/t"
+                : "-",
     },
     {
         field: "salesOvertime",
@@ -63,6 +68,9 @@ export const columns: GridColDef<ResourceTypeViewRow>[] = [
         headerAlign: "center",
         minWidth: 140,
         align: "center",
-        valueGetter: (props) => props.row.node.salesOvertime !== 0 ? props.row.node.salesOvertime + " kr/t" : "-",
+        valueGetter: (props) =>
+            props.row.node.salesOvertime !== 0
+                ? props.row.node.salesOvertime + " kr/t"
+                : "-",
     },
 ];

@@ -1,19 +1,16 @@
-import { faCheck } from "@fortawesome/pro-solid-svg-icons";
-import { ProjectManager } from "@math865a/project-tool.types";
 import {
     Autocomplete,
-    Box,
     ListItemAvatar,
     ListItemSecondaryAction,
     ListItemText,
-    Stack,
     TextField,
-    Typography,
 } from "@mui/material";
 import _ from "lodash";
 import { useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { AutoControl, Avatars, FormUI, Symbol } from "~/src/design-system";
+import { AutoControl, Avatars, FormUI } from "~/src/design-system";
+import { IconCheck } from "@tabler/icons-react";
+import { ProjectManager } from "~/src";
 
 export default function ProjectManagerControl({
     options,
@@ -66,7 +63,7 @@ export default function ProjectManagerControl({
                                 secondaryTypographyProps={{ fontSize: 13 }}
                             />
                             <ListItemSecondaryAction>
-                                {state.selected && <Symbol icon={faCheck} />}
+                                {state.selected && <IconCheck />}
                             </ListItemSecondaryAction>
                         </AutoControl.Option>
                     );

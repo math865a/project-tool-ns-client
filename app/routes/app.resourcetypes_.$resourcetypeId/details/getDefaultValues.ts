@@ -1,4 +1,4 @@
-import { ResourceTypeNode } from "@math865a/project-tool.types";
+import { ResourceTypeNode } from "~/src";
 
 export function getDefaultValues(node: ResourceTypeNode) {
     const { name, abbrevation, salesDefault, salesOvertime, typeNo, id } = node;
@@ -10,4 +10,4 @@ export function getDefaultValues(node: ResourceTypeNode) {
         typeNo,
         resourceTypeId: id,
     };
-};
+}

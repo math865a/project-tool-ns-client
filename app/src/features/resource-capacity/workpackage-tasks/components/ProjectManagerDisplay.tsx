@@ -1,7 +1,6 @@
-import { ProjectManager } from "@math865a/project-tool.types";
 import { Stack, Tooltip, Typography } from "@mui/material";
 import { Link } from "@remix-run/react";
-import { Action, Can, Subject } from "~/src";
+import { Action, Can, ProjectManager, Subject } from "~/src";
 import { Avatars } from "~/src/design-system";
 
 export default function ProjectManagerDisplay({

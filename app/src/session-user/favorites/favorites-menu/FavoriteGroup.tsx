@@ -1,17 +1,9 @@
-import {
-    faBriefcase,
-    faChevronDown,
-    faChevronUp,
-    faScreenUsers,
-    faUser,
-} from "@fortawesome/pro-light-svg-icons";
 import { useDisclosure } from "@mantine/hooks";
-import { FavoriteRecord } from "@math865a/project-tool.types";
+
 import {
     Collapse,
     List,
     ListItem,
-    ListItemButton,
     ListItemIcon,
     ListItemText,
 } from "@mui/material";
@@ -21,6 +13,12 @@ import { FavoriteGroupName } from "../types";
 import { FavoriteItem } from "./FavoriteItem";
 import { useSession } from "../../SessionContextProvider";
 import { Favorite } from "~/src/_definitions";
+import {
+    IconBriefcase,
+    IconChevronDown,
+    IconChevronUp,
+    IconUser,
+} from "@tabler/icons-react";
 
 interface FavoriteGroupProps {
     name: FavoriteGroupName;
@@ -45,13 +43,13 @@ export function FavoriteGroup({
         switch (name) {
             case "resourceFavorites":
                 return {
-                    icon: faUser,
+                    icon: IconUser,
                     title: "Ressourcer",
                     url: "/app/resources/",
                 };
             default:
                 return {
-                    icon: faBriefcase,
+                    icon: IconBriefcase,
                     title: "Arbejdspakker",
                     url: "/app/workpackages/",
                 };
@@ -65,7 +63,7 @@ export function FavoriteGroup({
             <ListItem
                 secondaryAction={
                     <Action.Symbol
-                        icon={expanded ? faChevronDown : faChevronUp}
+                        icon={expanded ? IconChevronDown : IconChevronUp}
                         onClick={handlers.toggle}
                     />
                 }
@@ -80,7 +78,7 @@ export function FavoriteGroup({
             </ListItem>
 
             <Collapse in={expanded}>
-                <List sx={{px: 4, flexGrow: 1}}>
+                <List sx={{ px: 4, flexGrow: 1 }}>
                     {items.map((d) => (
                         <FavoriteItem
                             record={d}

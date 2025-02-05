@@ -1,32 +1,30 @@
-import { faTimes } from "@fortawesome/pro-light-svg-icons";
 import { useHover } from "@mantine/hooks";
-import { FavoriteRecord } from "@math865a/project-tool.types";
 import {
     ListItem,
     ListItemAvatar,
     ListItemText,
-    Tooltip,
     Typography,
-    useTheme
+    useTheme,
 } from "@mui/material";
 import { Link } from "@remix-run/react";
 import { Action, Child } from "design";
 import { useMemo } from "react";
 import { useSession } from "../../SessionContextProvider";
 import { Favorite } from "~/src/_definitions";
+import { IconX } from "@tabler/icons-react";
 
 export type FavoriteItemProps = {
     record: Favorite;
     startComponent?: Child | Child[];
     handleClose: () => void;
-    baseUrl: string
+    baseUrl: string;
 };
 
 export function FavoriteItem({
     startComponent,
     record,
     handleClose,
-    baseUrl
+    baseUrl,
 }: FavoriteItemProps) {
     const { name, id } = record;
     const {
@@ -35,7 +33,7 @@ export function FavoriteItem({
     const theme = useTheme();
 
     const url = useMemo(() => {
-        return baseUrl + id
+        return baseUrl + id;
     }, [baseUrl, id]);
 
     const { hovered, ref } = useHover<HTMLLIElement>();
@@ -46,7 +44,7 @@ export function FavoriteItem({
             secondaryAction={
                 hovered ? (
                     <Action.Symbol
-                        icon={faTimes}
+                        icon={IconX}
                         symbolProps={{ color: theme.palette.error.main }}
                         onClick={() => removeFavorite(record.id)}
                         title="Fjern som favorit"
@@ -61,27 +59,25 @@ export function FavoriteItem({
                     {startComponent}
                 </ListItemAvatar>
             )}
-       
-                <ListItemText
- 
-                    disableTypography
-                    primary={
-                        <Typography
-                            component={Link}
-                            to={url}
-                            fontSize={12}
-                            onClick={() => handleClose()}
-                            sx={{
-                                color: "text.primary",
-                                textDecoration: "none",
-                                "&:hover": { textDecoration: "underline" },
-                            }}
-                        >
-                            {name}
-                        </Typography>
-                    }
-                />
-        
+
+            <ListItemText
+                disableTypography
+                primary={
+                    <Typography
+                        component={Link}
+                        to={url}
+                        fontSize={12}
+                        onClick={() => handleClose()}
+                        sx={{
+                            color: "text.primary",
+                            textDecoration: "none",
+                            "&:hover": { textDecoration: "underline" },
+                        }}
+                    >
+                        {name}
+                    </Typography>
+                }
+            />
         </ListItem>
     );
 }

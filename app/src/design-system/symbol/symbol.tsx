@@ -1,12 +1,7 @@
-import type { IconDefinition as LightIcon } from "@fortawesome/pro-light-svg-icons";
-import type { IconDefinition as SolidIcon } from "@fortawesome/pro-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import type { IconProp } from "@fortawesome/fontawesome-svg-core";
-import "./symbolstyles.css";
+import { Icon } from "@tabler/icons-react";
 
-export type IconDef =
-    | LightIcon
-    | SolidIcon
+export type IconDef = Icon;
+
 export interface IIcon {
     icon?: IconDef;
     size?: number;
@@ -21,7 +16,7 @@ export type SymbolProps = IIcon;
 
 export const Symbol = (props: SymbolProps) => {
     const {
-        icon,
+        icon: Icon,
         size,
         color,
         className,
@@ -29,16 +24,9 @@ export const Symbol = (props: SymbolProps) => {
         mask,
         hidden,
     } = props;
+
     if (hidden) return null;
-    if (!icon) return null;
-    return (
-        <FontAwesomeIcon
-            icon={icon as IconProp}
-            fontSize={`${size}rem`}
-            color={color}
-            className={className}
-            inverse={inverse}
-            mask={mask as IconProp | undefined}
-        />
-    );
+    if (!Icon) return null;
+
+    return <Icon size={size} color={color} className={className} />;
 };

@@ -1,12 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useLoaderData } from "@remix-run/react";
-import {
-    ActionArgs,
-    LoaderArgs,
-    json,
-    redirect,
-} from "@remix-run/node";
-import _, { method } from "lodash";
+import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
+import _ from "lodash";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { getServiceUrl } from "~/server";
 import { sendRequest } from "~/session.server";
@@ -19,11 +14,12 @@ import ResourceForm from "./ResourceForm";
 import { schema } from "./form";
 import { getDefaultValues } from "./form/getDefaultValues";
 import { ICreateValues, IFormValues, IOptions } from "./form/types";
-import { FormResponse } from "@math865a/project-tool.types";
+
 import { AccessGroupsControl } from "~/src/components/forms";
 import { useEffect } from "react";
 import { generateId } from "~/util";
 import { defaultColors } from "~/src/design-system/controls/color-picker/defaultColors";
+import { FormResponse } from "~/src";
 
 export async function loader({ request }: LoaderArgs): Promise<IOptions> {
     return sendRequest(request, {
@@ -33,12 +29,12 @@ export async function loader({ request }: LoaderArgs): Promise<IOptions> {
 }
 
 export async function action({ request }: ActionArgs) {
-    const dto = await parseRequest(request)
-    console.log(dto)
+    const dto = await parseRequest(request);
+    console.log(dto);
     const result: FormResponse = await sendRequest(request, {
         url: getServiceUrl("users"),
         method: "POST",
-        body: dto
+        body: dto,
     });
     if (result.status === "ok") {
         return redirect("../");
@@ -75,7 +71,6 @@ export default function CreateUserForm() {
         transform,
     });
 
-
     const connected: string = useWatch({
         control: methods.control,
         name: "connect",
@@ -83,15 +78,29 @@ export default function CreateUserForm() {
 
     useEffect(() => {
         if (connected !== "Ingen") {
-            const option = options.connectOptions.find((d) => d.id === connected);
+            const option = options.connectOptions.find(
+                (d) => d.id === connected
+            );
             if (!option) {
                 throw new Error("Resource not found");
             }
             methods.setValue("uid", option.id);
-            methods.setValue("name", option.name, {shouldDirty: true, shouldTouch: true, shouldValidate: true});
-            methods.setValue("color", option.color, {shouldDirty: true, shouldTouch: true, shouldValidate: true});
-            methods.setValue("isProjectManager", option.isProjectManager, {shouldDirty: true, shouldTouch: true, shouldValidate: true});
-            methods.setValue("isResource", option.isResource)
+            methods.setValue("name", option.name, {
+                shouldDirty: true,
+                shouldTouch: true,
+                shouldValidate: true,
+            });
+            methods.setValue("color", option.color, {
+                shouldDirty: true,
+                shouldTouch: true,
+                shouldValidate: true,
+            });
+            methods.setValue("isProjectManager", option.isProjectManager, {
+                shouldDirty: true,
+                shouldTouch: true,
+                shouldValidate: true,
+            });
+            methods.setValue("isResource", option.isResource);
         } else {
             methods.setValue("uid", generateId());
             methods.setValue("name", "");
@@ -154,9 +163,7 @@ export default function CreateUserForm() {
                                     label="Projektleder"
                                 />
                             </FormUI.HStack>
-                            <ResourceForm
-                                isConnected={connected !== "Ingen"}
-                            />
+                            <ResourceForm isConnected={connected !== "Ingen"} />
                             <FormUI.HStack>
                                 <Controls.Default.Boolean
                                     name="sendWelcomeEmail"
@@ -166,7 +173,7 @@ export default function CreateUserForm() {
                         </FormUI.VStack>
                     </Dialog.Body>
                     <Dialog.Footer>
-                        <FormUI.Actions onCancel={handleClose}/>
+                        <FormUI.Actions onCancel={handleClose} />
                     </Dialog.Footer>
                 </form>
             </FormProvider>

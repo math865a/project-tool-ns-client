@@ -1,15 +1,25 @@
-import { faCheck } from "@fortawesome/pro-light-svg-icons";
 import {
-    Autocomplete, autocompleteClasses, AutocompleteCloseReason,
+    Autocomplete,
+    autocompleteClasses,
+    AutocompleteCloseReason,
     ListItemAvatar,
     ListItemSecondaryAction,
-    ListItemText, styled
+    ListItemText,
+    styled,
 } from "@mui/material";
 import { AutoControl, Avatars, Fallback, Symbol } from "~/src/design-system";
 import { useProjectManagerMenu } from "./ProjectManagerMenuProvider";
+import { IconCheck } from "@tabler/icons-react";
 
 export default function ProjectManagerPicker() {
-    const { options, isLoadingOptions, handleClose, projectManager, updateProjectManager, title } = useProjectManagerMenu();
+    const {
+        options,
+        isLoadingOptions,
+        handleClose,
+        projectManager,
+        updateProjectManager,
+        title,
+    } = useProjectManagerMenu();
 
     return (
         <div>
@@ -17,8 +27,7 @@ export default function ProjectManagerPicker() {
                 open
                 multiple
                 loading={isLoadingOptions}
-                loadingText={<Fallback.SectionLoading/>}
-                
+                loadingText={<Fallback.SectionLoading />}
                 onClose={(
                     event: React.ChangeEvent<{}>,
                     reason: AutocompleteCloseReason
@@ -36,26 +45,28 @@ export default function ProjectManagerPicker() {
                     if (option.name === "Ingen") return null;
                     return (
                         <AutoControl.Option
-                        key={option.id}
-                        props={props}
-                        option={option}
-                        state={state}
-                        sx={{ py: 2 }}
-                    >
-                        <ListItemAvatar sx={{ minWidth: 40 }}>
-                            <Avatars.Individual subject={option} size={25} />
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary={option.name}
-                            primaryTypographyProps={{ fontSize: 13 }}
-                            secondaryTypographyProps={{ fontSize: 13 }}
-                        />
-                        <ListItemSecondaryAction>
-                            {state.selected && <Symbol icon={faCheck} />}
-                        </ListItemSecondaryAction>
-                    </AutoControl.Option>
-                    )
-
+                            key={option.id}
+                            props={props}
+                            option={option}
+                            state={state}
+                            sx={{ py: 2 }}
+                        >
+                            <ListItemAvatar sx={{ minWidth: 40 }}>
+                                <Avatars.Individual
+                                    subject={option}
+                                    size={25}
+                                />
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={option.name}
+                                primaryTypographyProps={{ fontSize: 13 }}
+                                secondaryTypographyProps={{ fontSize: 13 }}
+                            />
+                            <ListItemSecondaryAction>
+                                {state.selected && <Symbol icon={IconCheck} />}
+                            </ListItemSecondaryAction>
+                        </AutoControl.Option>
+                    );
                 }}
                 options={options}
                 isOptionEqualToValue={(option, value) => option.id === value.id}

@@ -1,18 +1,15 @@
-import {
-    faBriefcase,
-    faChartUser,
-    faUsers,
-    faScreenUsers,
-    faFileContract,
-    faReceipt,
-    faLock,
-    faUserGear,
-    faUsersGear,
-    faUserLock,
-    faUserTie,
-} from "@fortawesome/pro-light-svg-icons";
 import { IconDef } from "~/src/design-system";
 import { Subject } from "~/src/_definitions";
+import {
+    IconBriefcase,
+    IconFile,
+    IconLock,
+    IconReceipt,
+    IconUser,
+    IconUserCog,
+    IconUsers,
+    IconUserScreen,
+} from "@tabler/icons-react";
 
 export interface ISidebarPage {
     url: string;
@@ -33,65 +30,65 @@ export const pageMap = {
         text: Subject.Workpackages,
         to: craftUrl("workpackages"),
         activeUrl: craftUrl("workpackages"),
-        icon: faBriefcase
+        icon: IconBriefcase,
     },
     [Subject.ProjectManagers]: {
         text: Subject.ProjectManagers,
         to: craftUrl("project-managers"),
         activeUrl: craftUrl("project-managers"),
-        icon: faUserTie,
-        space: true
+        icon: IconUser,
+        space: true,
     },
     [Subject.Capacity]: {
         text: Subject.Capacity,
         to: craftUrl("capacity"),
         activeUrl: craftUrl("capacity"),
-        icon: faChartUser
+        icon: IconUserScreen,
     },
     [Subject.Resources]: {
         text: Subject.Resources,
         to: craftUrl("resources"),
         activeUrl: craftUrl("resources"),
-        icon: faUsers,
-        space: true
+        icon: IconUsers,
+        space: true,
     },
 
     [Subject.ResourceTypes]: {
         text: Subject.ResourceTypes,
         to: craftUrl("resourcetypes"),
         activeUrl: craftUrl("resourcetypes"),
-        icon: faScreenUsers
+        icon: IconUserScreen,
     },
     [Subject.Contracts]: {
         text: Subject.Contracts,
         to: craftUrl("contracts"),
         activeUrl: craftUrl("contracts"),
-        icon: faFileContract,
+        icon: IconFile,
     },
     [Subject.FinancialSources]: {
         text: Subject.FinancialSources,
         to: craftUrl("financialsources"),
         activeUrl: craftUrl("financialsources"),
-        icon: faReceipt,
-        space: true
+        icon: IconReceipt,
+        space: true,
     },
     [Subject.Users]: {
         text: Subject.Users,
         to: craftUrl("users"),
         activeUrl: craftUrl("users"),
-        icon: faUsersGear,
+        icon: IconUserCog,
     },
     [Subject.AccessGroups]: {
         text: Subject.AccessGroups,
         to: craftUrl("access-groups"),
         activeUrl: craftUrl("access-groups"),
-        icon: faUserLock
+        icon: IconLock,
     },
 };
 
-export const administrationPage =  {
+export const administrationPage = {
     text: "Administration",
     to: "/app/administration/users",
     activeUrl: craftUrl("administration"),
-    icon: faLock,
-}
+    icon: IconLock,
+};

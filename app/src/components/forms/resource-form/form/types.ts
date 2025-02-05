@@ -1,4 +1,3 @@
-import { CreateResourceDto, FormOption } from "@math865a/project-tool.types";
 import { ResourceTypeOption } from "~/src/_definitions/form";
 
 export type IResourceValues = {
@@ -17,6 +16,6 @@ export type IResourceFormValues = Omit<IResourceValues, "resourceTypes"> & {
 };
 
 export interface IResourceFormOptons {
-    calendars: FormOption[];
+    calendars: any[];
     resourceTypes: ResourceTypeOption[];
 }

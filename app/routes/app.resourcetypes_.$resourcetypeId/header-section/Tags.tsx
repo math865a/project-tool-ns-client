@@ -1,9 +1,9 @@
-import { faFileContract } from "@fortawesome/pro-light-svg-icons";
 import { Page } from "~/src/design-system";
 import { Can } from "~/src/session-user";
 import { Action as A, Subject } from "~/src/_definitions";
 import { useLoaderData } from "@remix-run/react";
 import { ResourceTypeLoader } from "../route";
+import { IconFile } from "@tabler/icons-react";
 
 export default function ResourceTypeTags() {
     const {
@@ -14,7 +14,7 @@ export default function ResourceTypeTags() {
             <Can I={A.Read} a={Subject.Contracts} passThrough>
                 {(allowed) => (
                     <Page.Tag
-                        icon={faFileContract}
+                        icon={IconFile}
                         title={name}
                         to={`/app/contracts/${id}`}
                         disabled={!allowed}

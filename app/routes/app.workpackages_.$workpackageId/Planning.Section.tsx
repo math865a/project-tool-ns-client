@@ -1,12 +1,10 @@
-import {
-    faChartSimpleHorizontal
-} from "@fortawesome/pro-light-svg-icons";
 import { observer } from "mobx-react-lite";
 import { Fallback, Page } from "~/src/design-system";
 import GanttDialog from "./planning/GanttAction";
 import PlanningChart from "./planning/PlanningChart";
 import { useWorkpackage } from "~/src/state";
 import { PlanningSectionFooter } from "./planning/Footer";
+import { IconChartBarPopular } from "@tabler/icons-react";
 
 const PlanningSection = observer(() => {
     const { Gantt } = useWorkpackage();
@@ -19,11 +17,10 @@ const PlanningSection = observer(() => {
             startActions={<GanttDialog />}
             endActions={<PlanningSectionFooter />}
         >
-            
             {Gantt.isEmpty ? (
                 <Fallback.Empty
                     text="Der er ikke oprettet nogle leverancer endnu."
-                    icon={faChartSimpleHorizontal}
+                    icon={IconChartBarPopular}
                     direction="column"
                     iconSize={3}
                 />

@@ -1,4 +1,3 @@
-import { faLock } from "@fortawesome/pro-light-svg-icons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ActionArgs } from "@remix-run/node";
 import _ from "lodash";
@@ -13,12 +12,12 @@ import { useSession } from "~/src/session-user";
 import { parseRequest } from "~/util/formData";
 import { schema } from "./schema";
 import { useActionData } from "@remix-run/react";
-import { FormResponse } from "@math865a/project-tool.types";
 import { useEffect } from "react";
 import { useNotifications } from "~/src";
+import { IconLock } from "@tabler/icons-react";
 
 export const handle = {
-    BackAction:<BackAction title="Mine konto" noBack />
+    BackAction: <BackAction title="Mine konto" noBack />,
 };
 
 export async function action({ request }: ActionArgs) {
@@ -30,8 +29,8 @@ export async function action({ request }: ActionArgs) {
 }
 
 export default function UserDetails() {
-    const actionData = useActionData<FormResponse>()
-    const {notifyResponse} = useNotifications()
+    const actionData = useActionData<any>();
+    const { notifyResponse } = useNotifications();
     const { user } = useSession();
     const methods = useForm({
         resolver: yupResolver(schema),
@@ -53,11 +52,10 @@ export default function UserDetails() {
 
     useEffect(() => {
         if (actionData) {
-            notifyResponse(actionData)
+            notifyResponse(actionData);
         }
+    }, [actionData]);
 
-    },[actionData])
-    
     return (
         <FormProvider {...methods}>
             <Page.Section
@@ -65,7 +63,7 @@ export default function UserDetails() {
                 startActions={
                     <Action.TextLink
                         text="Skift password"
-                        icon={faLock}
+                        icon={IconLock}
                         to="change-password"
                     />
                 }

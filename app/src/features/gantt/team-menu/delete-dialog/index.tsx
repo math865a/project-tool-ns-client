@@ -1,18 +1,13 @@
-import { faTimes, faTrash } from "@fortawesome/pro-light-svg-icons";
-import { ListItemIcon, ListItemText, MenuItem, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
-import {
-    Action,
-    ConfirmationDialog,
-    Dialog,
-    Symbol,
-} from "~/src/design-system";
+import { Action, Dialog } from "~/src/design-system";
 import { useWorkpackage } from "useWorkpackage";
 import ConsequencesBody from "./ConsequencesBody";
 import { TeamMember } from "gantt-models";
 import { Can } from "~/src/session-user";
 import { Action as A, Subject } from "~/src/_definitions";
+import { IconTrash, IconX } from "@tabler/icons-react";
 
 const TeamMemberDelete = observer(
     ({ TeamMember }: { TeamMember: TeamMember }) => {
@@ -41,16 +36,12 @@ const TeamMemberDelete = observer(
 
         return (
             <>
-                <Can
-                    I={A.Write}
-                    a={Subject.Workpackages}>
-              
-                        <Action.Symbol
-                            icon={faTrash}
-                            title="Fjern"
-                            onClick={handleDeleteClick}
-                        />
-                 
+                <Can I={A.Write} a={Subject.Workpackages}>
+                    <Action.Symbol
+                        icon={IconTrash}
+                        title="Fjern"
+                        onClick={handleDeleteClick}
+                    />
                 </Can>
                 <Dialog.Modal open={removeConfOpen}>
                     <Dialog.Title
@@ -63,12 +54,12 @@ const TeamMemberDelete = observer(
                     <Dialog.Footer>
                         <Action.TextButton
                             text="Annuller"
-                            icon={faTimes}
+                            icon={IconX}
                             onClick={handleRemoveConfClose}
                         />
                         <Action.TextButton
                             text="Slet"
-                            icon={faTrash}
+                            icon={IconTrash}
                             onClick={handleDelete}
                         />
                     </Dialog.Footer>

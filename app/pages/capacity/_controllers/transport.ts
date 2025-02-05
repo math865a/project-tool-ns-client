@@ -7,7 +7,6 @@ import {
     UpdateCapacityViewNameDto,
     UpdateDefaultCapacityViewDto,
 } from "../_definitions";
-import { CapacityJson } from "@math865a/project-tool.types";
 
 @model("capacity-board-transport")
 export class Transport extends Model({
@@ -40,10 +39,7 @@ export class Transport extends Model({
         this.socket?.emit("delete:view", viewId);
     }
 
-    loadBatch(
-        filter: CapacityFilterDto,
-        callback: (data: CapacityJson[]) => void
-    ) {
+    loadBatch(filter: CapacityFilterDto, callback: (data: any[]) => void) {
         this.socket?.emit("get:batch", filter, callback);
     }
 }

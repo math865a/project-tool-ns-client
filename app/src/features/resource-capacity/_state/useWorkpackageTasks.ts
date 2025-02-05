@@ -1,11 +1,8 @@
-import { ProjectManager } from "@math865a/project-tool.types";
-import { useParams } from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
-import invariant from "tiny-invariant";
 import { useSocketContext } from "~/src/socket";
-import { IDateRange } from "./useDateRange";
 import { IWorkpackageTotalsData } from "./useWorkpackageChartsData";
 import { IResourceCapacityParams } from "./_useResourceCapacity";
+import { ProjectManager } from "~/src";
 
 export interface IWorkpackageTask {
     deliveryName: string;
@@ -35,8 +32,6 @@ export const useWorkpackageTasks = (
     activeWorkpackage: IWorkpackageTotalsData,
     capacityParams: IResourceCapacityParams
 ) => {
-
-
     const socket = useSocketContext();
 
     const [data, setData] = useState<IWorkpackageTask[]>([]);
@@ -49,7 +44,6 @@ export const useWorkpackageTasks = (
         return {
             instruction: capacityParams,
             workpackageId: activeWorkpackage?.id,
-  
         };
     }, [
         capacityParams.resourceId,
@@ -70,9 +64,15 @@ export const useWorkpackageTasks = (
     };
 
     useEffect(() => {
-        if (!socket ||!params.workpackageId) return;
+        if (!socket || !params.workpackageId) return;
         getData();
-    }, [params.workpackageId, params.instruction.endDate, params.instruction.startDate, params.instruction.resourceId, socket]);
+    }, [
+        params.workpackageId,
+        params.instruction.endDate,
+        params.instruction.startDate,
+        params.instruction.resourceId,
+        socket,
+    ]);
 
     return {
         data,

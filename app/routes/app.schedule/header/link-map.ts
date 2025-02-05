@@ -1,22 +1,21 @@
-import { faCalendarWeek, faChartSimple, faCalendar, faListUl } from "@fortawesome/pro-light-svg-icons";
+import { IconCalendarWeek, IconChartArea, IconList } from "@tabler/icons-react";
 
 export const links = [
     {
         to: "/app/schedule",
-        icon: faCalendarWeek,
+        icon: IconCalendarWeek,
         title: "Opsummering",
         subtitle: "Denne og næste uge",
-        root: true
+        root: true,
     },
     {
         to: "/app/schedule/dashboard",
-        icon: faChartSimple,
+        icon: IconChartArea,
         title: "Dashboard",
     },
     {
         to: "/app/schedule/tasks",
-        icon: faListUl,
+        icon: IconList,
         title: "Opgaver",
-        
     },
 ];

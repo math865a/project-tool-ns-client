@@ -1,7 +1,6 @@
-import { ResourceRowJson } from '@math865a/project-tool.types';
-import { getAvatarName } from '~/util';
-import _ from 'lodash';
-import { comparer, computed, reaction } from 'mobx';
+import { getAvatarName } from "~/util";
+import _ from "lodash";
+import { computed } from "mobx";
 import {
     getRoot,
     idProp,
@@ -9,10 +8,10 @@ import {
     model,
     modelAction,
     prop,
-} from 'mobx-keystone';
-import { CapacityBoard } from '../../_controllers/_board';
+} from "mobx-keystone";
+import { CapacityBoard } from "../../_controllers/_board";
 
-@model('resource-row-model')
+@model("resource-row-model")
 export class ResourceRow extends Model({
     id: idProp.typedAs<string>(),
     name: prop<string>().withSetter(),
@@ -20,33 +19,6 @@ export class ResourceRow extends Model({
     resourceTypes: prop<string[]>().withSetter(),
     hasBookings: prop<boolean>(),
 }) {
-    onAttachedToRootStore() {
-        /*const sync = reaction(
-            () => this.isEligible,
-            (isEligible, wasEligible) => {
-                if (
-                    isEligible &&
-                    !wasEligible &&
-                    this.Capacities.length === 0
-                ) {
-                    this.CapacityStore.loadRowBatches(this.id);
-                } else if (
-                    !isEligible &&
-                    wasEligible &&
-                    this.Capacities.length > 0
-                ) {
-                    this.CapacityStore.removeRowCapacities(this);
-                }
-            },
-            { equals: comparer.shallow }
-        );
-
-        return () => {
-            sync();
-        };
-        */
-    }
-
     @computed
     get RowFilter() {
         return getRoot<CapacityBoard>(this).Filter.RowFilter;
@@ -87,8 +59,36 @@ export class ResourceRow extends Model({
         );
     }
 
+    onAttachedToRootStore() {
+        /*const sync = reaction(
+            () => this.isEligible,
+            (isEligible, wasEligible) => {
+                if (
+                    isEligible &&
+                    !wasEligible &&
+                    this.Capacities.length === 0
+                ) {
+                    this.CapacityStore.loadRowBatches(this.id);
+                } else if (
+                    !isEligible &&
+                    wasEligible &&
+                    this.Capacities.length > 0
+                ) {
+                    this.CapacityStore.removeRowCapacities(this);
+                }
+            },
+            { equals: comparer.shallow }
+        );
+
+        return () => {
+            sync();
+        };
+        */
+    }
+
+    //ResourceRowJson
     @modelAction
-    update(json: ResourceRowJson) {
+    update(json: any) {
         this.setName(json.name);
         this.setColor(json.color);
         this.setResourceTypes(json.resourceTypes);

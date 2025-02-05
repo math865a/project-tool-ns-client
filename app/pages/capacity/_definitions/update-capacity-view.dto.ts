@@ -1,6 +1,6 @@
-import { ViewMode } from "@math865a/project-tool.types";
+import { ViewMode } from "~/pages/capacity/_definitions/view-mode";
 
-export class UpdateCapacityViewDto{
+export class UpdateCapacityViewDto {
     public readonly viewId: string;
     public readonly resourcesToDelete: string[];
     public readonly bookingStagesToDelete: string[];

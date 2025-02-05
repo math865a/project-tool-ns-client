@@ -1,8 +1,9 @@
 import { Box, Chip, Stack, useTheme } from "@mui/material";
-import { useLoaderData, useRouteLoaderData } from "@remix-run/react";
-import { Details, Symbol } from "~/src/design-system";
-import { faCheck, faTimes } from "@fortawesome/pro-solid-svg-icons";
+import { useRouteLoaderData } from "@remix-run/react";
+import { Details } from "~/src/design-system";
 import { ResourceProfile } from "~/src";
+import { IconCheck, IconX } from "@tabler/icons-react";
+import { Symbol } from "@/src/design-system";
 
 export function Tags() {
     const {
@@ -17,14 +18,21 @@ export function Tags() {
         <Details.Item
             title="Tags"
             value={
-                <Stack direction="row" alignItems="center" spacing={2} pt={1} pl={1.25}>
+                <Stack
+                    direction="row"
+                    alignItems="center"
+                    spacing={2}
+                    pt={1}
+                    pl={1.25}
+                >
                     <Chip
                         label="Ressource"
                         icon={
                             <Box pl={1} pt={0.25}>
+                                <IconCheck color={theme.palette.success.main} />
                                 <Symbol
                                     size={0.9}
-                                    icon={faCheck}
+                                    icon={IconCheck}
                                     color={theme.palette.success.main}
                                 />
                             </Box>
@@ -32,7 +40,6 @@ export function Tags() {
                         sx={{
                             borderRadius: 2,
                             fontSize: 12,
-                      
                         }}
                         variant="outlined"
                     />
@@ -40,7 +47,14 @@ export function Tags() {
                         label="Projektleder"
                         icon={
                             <Box pl={1} pt={0.25}>
-                                <Symbol
+                                {isProjectManager ? (
+                                    <IconCheck
+                                        color={theme.palette.success.main}
+                                    />
+                                ) : (
+                                    <IconX color={theme.palette.error.main} />
+                                )}
+                                {/*<Symbol
                                     size={0.9}
                                     icon={isProjectManager ? faCheck : faTimes}
                                     color={
@@ -48,7 +62,7 @@ export function Tags() {
                                             ? theme.palette.success.main
                                             : theme.palette.error.main
                                     }
-                                />
+                                />*/}
                             </Box>
                         }
                         sx={{
@@ -61,7 +75,14 @@ export function Tags() {
                         label="Bruger"
                         icon={
                             <Box pl={1} pt={0.25}>
-                                <Symbol
+                                {isUser ? (
+                                    <IconCheck
+                                        color={theme.palette.success.main}
+                                    />
+                                ) : (
+                                    <IconX color={theme.palette.error.main} />
+                                )}
+                                {/*   <Symbol
                                     size={0.9}
                                     icon={isUser ? faCheck : faTimes}
                                     color={
@@ -69,7 +90,7 @@ export function Tags() {
                                             ? theme.palette.success.main
                                             : theme.palette.error.main
                                     }
-                                />
+                                />*/}
                             </Box>
                         }
                         sx={{

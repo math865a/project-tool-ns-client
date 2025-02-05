@@ -1,6 +1,3 @@
-import { faCheck, faTimes } from "@fortawesome/pro-light-svg-icons";
-import { faPlus } from "@fortawesome/pro-solid-svg-icons";
-import { FormResponse } from "@math865a/project-tool.types";
 import {
     Autocomplete,
     AutocompleteCloseReason,
@@ -14,10 +11,18 @@ import {
 import { useFetcher, useRouteLoaderData } from "@remix-run/react";
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { Action as A, Can, ResourceProfile, ResourceTypeOption, Subject } from "~/src";
+import {
+    Action as A,
+    Can,
+    ResourceProfile,
+    ResourceTypeOption,
+    Subject,
+} from "~/src";
 import { Action, AutoControl } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import { toFormData } from "~/util";
+import { IconCheck, IconPlus, IconX } from "@tabler/icons-react";
+
 export default function ResourceTypesEditor({
     isHovering,
 }: {
@@ -27,9 +32,8 @@ export default function ResourceTypesEditor({
         "routes/app.resources_.$resourceId"
     ) as ResourceProfile;
 
-
     const resourceTypeOptions = useFetcher<ResourceTypeOption[]>();
-    const createAgents = useFetcher<FormResponse>();
+    const createAgents = useFetcher<any>();
     const [selected, setSelected] = useState<ResourceTypeOption[]>([]);
 
     const theme = useTheme();
@@ -64,7 +68,7 @@ export default function ResourceTypesEditor({
                 <Can I={A.Write} a={Subject.ResourceTypes}>
                     {(isHovering || menuProps.open) && (
                         <Action.Symbol
-                            icon={faPlus}
+                            icon={IconPlus}
                             onClick={(event) => {
                                 handleOpen(event);
                                 getOptions();
@@ -162,7 +166,7 @@ export default function ResourceTypesEditor({
                     <Stack direction="row" alignItems="center" spacing={1}>
                         <Action.TextButton
                             text="Annuller"
-                            icon={faTimes}
+                            icon={IconX}
                             disabled={createAgents.state === "submitting"}
                             sx={{ color: theme.palette.error.main }}
                             onClick={() => {
@@ -172,7 +176,7 @@ export default function ResourceTypesEditor({
                         />
                         <Action.TextButton
                             text="Tilføj"
-                            icon={faCheck}
+                            icon={IconCheck}
                             disabled={createAgents.state === "submitting"}
                             sx={{ color: theme.palette.success.main }}
                             onClick={() => {

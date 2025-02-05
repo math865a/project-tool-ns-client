@@ -4,7 +4,7 @@
 
 # Specify node version and choose image
 # also name our image as development (can be anything)
-FROM node:17-alpine3.12
+FROM node:19-alpine3.16
 
 RUN npm i -g pnpm
 

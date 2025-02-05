@@ -1,7 +1,7 @@
 import { Action } from "design";
 import { useSession } from "../../SessionContextProvider";
 import FavoritesMenu from "./FavoriteMenu";
-import { faStar } from "@fortawesome/pro-light-svg-icons";
+import { IconStar } from "@tabler/icons-react";
 
 export function Favorites() {
     const {
@@ -11,7 +11,7 @@ export function Favorites() {
     return (
         <>
             <Action.TextButton
-                icon={faStar}
+                icon={IconStar}
                 iconSize={0.9}
                 ptText={0.25}
                 text="Favoritter"

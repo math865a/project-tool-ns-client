@@ -1,16 +1,16 @@
-import { ProjectManager } from "@math865a/project-tool.types";
 import { useOptions } from "~/src/hooks/options/useOptions";
 import { useOptionState } from "~/src/hooks/options/useOptionState";
 import { HandleOptionsStageToggle } from "~/src/hooks/options/_types";
 import { useLoaderData } from "@remix-run/react";
 import { WorkpackageLoader } from "~/routes/app.workpackages_.$workpackageId/route";
+import { ProjectManager } from "~/src";
 
 export const useManagers = () => {
     const {
         node: { id: recordId },
         managers: {
-            projectManager: {id: initialProjectManager},
-        }
+            projectManager: { id: initialProjectManager },
+        },
     } = useLoaderData<WorkpackageLoader>();
 
     const handleToggle: HandleOptionsStageToggle<ProjectManager> = (

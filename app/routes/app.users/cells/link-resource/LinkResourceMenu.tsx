@@ -1,4 +1,3 @@
-import { faCheck, faTimes } from "@fortawesome/pro-solid-svg-icons";
 import {
     Box,
     List,
@@ -14,12 +13,12 @@ import {
 import { useFetcher } from "@remix-run/react";
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
 import { IUserConnectOption } from "~/routes/app.users.create/form";
 import { Action, Avatars, Fallback, Symbol } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import { UserRow } from "../../definitions";
 import { useNotifications } from "~/src";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 interface Props extends Omit<ReturnType<typeof useMenuState>, "handleOpen"> {
     user: UserRow;
@@ -122,7 +121,7 @@ export function LinkResourceMenu({
                             <ListItemSecondaryAction>
                                 {selected?.id === d.id ? (
                                     <Symbol
-                                        icon={faCheck}
+                                        icon={IconCheck}
                                         color={theme.palette.success.main}
                                     />
                                 ) : undefined}
@@ -141,14 +140,14 @@ export function LinkResourceMenu({
             >
                 <Action.TextButton
                     text="Annuller"
-                    icon={faTimes}
+                    icon={IconX}
                     symbolProps={{ color: theme.palette.error.main }}
                     type="button"
                     onClick={handleClose}
                 />
                 <Action.TextButton
                     text="Bekræft"
-                    icon={faCheck}
+                    icon={IconCheck}
                     symbolProps={{ color: theme.palette.success.main }}
                     disabled={selected === null}
                     onClick={() => handleSubmit()}

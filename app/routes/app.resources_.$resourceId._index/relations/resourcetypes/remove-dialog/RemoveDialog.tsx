@@ -1,10 +1,10 @@
-import { faTimes, faTrash } from "@fortawesome/pro-light-svg-icons";
 import { List } from "@mui/material";
 import { useRouteLoaderData } from "@remix-run/react";
 import { ResourceProfile } from "~/src";
 import { Action, Dialog } from "~/src/design-system";
 import { useResourceTypeContext } from "../_provider";
 import { WorkpackageItem } from "./WorkpackageItem";
+import { IconTrash, IconX } from "@tabler/icons-react";
 
 export default function RemoveDialog() {
     const { dialogOpen, onCancel, resourceType, consequences, handleDelete } =
@@ -31,12 +31,12 @@ export default function RemoveDialog() {
             <Dialog.Footer>
                 <Action.TextButton
                     text="Annuller"
-                    icon={faTimes}
+                    icon={IconX}
                     onClick={onCancel}
                 />
                 <Action.TextButton
                     text="Slet"
-                    icon={faTrash}
+                    icon={IconTrash}
                     onClick={() => (resourceType ? handleDelete() : null)}
                 />
             </Dialog.Footer>

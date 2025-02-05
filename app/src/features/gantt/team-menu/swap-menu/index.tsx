@@ -1,5 +1,3 @@
-import { faInfoCircle } from "@fortawesome/pro-light-svg-icons";
-import { faCheck, faTimes } from "@fortawesome/pro-solid-svg-icons";
 import {
     Box,
     Checkbox,
@@ -23,6 +21,7 @@ import { useWorkpackage } from "useWorkpackage";
 import { Action, Avatars, Symbol } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import { TeamMemberJson } from "../../types";
+import { IconCheck, IconInfoCircle, IconX } from "@tabler/icons-react";
 
 export const SwapMenu = observer(
     ({
@@ -119,7 +118,7 @@ export const SwapMenu = observer(
                                 disableTouchRipple
                                 sx={{ cursor: "default" }}
                             >
-                                <Symbol icon={faInfoCircle} size={0.9} />
+                                <Symbol icon={IconInfoCircle} size={0.9} />
                             </IconButton>
                         </Tooltip>
                     </Stack>
@@ -162,7 +161,7 @@ export const SwapMenu = observer(
                         <Action.TextButton
                             fontSize={12}
                             text="Annuller"
-                            icon={faTimes}
+                            icon={IconX}
                             symbolProps={{ color: theme.palette.error.main }}
                             onClick={menuProps.onClose}
                         />
@@ -170,7 +169,7 @@ export const SwapMenu = observer(
                             fontSize={12}
                             text="Gem"
                             disabled={value === null}
-                            icon={faCheck}
+                            icon={IconCheck}
                             onClick={handleSave}
                             symbolProps={{ color: theme.palette.success.main }}
                         />

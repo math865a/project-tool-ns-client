@@ -1,9 +1,9 @@
-import { ProjectManager } from "@math865a/project-tool.types";
 import { Socket } from "socket.io-client";
 import { useSocketContext } from "~/src/socket";
 import ProjectManagerDisplay from "./ProjectManagerDisplay";
 import ProjectManagerMenu from "./ProjectManagerMenu";
 import ProjectManagerMenuProvider from "./ProjectManagerMenuProvider";
+import { ProjectManager } from "~/src";
 
 interface Props {
     initialProjectManager: ProjectManager;
@@ -12,7 +12,7 @@ interface Props {
     socket?: Socket;
     pl?: number;
     displayMinWidth?: number;
-    disabled?: boolean
+    disabled?: boolean;
 }
 
 export default function ProjectManagerRoot({
@@ -22,9 +22,9 @@ export default function ProjectManagerRoot({
     socket,
     pl = 0,
     displayMinWidth = 0,
-    disabled
+    disabled,
 }: Props) {
-    const  socketContext = useSocketContext();
+    const socketContext = useSocketContext();
 
     return (
         <>
@@ -34,7 +34,11 @@ export default function ProjectManagerRoot({
                 initialProjectManager={initialProjectManager}
                 socket={socket ?? socketContext}
             >
-                <ProjectManagerDisplay pl={pl} displayMinWidth={displayMinWidth} disabled={disabled}/>
+                <ProjectManagerDisplay
+                    pl={pl}
+                    displayMinWidth={displayMinWidth}
+                    disabled={disabled}
+                />
                 <ProjectManagerMenu />
             </ProjectManagerMenuProvider>
         </>

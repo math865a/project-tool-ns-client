@@ -1,19 +1,18 @@
-import { Child } from 'design';
-import { ResourceProfile, TimelineWorkpackageJson } from '@math865a/project-tool.types';
-import { registerRootStore } from 'mobx-keystone';
-import { observer } from 'mobx-react-lite';
-import { createContext, useContext, useState } from 'react';
-import { TimelineController } from './controllers/controller';
-import { useRouteLoaderData } from '@remix-run/react';
+import { Child } from "design";
+//import { TimelineWorkpackageJson }
+import { registerRootStore } from "mobx-keystone";
+import { observer } from "mobx-react-lite";
+import { createContext, useContext, useState } from "react";
+import { TimelineController } from "./controllers/controller";
 
-function createModel(workpackages: TimelineWorkpackageJson[]) {
+function createModel(workpackages: any[]) {
     const Controller = new TimelineController({});
     registerRootStore(Controller);
     Controller.Store.resolveMany(workpackages);
     return Controller;
 }
 
-const useTimelineController = (workpackages: TimelineWorkpackageJson[]) => {
+const useTimelineController = (workpackages: any[]) => {
     const [Controller] = useState<TimelineController>(() =>
         createModel(workpackages)
     );
@@ -30,9 +29,8 @@ const TimelineProvider = observer(
         workpackages,
     }: {
         children: Child | Child[];
-        workpackages: TimelineWorkpackageJson[];
+        workpackages: any[];
     }) => {
-
         const Controller = useTimelineController(workpackages);
 
         return (
@@ -43,12 +41,12 @@ const TimelineProvider = observer(
     }
 );
 
-export default TimelineProvider
+export default TimelineProvider;
 
 export const useTimeline = () => {
     const ctx = useContext(TaskTimelineContext);
     if (!ctx) {
-        throw new Error('no ctx');
+        throw new Error("no ctx");
     }
     return ctx;
 };

@@ -1,29 +1,26 @@
-import { faPlus } from "@fortawesome/pro-solid-svg-icons";
-import {
-    faBriefcase,
-    faUserPlus
-} from "@fortawesome/pro-light-svg-icons";
 import {
     ListItemIcon,
-    ListItemText, Menu,
-    MenuItem, useTheme
+    ListItemText,
+    Menu,
+    MenuItem,
+    useTheme,
 } from "@mui/material";
 import { Link } from "@remix-run/react";
 import { Action, Symbol } from "design";
 import { useState } from "react";
 import { Can } from "~/src/session-user";
 import { Action as A, Subject } from "~/src/_definitions";
+import { IconBriefcase, IconPlus, IconUserPlus } from "@tabler/icons-react";
 
 export default function QuickCreate() {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
-    
 
     return (
         <>
             <Action.TextButton
-                icon={faPlus}
+                icon={IconPlus}
                 iconSize={1}
                 text="Opret"
                 sx={{ color: theme.palette.success.main }}
@@ -49,7 +46,7 @@ export default function QuickCreate() {
                         onClick={() => setAnchorEl(null)}
                     >
                         <ListItemIcon>
-                            <Symbol icon={faBriefcase} />
+                            <Symbol icon={IconBriefcase} />
                         </ListItemIcon>
                         <ListItemText
                             primary="Opret ny arbejdspakke"
@@ -66,7 +63,7 @@ export default function QuickCreate() {
                         sx={{ py: 1 }}
                     >
                         <ListItemIcon>
-                            <Symbol icon={faUserPlus} />
+                            <Symbol icon={IconUserPlus} />
                         </ListItemIcon>
                         <ListItemText
                             primary="Opret ressource"

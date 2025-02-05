@@ -1,23 +1,23 @@
 import type { DraggableSyntheticListeners } from "@dnd-kit/core";
 import { CSS, Transform } from "@dnd-kit/utilities";
-import { faCircle, faPipe } from "@fortawesome/pro-light-svg-icons";
-import { disableInteraction } from  "~/styles";
+
+import { disableInteraction } from "~/styles";
 import {
     Box,
     BoxProps,
     Breadcrumbs,
     Container,
+    Divider,
     Grid2Props,
     Paper,
     Stack,
     Tooltip,
     Typography,
     Unstable_Grid2 as Grid,
-    Divider,
 } from "@mui/material";
 
 import { Link } from "@remix-run/react";
-import React, { createContext, useEffect, useMemo, useRef } from "react";
+import React, { createContext, useMemo } from "react";
 import { IconDef, Symbol, SymbolProps } from "../index";
 import { Child } from "../types";
 
@@ -75,18 +75,17 @@ function Header({
     children = <Box />,
     actions = <Box />,
     pb,
-    divider = false
+    divider = false,
 }: {
     children?: Child | Child[];
     actions?: Child | Child[];
     pb?: number;
-    divider?: boolean
+    divider?: boolean;
 }) {
     return (
         <>
             <Grid xs={12}>
                 <Box
-       
                     flexGrow={1}
                     display="flex"
                     justifyContent="space-between"
@@ -96,7 +95,7 @@ function Header({
                     {children}
                     <Box>{actions}</Box>
                 </Box>
-                {divider && <Divider/>}
+                {divider && <Divider />}
             </Grid>
         </>
     );

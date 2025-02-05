@@ -1,4 +1,3 @@
-import { FinancialSourceViewRow } from "@math865a/project-tool.types";
 import { LoaderArgs } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 import { Page } from "design";
@@ -14,14 +13,13 @@ export const handle = {
     BackAction: <BackAction title="Finanskilder" noBack />,
 };
 
-export async function loader({
-    request,
-}: LoaderArgs): Promise<FinancialSourceViewRow[]> {
+export async function loader({ request }: LoaderArgs): Promise<any[]> {
     return await sendRequest(request, {
         url: getServiceUrl("financialSources"),
         method: "GET",
     });
 }
+
 export type FinancialSourcesLoader = typeof loader;
 
 export default function FinancialSourcesView() {

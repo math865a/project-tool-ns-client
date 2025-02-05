@@ -1,10 +1,5 @@
 import { Child } from "design";
-import {
-    CapacityJson,
-    CapacityBoardRows,
-    BookingStageNode,
-    CapacityViewJson,
-} from "@math865a/project-tool.types";
+
 import _ from "lodash";
 import { registerRootStore } from "mobx-keystone";
 import { observer } from "mobx-react-lite";
@@ -12,11 +7,15 @@ import React, { createContext, useContext, useState } from "react";
 import { CapacityBoard } from "./_controllers/_board";
 import { Filter } from "./_controllers/filter";
 import { BookingStageFilter } from "./_controllers/filter/BookingStageFilter";
-import { useSocket } from "~/src/socket";
 import { GridApiPro } from "@mui/x-data-grid-pro/models/gridApiPro";
 import { useGridApiRef } from "@mui/x-data-grid-pro";
 import { Socket } from "socket.io-client";
-import { useSession } from "~/src";
+import {
+    BookingStageNode,
+    CapacityBoardRows,
+    CapacityJson,
+    CapacityViewJson,
+} from "~/pages/capacity/_definitions";
 
 const BoardContext = createContext<CapacityBoard | undefined>(undefined);
 
@@ -54,8 +53,6 @@ const useCapacityBoard = (
     api: React.MutableRefObject<GridApiPro>,
     socket: Socket
 ) => {
-
-
     const [model] = useState<CapacityBoard>(() =>
         createBoard(rows, bookingStages, views, capacities, socket, api)
     );
@@ -69,7 +66,7 @@ const CapacityBoardProvider = observer(
         capacities = [],
         bookingStages,
         views,
-        socket
+        socket,
     }: {
         children?: (api: React.MutableRefObject<GridApiPro>) => Child | Child[];
         rows?: CapacityBoardRows;

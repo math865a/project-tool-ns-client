@@ -1,30 +1,24 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-    FormResponse,
-    ResourceTypeForm,
-} from "@math865a/project-tool.types";
-import {} from "@mui/material";
 import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
 import _ from "lodash";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { sendRequest } from "session";
 import { getServiceUrl } from "~/server";
-import { FormUI, Controls, Dialog } from "~/src/design-system";
+import { Controls, Dialog, FormUI } from "~/src/design-system";
 import { useDialogCloseRedirect } from "~/src/hooks/useDialogCloseRedirect";
 import { formSubmit } from "~/src/hooks/useFormSubmit";
 import ServerValidation from "~/src/hooks/useServerValidation";
 import { parseRequest } from "~/util/formData";
 import {
     CreateValues,
+    getDefaultValues,
     ResourcesControl,
     schema,
-    getDefaultValues,
 } from "./form";
 import { useLoaderData } from "@remix-run/react";
+import { FormResponse } from "~/src";
 
-export async function loader({
-    request,
-}: LoaderArgs): Promise<ResourceTypeForm> {
+export async function loader({ request }: LoaderArgs): Promise<any> {
     return await sendRequest(request, {
         url: getServiceUrl("resourceTypes", "create-form"),
         method: "GET",

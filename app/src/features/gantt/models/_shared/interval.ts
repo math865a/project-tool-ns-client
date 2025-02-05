@@ -1,9 +1,8 @@
-import { UpdatePeriodDto } from "@math865a/project-tool.types";
 import { getDateObject, getDateTime, getDatetimeFromObject } from "~/util/time";
 import { type DateRange } from "@mui/x-date-pickers-pro";
 import _ from "lodash";
-import { DateTime as dt, Interval as int, type DateObjectUnits } from "luxon";
-import { autorun, computed, toJS } from "mobx";
+import { type DateObjectUnits, DateTime as dt, Interval as int } from "luxon";
+import { computed } from "mobx";
 import {
     getParent,
     getRoot,
@@ -14,6 +13,7 @@ import {
     prop,
 } from "mobx-keystone";
 import { Gantt } from "../../controllers/Gantt";
+import { UpdatePeriodDto } from "~/src";
 
 @model("interval")
 export class Interval extends Model(
@@ -33,38 +33,9 @@ export class Interval extends Model(
         },
     }
 ) {
-    onAttachedToRootStore() {
-        onSnapshot(this, (snapshot) => this.save(snapshot));
-
-    }
-
     @computed
     get Timeline() {
         return getRoot<Gantt>(this).Timeline;
-    }
-
-    @modelAction
-    updatePeriodFromCoords(x: number, w: number) {
-        const ts = this.Timeline.xScale.invert(x);
-        const tf = this.Timeline.xScale.invert(x + w);
-        const period = int.fromDateTimes(getDateTime(ts), getDateTime(tf));
-        this.updatePeriod(period);
-    }
-
-    @modelAction
-    updatePeriod(period: int) {
-        this.setStart(getDateObject(period.start as dt));
-        this.setEnd(getDateObject(period.end as dt));
-    }
-
-    @modelAction
-    save(snapshot: { startDate: string; endDate: string }) {
-        const parent = getParent<{ id: string }>(this);
-        if (!parent) return;
-
-        getRoot<Gantt>(this).ActivityStore.Transport.updatePeriod(
-            new UpdatePeriodDto(parent.id, snapshot.startDate, snapshot.endDate)
-        );
     }
 
     @computed
@@ -100,8 +71,6 @@ export class Interval extends Model(
         return int.fromDateTimes(this.startDate, this.endDate);
     }
 
-
-
     @computed
     get dt() {
         return this.interval.toDuration("milliseconds").milliseconds;
@@ -119,7 +88,10 @@ export class Interval extends Model(
 
     @computed
     get workdays() {
-        return _.filter(this.days, (d) => ![6, 7].includes((d.start as dt).weekday));
+        return _.filter(
+            this.days,
+            (d) => ![6, 7].includes((d.start as dt).weekday)
+        );
     }
 
     @computed
@@ -136,15 +108,48 @@ export class Interval extends Model(
         return this.workdays.length;
     }
 
+    @computed
+    get datePickerValue(): DateRange<dt> {
+        return [this.startDate, this.endDate];
+    }
+
+    @computed
+    get tArr() {
+        return [this.sNorm, this.fNorm];
+    }
+
+    onAttachedToRootStore() {
+        onSnapshot(this, (snapshot) => this.save(snapshot));
+    }
+
+    @modelAction
+    updatePeriodFromCoords(x: number, w: number) {
+        const ts = this.Timeline.xScale.invert(x);
+        const tf = this.Timeline.xScale.invert(x + w);
+        const period = int.fromDateTimes(getDateTime(ts), getDateTime(tf));
+        this.updatePeriod(period);
+    }
+
+    @modelAction
+    updatePeriod(period: int) {
+        this.setStart(getDateObject(period.start as dt));
+        this.setEnd(getDateObject(period.end as dt));
+    }
+
+    @modelAction
+    save(snapshot: { startDate: string; endDate: string }) {
+        const parent = getParent<{ id: string }>(this);
+        if (!parent) return;
+
+        getRoot<Gantt>(this).ActivityStore.Transport.updatePeriod(
+            new UpdatePeriodDto(parent.id, snapshot.startDate, snapshot.endDate)
+        );
+    }
+
     @modelAction
     update(startDate: DateObjectUnits, endDate: DateObjectUnits) {
         this.setStart(startDate);
         this.setEnd(endDate);
-    }
-
-    @computed
-    get datePickerValue(): DateRange<dt> {
-        return [this.startDate, this.endDate];
     }
 
     @modelAction
@@ -174,9 +179,4 @@ export class Interval extends Model(
         this.setStart(getDateObject(newStart));
         this.setEnd(getDateObject(newEnd));
     };
-
-    @computed
-    get tArr() {
-        return [this.sNorm, this.fNorm];
-    }
 }

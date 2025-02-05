@@ -1,10 +1,9 @@
-import { faPencil } from "@fortawesome/pro-light-svg-icons";
-import { ProjectManager } from "@math865a/project-tool.types";
 import { Box, Stack, Typography } from "@mui/material";
 import _ from "lodash";
 import { useState } from "react";
 import { Action, Avatars } from "~/src/design-system";
 import { useProjectManagerMenu } from "./ProjectManagerMenuProvider";
+import { IconPencil } from "@tabler/icons-react";
 
 export default function ProjectManagerDisplay({
     displayMinWidth,
@@ -39,7 +38,11 @@ export default function ProjectManagerDisplay({
                     justifyContent="flex-start"
                     spacing={1}
                 >
-                    <Avatars.Individual subject={projectManager} size={25} fontSize={11} />
+                    <Avatars.Individual
+                        subject={projectManager}
+                        size={25}
+                        fontSize={11}
+                    />
                     <Stack spacing={-0.5}>
                         <Typography fontSize={12} color="text.primary">
                             {projectManager.name}
@@ -52,7 +55,7 @@ export default function ProjectManagerDisplay({
                 <Box minWidth={20}>
                     {showButton && (
                         <Action.Symbol
-                            icon={faPencil}
+                            icon={IconPencil}
                             title={`Vælg ${_.lowerCase(title)}`}
                             onClick={handleOpen}
                         />

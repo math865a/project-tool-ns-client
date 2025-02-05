@@ -1,7 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-    FormResponse
-} from "@math865a/project-tool.types";
+
 import { ActionArgs, json, redirect } from "@remix-run/node";
 import { FormProvider, useForm } from "react-hook-form";
 import { sendRequest } from "session";
@@ -14,6 +12,7 @@ import { parseRequest } from "~/util/formData";
 import FormControls from "./controls/FormControls";
 import { getDefaultValues } from "./util/getDefaultValues";
 import { schema } from "./util/schema";
+import { FormResponse } from "~/src";
 
 export async function action({ request }: ActionArgs) {
     const result: FormResponse = await sendRequest(request, {

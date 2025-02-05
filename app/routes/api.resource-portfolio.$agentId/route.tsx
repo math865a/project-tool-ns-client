@@ -1,8 +1,8 @@
-import { FormResponse } from "@math865a/project-tool.types";
 import { ActionArgs, LoaderArgs } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { getServiceUrl } from "~/server";
 import { sendRequest } from "~/session.server";
+import { FormResponse } from "~/src";
 
 export interface IDeletionConsequence {
     id: string;
@@ -18,6 +18,7 @@ export interface IDeletionAllocation {
     endDate: string;
     hours: string;
 }
+
 export async function loader({
     request,
     params,

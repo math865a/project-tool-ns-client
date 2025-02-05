@@ -1,7 +1,7 @@
-import { faCheck, faTimes } from "@fortawesome/pro-solid-svg-icons";
 import { Stack, useTheme } from "@mui/material";
 import { Action } from "~/src/design-system";
 import { ActionsCellProps } from "./ActionsCell";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 export type EditingActionsProps = Pick<
     ActionsCellProps,
@@ -18,7 +18,7 @@ export default function EditingActions({
     return (
         <Stack direction="row" alignItems="center" spacing={0.5}>
             <Action.Symbol
-                icon={faCheck}
+                icon={IconCheck}
                 symbolProps={{ color: theme.palette.success.main }}
                 iconSize={1}
                 color="inherit"
@@ -26,7 +26,7 @@ export default function EditingActions({
                 onClick={handleSaveClick(id)}
             />
             <Action.Symbol
-                icon={faTimes}
+                icon={IconX}
                 symbolProps={{ color: theme.palette.error.main }}
                 iconSize={1}
                 color="inherit"

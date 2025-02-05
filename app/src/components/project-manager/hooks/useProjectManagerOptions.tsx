@@ -1,7 +1,7 @@
-import { ProjectManager } from "@math865a/project-tool.types";
 import _ from "lodash";
 import { useState } from "react";
 import { Socket } from "socket.io-client";
+import { ProjectManager } from "~/src";
 
 export const useProjectManagerOptions = (socket?: Socket) => {
     const [rawOptions, setRawOptions] = useState<ProjectManager[]>([]);
@@ -26,11 +26,12 @@ export const useProjectManagerOptions = (socket?: Socket) => {
         setHasLoaded(false);
     };
 
-
-
     const getOptions = (rawOptions: ProjectManager[]) => {
         const newOptions = _.cloneDeep(rawOptions);
-        const defaultProjectManager = newOptions.splice(_.findIndex(newOptions, d => d.name === "Ingen"), 1);
+        const defaultProjectManager = newOptions.splice(
+            _.findIndex(newOptions, (d) => d.name === "Ingen"),
+            1
+        );
         const newOp = [defaultProjectManager[0], ...newOptions];
         return newOp;
     };

@@ -1,18 +1,16 @@
-import {
-    faBarsProgress,
-    faMapPin,
-    faSearch,
-    faTrash,
-    faUserPlus
-} from "@fortawesome/pro-light-svg-icons";
-import {
-    Menu
-} from "@mui/material";
+import { Menu } from "@mui/material";
 import { computed } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useWorkpackage } from "useWorkpackage";
 import { ContextMenuColorPickerItem } from "./ContextMenu.ColorPickerItem";
 import { ContextMenuItem, IContextMenuItemProps } from "./ContextMenu.Item";
+import {
+    IconMapPin,
+    IconPlus,
+    IconSearch,
+    IconTrash,
+    IconUserPlus,
+} from "@tabler/icons-react";
 
 export const GanttContextMenu = observer(() => {
     const {
@@ -24,30 +22,30 @@ export const GanttContextMenu = observer(() => {
             {
                 name: "details",
                 label: "Detaljer",
-                icon: faSearch,
+                icon: IconSearch,
             },
             {
                 name: "createDelivery",
                 label: "Tilføj leverance",
-                icon: faMapPin,
+                icon: IconMapPin,
                 onClick: () => T.ContextMenu.createDelivery(),
             },
             {
                 name: "createTask",
                 label: "Tilføj opgave",
-                icon: faBarsProgress,
+                icon: IconPlus,
                 onClick: () => T.ContextMenu.createTask(),
             },
             {
                 name: "createAllocation",
                 label: "Tilføj allokering",
-                icon: faUserPlus,
+                icon: IconUserPlus,
                 onClick: () => T.ContextMenu.createAllocation(),
             },
             {
                 name: "delete",
                 label: "Slet",
-                icon: faTrash,
+                icon: IconTrash,
                 onClick: () => T.ContextMenu.delete(),
             },
         ];
@@ -84,5 +82,3 @@ export const GanttContextMenu = observer(() => {
         </Menu>
     );
 });
-
-

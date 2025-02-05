@@ -1,9 +1,8 @@
-import { faUpRightFromSquare } from "@fortawesome/pro-light-svg-icons";
-import { faCheck, faTimes } from "@fortawesome/pro-solid-svg-icons";
 import { GridProps, Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { styled, useTheme } from "@mui/material/styles";
 import {
+    daDK,
     DataGridPro,
     DataGridProProps,
     GridColDef,
@@ -13,7 +12,6 @@ import {
     GridToolbarFilterButton,
     GridToolbarQuickFilter,
     GridValidRowModel,
-    daDK,
 } from "@mui/x-data-grid-pro";
 import React, {
     createContext,
@@ -24,6 +22,7 @@ import React, {
 import { Action } from "../action";
 import { renderCellExpand } from "./ExpandCellRenderer";
 import { multilineColumn } from "./MultilineEdit";
+import { IconCheck, IconLink, IconX } from "@tabler/icons-react";
 
 const StyledGridOverlay = styled("div")(({ theme }) => ({
     display: "flex",
@@ -168,7 +167,6 @@ function DefaultToolbar() {
             alignItems="center"
             justifyContent="space-between"
         >
-          
             <GridToolbarQuickFilter />
             <Stack direction="row" spacing={1} alignItems="center">
                 <GridToolbarFilterButton />
@@ -273,7 +271,7 @@ function BooleanCell({ value, title }: { value: boolean; title?: string }) {
 
     return (
         <Action.Symbol
-            icon={value ? faCheck : faTimes}
+            icon={value ? IconCheck : IconX}
             title={title}
             iconSize={1.1}
             disableFocusRipple
@@ -302,7 +300,7 @@ function LinkCell({ to, id }: ILinkCellProps) {
         setIsVisible(id === hoverRow);
     }, [id, hoverRow]);
     if (!isVisible) return null;
-    return <Action.Symbol to={to} icon={faUpRightFromSquare} title="Gå til" />;
+    return <Action.Symbol to={to} icon={IconLink} title="Gå til" />;
 }
 
 const useViewContext = () => {

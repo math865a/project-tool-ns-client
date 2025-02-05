@@ -1,7 +1,7 @@
-import { faCoins } from "@fortawesome/pro-light-svg-icons";
 import { formatThousands } from "~/util";
 import { Box, Stack, Tooltip, Typography } from "@mui/material";
 import { Symbol } from "design";
+import { IconCoins } from "@tabler/icons-react";
 
 export function ProfitCoverageStat({
     profit,
@@ -14,7 +14,7 @@ export function ProfitCoverageStat({
         <Stack direction="row" alignItems="center" spacing={0.75}>
             <Tooltip title="Dækning & dækningsgrad">
                 <Box>
-                    <Symbol icon={faCoins} size={0.8} />
+                    <Symbol icon={IconCoins} size={0.8} />
                 </Box>
             </Tooltip>
             <Stack direction="row" alignItems="center" spacing={0.5}>

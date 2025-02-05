@@ -1,17 +1,17 @@
-import { faChevronUp, faChevronDown } from "@fortawesome/pro-light-svg-icons";
 import { Button, Stack, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { Symbol } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
 import { useBoard } from "../../../_provider";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
 const ViewsAction = observer(
     ({
         handleOpen,
-        open
+        open,
     }: {
         handleOpen: ReturnType<typeof useMenuState>["handleOpen"];
-        open: boolean
+        open: boolean;
     }) => {
         const { View } = useBoard();
         return (
@@ -21,7 +21,7 @@ const ViewsAction = observer(
                 onClick={handleOpen}
             >
                 <Stack direction="row" alignItems="center" spacing={1}>
-                    <Symbol icon={open ? faChevronUp : faChevronDown} />
+                    <Symbol icon={open ? IconChevronUp : IconChevronDown} />
                     <Typography>
                         {View.CapacityView?.name ?? "Standardvisning"}
                     </Typography>

@@ -1,9 +1,9 @@
-import { faTrash } from "@fortawesome/pro-light-svg-icons";
 import { useSubmit } from "@remix-run/react";
 import { Action, ConfirmationDialog } from "design";
 import { useState } from "react";
 import { Can } from "~/src/session-user";
 import { Action as A, Subject } from "~/src/_definitions";
+import { IconTrash } from "@tabler/icons-react";
 
 export function ResourceTypeDeleteAction() {
     const submit = useSubmit();
@@ -35,7 +35,7 @@ export function ResourceTypeDeleteAction() {
                 {(allowed) => (
                     <Action.TextButton
                         text="Slet"
-                        icon={faTrash}
+                        icon={IconTrash}
                         onClick={handleOpen}
                         disabled
                     />

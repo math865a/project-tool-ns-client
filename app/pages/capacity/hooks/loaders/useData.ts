@@ -1,9 +1,7 @@
-import { InitialCapacityBoardLoad } from "@math865a/project-tool.types";
+//import { InitialCapacityBoardLoad }
 import { useRouteLoaderData } from "@remix-run/react";
 
 export const useData = () => {
-    const data = useRouteLoaderData(
-        "routes/app.capacity"
-    ) as InitialCapacityBoardLoad;
+    const data = useRouteLoaderData("routes/app.capacity") as any;
     return data;
 };

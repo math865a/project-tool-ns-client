@@ -1,5 +1,3 @@
-import { faTrash } from "@fortawesome/pro-light-svg-icons";
-import { faCheck, faTimes } from "@fortawesome/pro-solid-svg-icons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
     Box,
@@ -10,11 +8,7 @@ import {
     Stack,
     useTheme,
 } from "@mui/material";
-import {
-    useLoaderData,
-    useNavigate,
-    useParams
-} from "@remix-run/react";
+import { useLoaderData, useNavigate, useParams } from "@remix-run/react";
 import { Allocation } from "gantt-models";
 import _ from "lodash";
 import { observer } from "mobx-react-lite";
@@ -31,15 +25,13 @@ import { TeamMemberControl } from "./controls/TeamMemberControl";
 import { WorkControl } from "./controls/WorkControl";
 import { schema } from "./definitions/schema";
 import { EditValues } from "./definitions/types";
+import { IconCheck, IconTrash, IconX } from "@tabler/icons-react";
 
 export const AllocationDialog = observer(() => {
-    const {
-        Gantt,
-        inform,
-    } = useWorkpackage();
+    const { Gantt, inform } = useWorkpackage();
     const data = useLoaderData<EditValues>();
 
-    const AllotmentStore = Gantt.AllotmentStore
+    const AllotmentStore = Gantt.AllotmentStore;
     const navigate = useNavigate();
 
     const { workpackageId } = useParams();
@@ -102,11 +94,7 @@ export const AllocationDialog = observer(() => {
                 maxWidth="sm"
             >
                 <FormProvider {...methods}>
-                    <Can
-                        I={A.Write}
-                        a={Subject.Workpackages}
-                        passThrough
-                    >
+                    <Can I={A.Write} a={Subject.Workpackages} passThrough>
                         {(allowed) => (
                             <form
                                 style={{ width: "100%" }}
@@ -143,7 +131,7 @@ export const AllocationDialog = observer(() => {
                                         <Action.TextButton
                                             text="Slet"
                                             disabled={!allowed}
-                                            icon={faTrash}
+                                            icon={IconTrash}
                                             onClick={handleDelete}
                                         />
                                         <Stack
@@ -160,7 +148,7 @@ export const AllocationDialog = observer(() => {
                                                                 .isDirty ||
                                                             !allowed
                                                         }
-                                                        icon={faTimes}
+                                                        icon={IconX}
                                                         symbolProps={{
                                                             color: theme.palette
                                                                 .error.main,
@@ -177,7 +165,7 @@ export const AllocationDialog = observer(() => {
                                                         }
                                                         text="Gem ændringer"
                                                         type="submit"
-                                                        icon={faCheck}
+                                                        icon={IconCheck}
                                                         symbolProps={{
                                                             color: theme.palette
                                                                 .success.main,

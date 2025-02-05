@@ -1,10 +1,10 @@
-import { ViewMode } from '@math865a/project-tool.types';
-import { DateTime as dt, Duration as dur, Interval as int } from 'luxon';
-import { computed } from 'mobx';
-import { getRoot, Model, model, prop } from 'mobx-keystone';
-import { CapacityBoard } from './_board';
+import { DateTime as dt, Duration as dur, Interval as int } from "luxon";
+import { computed } from "mobx";
+import { getRoot, Model, model, prop } from "mobx-keystone";
+import { CapacityBoard } from "./_board";
+import { ViewMode } from "~/pages/capacity/_definitions";
 
-@model('capacity-calendar')
+@model("capacity-calendar")
 export class Calendar extends Model({
     dpx: prop<number>(3.75).withSetter(),
     tStart: prop<number>(() => dt.now().toMillis()).withSetter(),
@@ -122,6 +122,7 @@ export class Calendar extends Model({
                 ).toMillis();
         }
     }
+
     normalizeDate(date: dt) {
         const normalizedDate = dt.fromObject({
             day: date.day,

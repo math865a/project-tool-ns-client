@@ -2,7 +2,7 @@ import { Stack, useTheme } from "@mui/material";
 import { GridRowId } from "@mui/x-data-grid-pro";
 import { useRowState } from "../hooks/useRowState";
 import { Action } from "~/src/design-system";
-import { faCheck, faTimes } from "@fortawesome/pro-solid-svg-icons";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 interface Props
     extends Pick<
@@ -22,7 +22,7 @@ export default function EditActionsCell({
     return (
         <Stack direction="row" alignItems="center" spacing={0.5}>
             <Action.Symbol
-                icon={faCheck}
+                icon={IconCheck}
                 symbolProps={{ color: theme.palette.success.main }}
                 iconSize={1}
                 color="inherit"
@@ -30,7 +30,7 @@ export default function EditActionsCell({
                 onClick={handleSaveClick(id)}
             />
             <Action.Symbol
-                icon={faTimes}
+                icon={IconX}
                 symbolProps={{ color: theme.palette.error.main }}
                 iconSize={1}
                 color="inherit"

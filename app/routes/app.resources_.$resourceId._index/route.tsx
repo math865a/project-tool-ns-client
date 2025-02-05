@@ -1,10 +1,9 @@
-import { FormResponse } from "@math865a/project-tool.types";
-import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
+import { ActionArgs, json, redirect } from "@remix-run/node";
 import { useParams, useRouteLoaderData } from "@remix-run/react";
 import { sendRequest } from "session";
 import invariant from "tiny-invariant";
 import { getServiceUrl } from "~/server";
-import { ResourceProfile } from "~/src";
+import { FormResponse, ResourceProfile } from "~/src";
 import { ResourceCapacity } from "~/src/features/resource-capacity";
 import BackAction from "~/src/layout/topbar/BackAction";
 import { parseRequest } from "~/util/formData";
@@ -20,14 +19,9 @@ function PageContext() {
         "routes/app.resources_.$resourceId"
     ) as ResourceProfile;
     return (
-        <BackAction
-            title={`${node.name} - Overblik`}
-            backTo="/app/resources"
-        />
+        <BackAction title={`${node.name} - Overblik`} backTo="/app/resources" />
     );
 }
-
-
 
 export async function action({ request, params }: ActionArgs) {
     invariant(params.resourceId);

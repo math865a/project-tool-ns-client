@@ -1,8 +1,8 @@
-import { faSave } from "@fortawesome/pro-light-svg-icons";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { Action } from "~/src/design-system";
 import { useBoard } from "../../../_provider";
+import { IconDeviceFloppy } from "@tabler/icons-react";
 
 const NoViews = observer(() => {
     const View = useBoard().View;
@@ -23,11 +23,10 @@ const NoViews = observer(() => {
             </Typography>
             {View.hasFiltered ? (
                 <Box maxWidth={175}>
-
                     <Action.TextButton
-                    iconSize={1.3}
+                        iconSize={1.3}
                         text="Gem nuværende filter som visning"
-                        icon={faSave}
+                        icon={IconDeviceFloppy}
                         onClick={() => CapacityViewStore.createView()}
                     />
                 </Box>

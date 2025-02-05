@@ -1,17 +1,3 @@
-import {
-    faKey,
-    faLink,
-    faLock,
-    faMailForward,
-    faSplit,
-    faTrash,
-    faUnlock,
-    faUser,
-    faUserPlus,
-    faUserSlash,
-    faUserTie,
-    faWavePulse,
-} from "@fortawesome/pro-light-svg-icons";
 import { Menu } from "@mui/material";
 import { GridRowId } from "@mui/x-data-grid-pro";
 import { useMemo } from "react";
@@ -20,6 +6,19 @@ import { useMenuState } from "~/src/hooks/useMenu";
 import { useRowState } from "../../hooks/useRowState";
 import { LinkResourceMenu } from "../link-resource/LinkResourceMenu";
 import { useNotifications } from "~/src";
+import {
+    IconArrowsSplit,
+    IconKey,
+    IconLink,
+    IconLock,
+    IconLockOpen,
+    IconMailForward,
+    IconTrash,
+    IconUser,
+    IconUserMinus,
+    IconUserPlus,
+    IconWaveSine,
+} from "@tabler/icons-react";
 
 type Props = Omit<ReturnType<typeof useMenuState>, "handleOpen"> & {
     id: GridRowId;
@@ -68,7 +67,7 @@ export function ActionsMenu({
                 }}
             >
                 <Directory.ContextMenuItem
-                    icon={faWavePulse}
+                    icon={IconWaveSine}
                     label="Aktivitet"
                     disabled
                     space={!record.isResource}
@@ -76,7 +75,7 @@ export function ActionsMenu({
 
                 {record.isResource && (
                     <Directory.ContextMenuItem
-                        icon={faUser}
+                        icon={IconUser}
                         label="Gå til ressource"
                         to={`/app/resources/${record.uid}`}
                         space
@@ -84,7 +83,7 @@ export function ActionsMenu({
                 )}
 
                 <Directory.ContextMenuItem
-                    icon={faKey}
+                    icon={IconKey}
                     label="Nulstil password"
                     onClick={() => {
                         handleResetPassword(record);
@@ -96,7 +95,7 @@ export function ActionsMenu({
                 />
 
                 <Directory.ContextMenuItem
-                    icon={faMailForward}
+                    icon={IconMailForward}
                     label={
                         record.lastSeen
                             ? "Mail adgangsoplysninger"
@@ -120,7 +119,7 @@ export function ActionsMenu({
 
                 {record.isResource && (
                     <Directory.ContextMenuItem
-                        icon={faUserSlash}
+                        icon={IconUserMinus}
                         label="Slet ressource"
                         onClick={() => {
                             deleteResource(record);
@@ -131,7 +130,7 @@ export function ActionsMenu({
                 )}
                 {record.isResource && (
                     <Directory.ContextMenuItem
-                        icon={faSplit}
+                        icon={IconArrowsSplit}
                         label="Split fra ressource"
                         onClick={() => {
                             split(record);
@@ -143,7 +142,7 @@ export function ActionsMenu({
 
                 {!record.isResource && (
                     <Directory.ContextMenuItem
-                        icon={faUserPlus}
+                        icon={IconUserPlus}
                         label="Opret ressource"
                         to={`create/${record.uid}/resource`}
                         onClick={menuProps.onClose}
@@ -151,14 +150,14 @@ export function ActionsMenu({
                 )}
                 {!record.isResource && (
                     <Directory.ContextMenuItem
-                        icon={faLink}
+                        icon={IconLink}
                         label="Forbind ressource"
                         onClick={handleOpen}
                     />
                 )}
 
                 <Directory.ContextMenuItem
-                    icon={faUserTie}
+                    icon={IconUser}
                     label={
                         record.isProjectManager
                             ? "Fjern som projektleder"
@@ -177,7 +176,7 @@ export function ActionsMenu({
                 />
 
                 <Directory.ContextMenuItem
-                    icon={record.isDeactivated ? faUnlock : faLock}
+                    icon={record.isDeactivated ? IconLockOpen : IconLock}
                     label={record.isDeactivated ? "Aktivér" : "Deaktivér"}
                     onClick={() => {
                         notify(
@@ -193,7 +192,7 @@ export function ActionsMenu({
 
                 {record.isDeactivated && (
                     <Directory.ContextMenuItem
-                        icon={faTrash}
+                        icon={IconTrash}
                         label="Slet"
                         onClick={() => {
                             console.log(record.uid);

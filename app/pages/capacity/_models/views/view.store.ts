@@ -4,12 +4,12 @@ import { computed, toJS } from "mobx";
 import { getRoot, Model, model, modelAction, prop } from "mobx-keystone";
 import { CapacityBoard } from "../../_controllers/_board";
 import { CapacityView } from "./view.model";
-import { CapacityViewJson, ViewMode } from "@math865a/project-tool.types";
 import {
     CreateCapacityViewDto,
     UpdateCapacityViewDto,
     UpdateCapacityViewNameDto,
     UpdateDefaultCapacityViewDto,
+    ViewMode,
 } from "../../_definitions";
 
 @model("capacity-views")
@@ -19,6 +19,21 @@ export class CapacityViewsStore extends Model({
     @computed
     get Transport() {
         return getRoot<CapacityBoard>(this).Transport;
+    }
+
+    @computed
+    get Filter() {
+        return getRoot<CapacityBoard>(this).Filter;
+    }
+
+    @computed
+    get View() {
+        return getRoot<CapacityBoard>(this).View;
+    }
+
+    @computed
+    get sortedViews() {
+        return _.sortBy(this.Views, (d) => d.name);
     }
 
     @modelAction
@@ -120,37 +135,22 @@ export class CapacityViewsStore extends Model({
         this.Views.splice(_.indexOf(this.Views, CapacityView), 1);
     };
 
-    @computed
-    get Filter() {
-        return getRoot<CapacityBoard>(this).Filter;
-    }
-
-    @computed
-    get View() {
-        return getRoot<CapacityBoard>(this).View;
-    }
-
-    @computed
-    get sortedViews() {
-        return _.sortBy(this.Views, (d) => d.name);
-    }
-
     @modelAction
-    initialize = (jsons: CapacityViewJson[]) => {
+    initialize = (jsons: any[]) => {
         this.resolveMany(jsons);
         const defaultView = this.Views.find((d) => d.isDefault);
         if (defaultView) {
             this.View.setView(defaultView);
         }
     };
-
+    //CapacityViewJson
     @modelAction
-    resolveMany = (jsons: CapacityViewJson[]) => {
+    resolveMany = (jsons: any[]) => {
         jsons.forEach((json) => this.resolve(json));
     };
 
     @modelAction
-    resolve(json: CapacityViewJson) {
+    resolve(json: any) {
         let Model: CapacityView | undefined = this.Views.find(
             (d) => d.id === json.id
         );

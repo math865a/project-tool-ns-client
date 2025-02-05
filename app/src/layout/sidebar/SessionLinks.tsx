@@ -1,9 +1,9 @@
-import { faUserCog, faDoorOpen } from "@fortawesome/pro-light-svg-icons";
 import { ListItem } from "@mui/material";
 import { useSubmit } from "@remix-run/react";
 import { Directory } from "~/src/design-system";
 import SidebarButtonItem from "./SidebarButtonItem";
 import SidebarItem from "./SidebarItem";
+import { IconDoorExit, IconUserCog } from "@tabler/icons-react";
 
 export default function SessionLinks() {
     const submit = useSubmit();
@@ -18,12 +18,12 @@ export default function SessionLinks() {
             <SidebarItem
                 to="/app/session"
                 subject="Min konto"
-                icon={faUserCog}
+                icon={IconUserCog}
             />
             <SidebarButtonItem
                 onClick={handleSignOut}
                 subject="Log ud"
-                icon={faDoorOpen}
+                icon={IconDoorExit}
             />
         </Directory.Wrapper>
     );

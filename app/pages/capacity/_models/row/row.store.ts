@@ -1,28 +1,29 @@
-import { CapacityBoardRows, ResourceRowJson, ResourceTypeRowJson } from '@math865a/project-tool.types';
-import _ from 'lodash';
-import { computed } from 'mobx';
-import { getRoot, Model, model, modelAction, prop } from 'mobx-keystone';
-import { CapacityBoard } from '../../_controllers/_board';
-import { ResourceRow } from './resource-row.model';
-import { ResourceTypeRow } from './resourcetype-row.model';
+import _ from "lodash";
+import { computed } from "mobx";
+import { getRoot, Model, model, modelAction, prop } from "mobx-keystone";
+import { CapacityBoard } from "../../_controllers/_board";
+import { ResourceRow } from "./resource-row.model";
+import { ResourceTypeRow } from "./resourcetype-row.model";
+import {
+    ResourceRowJson,
+    ResourceTypeRowJson,
+} from "~/pages/capacity/_definitions";
 
-
-@model('row-store')
+@model("row-store")
 export class RowStore extends Model({
     Resources: prop<ResourceRow[]>(() => []),
     ResourceTypes: prop<ResourceTypeRow[]>(() => []),
 }) {
     @computed
-    get Transport(){
-        return getRoot<CapacityBoard>(this).Transport
+    get Transport() {
+        return getRoot<CapacityBoard>(this).Transport;
     }
 
     @modelAction
-    updateRows(dto: CapacityBoardRows) {
+    updateRows(dto: any) {
         this.resolveResourceRows(dto.resources);
         this.resolveResourceTypeRows(dto.resourceTypes);
     }
-
 
     @modelAction
     resolveResourceRows(jsons: ResourceRowJson[]) {
@@ -30,7 +31,7 @@ export class RowStore extends Model({
     }
 
     @modelAction
-    resolveResourceRow(json: ResourceRowJson) {
+    resolveResourceRow(json: any) {
         let Row: ResourceRow | undefined = _.find(
             this.Resources,
             (d) => d.id === json.id
@@ -49,7 +50,7 @@ export class RowStore extends Model({
     }
 
     @modelAction
-    resolveResourceTypeRow(json: ResourceTypeRowJson) {
+    resolveResourceTypeRow(json: any) {
         let Row: ResourceTypeRow | undefined = _.find(
             this.ResourceTypes,
             (d) => d.id === json.id

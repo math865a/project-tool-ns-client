@@ -1,13 +1,8 @@
-import {
-    faBug,
-    faComment,
-    faCommentLines,
-    faCommentPlus,
-} from "@fortawesome/pro-light-svg-icons";
 import { Menu } from "@mui/material";
 import { FeedbackType, useSession } from "~/src";
 import { Action, Directory } from "~/src/design-system";
 import { useMenuState } from "~/src/hooks/useMenu";
+import { IconBug, IconMessage } from "@tabler/icons-react";
 
 export function Feedback() {
     const { handleOpen, ...menuProps } = useMenuState();
@@ -23,25 +18,25 @@ export function Feedback() {
     return (
         <>
             <Action.TextButton
-                icon={faComment}
+                icon={IconMessage}
                 text="Giv feedback"
                 onClick={handleOpen}
             />
             <Menu {...menuProps}>
                 <Directory.ContextMenuItem
-                    icon={faBug}
+                    icon={IconBug}
                     key={FeedbackType.Bug}
                     label="Rapporter en fejl"
                     onClick={() => handleDialogOpen(FeedbackType.Bug)}
                 />
                 <Directory.ContextMenuItem
-                    icon={faCommentPlus}
+                    icon={IconMessage}
                     key={FeedbackType.Feature}
                     label="Foreslå en ny funktion"
                     onClick={() => handleDialogOpen(FeedbackType.Feature)}
                 />
                 <Directory.ContextMenuItem
-                    icon={faCommentLines}
+                    icon={IconMessage}
                     key={FeedbackType.Opinion}
                     label="Giv os din mening"
                     onClick={() => handleDialogOpen(FeedbackType.Opinion)}

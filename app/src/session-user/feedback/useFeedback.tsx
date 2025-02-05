@@ -1,15 +1,15 @@
-import { FormResponse } from "@math865a/project-tool.types";
 import { Box } from "@mui/material";
 import { useFetcher, useLocation } from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
 import { Socket } from "socket.io-client";
-import { Feedback, FeedbackType } from "~/src/_definitions/feedback";
+import { FeedbackType } from "~/src/_definitions/feedback";
 import { useNotifications } from "~/src/components";
 import { useDialogState } from "~/src/hooks/useDialog";
 import { toFormData } from "~/util";
 import { BugForm } from "./Feedback.Bug";
 import { OpinionForm } from "./Feedback.Opinion";
 import { FeatureForm } from "./Feedback.Feature";
+import { FormResponse } from "~/src";
 
 export const useFeedback = (socket?: Socket) => {
     const { handleOpen: handleDialogOpen, onClose, open } = useDialogState();

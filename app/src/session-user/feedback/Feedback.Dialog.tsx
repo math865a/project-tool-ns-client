@@ -2,7 +2,7 @@ import { Child, ConfirmationDialog, Dialog, FormUI } from "~/src/design-system";
 import { useDialogState } from "~/src/hooks";
 import { useSession } from "../SessionContextProvider";
 import { useFormContext } from "react-hook-form";
-import { faSend } from "@fortawesome/pro-light-svg-icons";
+import { IconSend } from "@tabler/icons-react";
 
 export function FeedbackDialog({
     title,
@@ -48,12 +48,11 @@ export function FeedbackDialog({
                     <FormUI.Actions
                         onCancel={() => handleClose()}
                         confirmText="Indsend"
-                        confirmIcon={faSend}
+                        confirmIcon={IconSend}
                         onSubmit={handleSubmit(submitFeedback)}
                         confirmColor="inherit"
                         confirmDisabled={fetcher.state === "loading"}
                         cancelDisabled={fetcher.state === "loading"}
-                  
                     />
                 </Dialog.Footer>
             </Dialog.Modal>

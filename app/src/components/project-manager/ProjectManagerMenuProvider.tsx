@@ -1,9 +1,9 @@
-import { ProjectManager } from "@math865a/project-tool.types";
 import { Child } from "design";
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext } from "react";
 import { Socket } from "socket.io-client";
 import { useProjectManager } from "./hooks/useProjectManager";
 import { useProjectManagerMenuState } from "./hooks/useProjectManagerMenuState";
+import { ProjectManager } from "~/src";
 
 interface IProjectManagerMenuBag {
     open: boolean;
@@ -37,7 +37,6 @@ export default function ProjectManagerMenuProvider({
     socketMessage: string;
     children: Child | Child[];
 }) {
-
     const props1: Omit<
         IProjectManagerMenuBag,
         "projectManager" | "updateProjectManager" | "title"
@@ -45,9 +44,16 @@ export default function ProjectManagerMenuProvider({
     const props2: Pick<
         IProjectManagerMenuBag,
         "projectManager" | "updateProjectManager"
-    > = useProjectManager(initialProjectManager, socketMessage, props1.rawOptions, socket);
+    > = useProjectManager(
+        initialProjectManager,
+        socketMessage,
+        props1.rawOptions,
+        socket
+    );
     return (
-        <ProjectManagerMenuContext.Provider value={{ ...props1, ...props2, title: title }}>
+        <ProjectManagerMenuContext.Provider
+            value={{ ...props1, ...props2, title: title }}
+        >
             {children}
         </ProjectManagerMenuContext.Provider>
     );

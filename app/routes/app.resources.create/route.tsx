@@ -1,13 +1,15 @@
-import { FormResponse } from "@math865a/project-tool.types";
-import { ActionArgs, LoaderArgs, json, redirect } from "@remix-run/node";
+import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { sendRequest } from "session";
 
 import { getServiceUrl } from "~/server";
 import { IResourceFormOptons, ResourceForm } from "~/src/components/forms";
 import { parseRequest } from "~/util/formData";
+import { FormResponse } from "~/src";
 
-export async function loader({ request }: LoaderArgs): Promise<IResourceFormOptons> {
+export async function loader({
+    request,
+}: LoaderArgs): Promise<IResourceFormOptons> {
     return await sendRequest(request, {
         url: getServiceUrl("resources", "create-form-options"),
         method: "GET",

@@ -1,15 +1,10 @@
-import {
-    FormResponse,
-    ResourceTypeProfile,
-} from "@math865a/project-tool.types";
-import { ActionArgs, LoaderArgs, json } from "@remix-run/node";
+import { ActionArgs, json, LoaderArgs, redirect } from "@remix-run/node";
 import { useRouteLoaderData } from "@remix-run/react";
-import { redirect } from "@remix-run/node";
 import { Page } from "design";
 import { sendRequest } from "session";
 import invariant from "tiny-invariant";
 import { getServiceUrl } from "~/server";
-import { HasAccess, Subject } from "~/src";
+import { FormResponse, HasAccess, ResourceTypeProfile, Subject } from "~/src";
 import BackAction from "~/src/layout/topbar/BackAction";
 import { parseRequest } from "~/util/formData";
 import DetailsSection from "./Details.Section";

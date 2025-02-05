@@ -1,10 +1,10 @@
-import { faTrash } from "@fortawesome/pro-light-svg-icons";
-import { Form, useLoaderData, useSubmit } from "@remix-run/react";
+import { useLoaderData, useSubmit } from "@remix-run/react";
 import { useState } from "react";
 import { Action as A, Subject } from "~/src/_definitions";
-import { ConfirmationDialog, Action as UIAction } from "~/src/design-system";
+import { Action as UIAction, ConfirmationDialog } from "~/src/design-system";
 import { Can } from "~/src/session-user";
 import { ResourceLoader } from "../route";
+import { IconTrash } from "@tabler/icons-react";
 
 export function DeleteAction() {
     const { node } = useLoaderData<ResourceLoader>();
@@ -36,7 +36,7 @@ export function DeleteAction() {
                     <UIAction.TextButton
                         disabled={!allowed}
                         text="Slet"
-                        icon={faTrash}
+                        icon={IconTrash}
                         onClick={handleOpen}
                     />
                 )}

@@ -1,5 +1,5 @@
-import { faCheck } from "@fortawesome/pro-light-svg-icons";
-import { FormOption } from "@math865a/project-tool.types";
+//import { FormOption }
+import { FormUI, Symbol } from "design";
 import {
     Autocomplete,
     AutocompleteChangeDetails,
@@ -10,13 +10,13 @@ import {
     MenuItem,
     TextField,
 } from "@mui/material";
-import { FormUI, Symbol } from "design";
 import { useFormContext, useWatch } from "react-hook-form";
+import { IconCheck } from "@tabler/icons-react";
 
-export function ResourcesControl({ options }: { options: FormOption[] }) {
+export function ResourcesControl({ options }: { options: any[] }) {
     const { control, setValue } = useFormContext();
 
-    const resources: FormOption[] = useWatch({ control, name: "resources" });
+    const resources: any[] = useWatch({ control, name: "resources" });
 
     return (
         <FormUI.Label label="Ressourcer" fullWidth widthFrac={2}>
@@ -30,7 +30,7 @@ export function ResourcesControl({ options }: { options: FormOption[] }) {
                     e,
                     value,
                     reason,
-                    details: AutocompleteChangeDetails<FormOption> | undefined
+                    details: AutocompleteChangeDetails<any> | undefined
                 ) => {
                     if (reason === "selectOption" && details) {
                         if (resources.find((d) => d.id === details.option.id)) {
@@ -74,7 +74,7 @@ export function ResourcesControl({ options }: { options: FormOption[] }) {
                     <MenuItem {...props}>
                         <ListItemIcon>
                             {resources.find((d) => d.id === option.id) !==
-                                undefined && <Symbol icon={faCheck} />}
+                                undefined && <Symbol icon={IconCheck} />}
                         </ListItemIcon>
                         <ListItemText
                             primary={option.name}

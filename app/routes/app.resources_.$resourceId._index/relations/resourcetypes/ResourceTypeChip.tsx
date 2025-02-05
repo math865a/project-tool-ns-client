@@ -1,11 +1,11 @@
-import { faTrash } from "@fortawesome/pro-light-svg-icons";
 import { useHover } from "@mantine/hooks";
 import { Chip, Typography } from "@mui/material";
-import { ResourceAgent, usePermissions } from "~/src";
+import { Action as A, ResourceAgent, Subject, usePermissions } from "~/src";
 import { Action } from "~/src/design-system";
 import { disableInteraction } from "~/styles";
 import { useResourceTypeContext } from "./_provider";
-import { Subject, Action as A } from "~/src";
+import { IconTrash } from "@tabler/icons-react";
+
 export function ResourceTypeChip({
     resourceType,
     disabled,
@@ -13,10 +13,7 @@ export function ResourceTypeChip({
     resourceType: ResourceAgent;
     disabled?: boolean;
 }) {
-    const {
-       requestDeletion,
-       isDeleting
-    } = useResourceTypeContext();
+    const { requestDeletion, isDeleting } = useResourceTypeContext();
 
     const { ref, hovered } = useHover();
 
@@ -30,7 +27,11 @@ export function ResourceTypeChip({
                 borderRadius: 2,
                 //borderColor: "transparent",
             }}
-            icon={<Typography pl={1} fontSize={12} color="text.secondary">{resourceType.typeNo}</Typography>}
+            icon={
+                <Typography pl={1} fontSize={12} color="text.secondary">
+                    {resourceType.typeNo}
+                </Typography>
+            }
             variant="outlined"
             style={disabled ? (disableInteraction as React.CSSProperties) : {}}
             clickable={false}
@@ -41,7 +42,7 @@ export function ResourceTypeChip({
                 permissions.can(A.Write, Subject.Resources) &&
                 permissions.can(A.Write, Subject.ResourceTypes) ? (
                     <Action.Symbol
-                        icon={faTrash}
+                        icon={IconTrash}
                         disabled={isDeleting}
                         title="Slet"
                         size="small"

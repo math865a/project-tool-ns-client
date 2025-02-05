@@ -1,10 +1,10 @@
-import { faUsers } from "@fortawesome/pro-light-svg-icons";
 import { Badge, BadgeProps, styled } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 import { useGantt } from "useGantt";
 import { Action } from "~/src/design-system";
 import { TeamMenu } from "../team-menu";
+import { IconUsers } from "@tabler/icons-react";
 
 export const TeamMenuAction = observer(() => {
     const { TeamStore } = useGantt();
@@ -30,7 +30,7 @@ export const TeamMenuAction = observer(() => {
             >
                 <Action.TextButton
                     text="Team"
-                    icon={faUsers}
+                    icon={IconUsers}
                     onClick={handleOpen}
                 />
             </CountBadge>

@@ -1,10 +1,10 @@
-import { faMaximize } from "@fortawesome/pro-light-svg-icons";
 import { Box } from "@mui/material";
-import { useLocation, useParams } from "@remix-run/react";
+import { useLocation } from "@remix-run/react";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { Action } from "~/src/design-system";
 import { useWorkpackage } from "~/src/state";
+import { IconMaximize } from "@tabler/icons-react";
 
 const GanttAction = observer(() => {
     const { Gantt } = useWorkpackage();
@@ -21,7 +21,7 @@ const GanttAction = observer(() => {
 
     return (
         <Box>
-            <Action.Symbol icon={faMaximize} title="Rediger" to={`gantt`} />
+            <Action.Symbol icon={IconMaximize} title="Rediger" to={`gantt`} />
         </Box>
     );
 });

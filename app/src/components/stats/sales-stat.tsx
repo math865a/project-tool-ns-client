@@ -1,7 +1,8 @@
-import { faArrowUp } from "@fortawesome/pro-light-svg-icons";
 import { compressAmount } from "~/util";
 import { Box, Stack, Tooltip, Typography, useTheme } from "@mui/material";
 import { Symbol } from "design";
+import { IconArrowUp } from "@tabler/icons-react";
+
 export function SalesStat({ sales }: { sales: number }) {
     const theme = useTheme();
 
@@ -10,7 +11,7 @@ export function SalesStat({ sales }: { sales: number }) {
             <Tooltip title="Salg">
                 <Box>
                     <Symbol
-                        icon={faArrowUp}
+                        icon={IconArrowUp}
                         color={theme.palette.success.main}
                         size={0.8}
                     />

@@ -1,5 +1,4 @@
-import { FormOption } from "@math865a/project-tool.types";
-import { AccessGroupOption, ProjectManager, ResourceTypeOption } from "~/src";
+import { AccessGroupOption, ResourceTypeOption } from "~/src";
 
 export interface ICreateValues {
     uid: string;
@@ -44,9 +43,8 @@ export interface IUserConnectOption {
 }
 
 export interface IOptions {
-    calendars: FormOption[];
+    calendars: any[];
     resourceTypes: ResourceTypeOption[];
     accessGroups: AccessGroupOption[];
-    connectOptions: IUserConnectOption[]
+    connectOptions: IUserConnectOption[];
 }
-

@@ -1,10 +1,9 @@
-import { faFilter } from "@fortawesome/pro-light-svg-icons";
 import { Action } from "design";
-import { Badge, BadgeProps, Box, styled, Typography, useTheme } from "@mui/material";
+import { Badge, BadgeProps, Box, styled, useTheme } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { HEADER_HEIGHT } from "../../../_config/contants";
 import { useBoard } from "../../../_provider";
 import { useMenuState } from "~/src/hooks/useMenu";
+import { IconFilter } from "@tabler/icons-react";
 
 const RowFilterAction = observer(
     ({
@@ -17,18 +16,24 @@ const RowFilterAction = observer(
         const theme = useTheme();
 
         return (
-            <Box minWidth={50} display="flex" justifyContent="flex-start" ml={1}>
-                <CountBadge badgeContent={RowFilter.filterCount} color="primary">
-
+            <Box
+                minWidth={50}
+                display="flex"
+                justifyContent="flex-start"
+                ml={1}
+            >
+                <CountBadge
+                    badgeContent={RowFilter.filterCount}
+                    color="primary"
+                >
                     <Action.Symbol
-                        icon={faFilter}
+                        icon={IconFilter}
                         title="Filter"
                         onClick={handleOpen}
                         iconSize={1}
                     />
-                   
-                </CountBadge> </Box>
-         
+                </CountBadge>{" "}
+            </Box>
         );
     }
 );
@@ -36,14 +41,14 @@ const RowFilterAction = observer(
 export default RowFilterAction;
 
 const CountBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
-    '& .MuiBadge-badge': {
-      right: 3,
-      top: 5,
-      padding: '0 4px',
-      border: `2px solid ${theme.palette.background.paper}`,
-      fontSize: 10
+    "& .MuiBadge-badge": {
+        right: 3,
+        top: 5,
+        padding: "0 4px",
+        border: `2px solid ${theme.palette.background.paper}`,
+        fontSize: 10,
     },
-  }));
+}));
 
 /*
                 {RowFilter.filterCount > 0 && (

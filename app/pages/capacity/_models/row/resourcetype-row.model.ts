@@ -1,5 +1,4 @@
-import { ContractNode, ResourceTypeRowJson } from '@math865a/project-tool.types';
-import { computed } from 'mobx';
+import { computed } from "mobx";
 import {
     getRoot,
     idProp,
@@ -7,16 +6,16 @@ import {
     model,
     modelAction,
     prop,
-} from 'mobx-keystone';
-import { CapacityBoard } from '../../_controllers/_board';
+} from "mobx-keystone";
+import { CapacityBoard } from "../../_controllers/_board";
 
-@model('resourcetype-row-model')
+@model("resourcetype-row-model")
 export class ResourceTypeRow extends Model({
     id: idProp.typedAs<string>(),
     name: prop<string>().withSetter(),
     typeNo: prop<number>().withSetter(),
     resources: prop<string[]>().withSetter(),
-    contract: prop<ContractNode>().withSetter(),
+    contract: prop<any>().withSetter(),
 }) {
     @computed
     get Store() {
@@ -40,8 +39,9 @@ export class ResourceTypeRow extends Model({
         return this.CapacityStore.Capacities.filter((d) => d.rowId === this.id);
     }
 
+    //ResourceTypeRowJson
     @modelAction
-    update(json: ResourceTypeRowJson) {
+    update(json: any) {
         this.setName(json.name);
         this.setTypeNo(json.typeNo);
         this.setResources(json.resources);

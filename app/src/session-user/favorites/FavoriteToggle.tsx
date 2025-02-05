@@ -1,5 +1,4 @@
-import { faStar as NonFavoriteStar } from "@fortawesome/pro-light-svg-icons";
-import { faStar as FavoriteStar } from "@fortawesome/pro-solid-svg-icons";
+import { IconStar, IconStarFilled } from "@tabler/icons-react";
 import { Action } from "design";
 import { useSession } from "../SessionContextProvider";
 import { useMemo } from "react";
@@ -32,7 +31,7 @@ export function FavoriteToggle({
             text={isFavorite ? "Favorit" : "Tilføj som favorit"}
             iconSize={0.9}
             ptText={0.25}
-            icon={isFavorite ? FavoriteStar : NonFavoriteStar}
+            icon={isFavorite ? IconStarFilled : IconStar}
             onClick={handleClick}
             symbolProps={{
                 color: isFavorite ? "#F2CB40" : undefined,
