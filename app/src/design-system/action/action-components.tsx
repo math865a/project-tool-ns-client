@@ -55,7 +55,7 @@ export namespace ActionTypes {
 const SymbolBase = React.forwardRef<
     HTMLButtonElement,
     ActionTypes.IIconActionProps
->(({ icon, iconSize = 0.9, symbolProps, to, handleProps, ...rest }, ref) => {
+>(({ icon, iconSize, symbolProps, to, handleProps, ...rest }, ref) => {
     if (to) {
         return (
             <IconButton
@@ -334,8 +334,6 @@ const AvatarButton = forwardRef<HTMLButtonElement, ICircleButtonProps>(
         return <AvatarComponent />;
     }
 );
-
-function SymbolText({}) {}
 
 export const Action = {
     Symbol,

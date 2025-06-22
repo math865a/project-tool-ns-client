@@ -1,14 +1,14 @@
 import _ from "lodash";
 import {
+    getDefaultValues,
     IResourceFormOptons,
     IResourceFormValues,
     IResourceValues,
-    getDefaultValues,
     schema,
 } from "./form";
 import { Controls, Dialog, FormUI } from "~/src/design-system";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { useDialogCloseRedirect } from "~/src/hooks/useDialogCloseRedirect";
 import { formSubmit } from "~/src/hooks/useFormSubmit";
 import ServerValidation from "~/src/hooks/useServerValidation";
@@ -33,10 +33,12 @@ export function ResourceForm({
     const handleClose = useDialogCloseRedirect(closeTo, methods.reset);
 
     const transform = (values: IResourceFormValues): IResourceValues => {
-        return {
+        const vals = {
             ...values,
             resourceTypes: _.map(values.resourceTypes.map((d) => d.id)),
         };
+        console.log(vals);
+        return vals;
     };
 
     const onSubmit = formSubmit.useActionSubmit<

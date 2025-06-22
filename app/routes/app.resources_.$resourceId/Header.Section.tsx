@@ -2,13 +2,7 @@ import { Box, Stack } from "@mui/material";
 import { useParams } from "@remix-run/react";
 import { Page } from "design";
 import invariant from "tiny-invariant";
-import {
-    DeleteAction,
-    AddUserAction,
-    FavoriteAction,
-    useLinks,
-    PageLink,
-} from "./header";
+import { DeleteAction, FavoriteAction, PageLink, useLinks } from "./header";
 
 export default function HeaderSection() {
     const { resourceId } = useParams();
@@ -30,7 +24,7 @@ export default function HeaderSection() {
                     ))}
                 </Stack>
                 <Stack direction="row" spacing={1} alignItems="center">
-                    <AddUserAction />
+                    {/*   <AddUserAction />*/}
                     <FavoriteAction />
                     <DeleteAction />
                 </Stack>

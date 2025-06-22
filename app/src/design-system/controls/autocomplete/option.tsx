@@ -15,12 +15,14 @@ function Option<T>({
     state,
     children,
     disableCheck,
+    key,
     ...itemProps
 }: {
     props: React.HTMLAttributes<HTMLLIElement>;
     option: T;
     state: AutocompleteRenderOptionState;
     children: Child | Child[];
+
     disableCheck?: boolean;
 } & MenuItemProps) {
     return (

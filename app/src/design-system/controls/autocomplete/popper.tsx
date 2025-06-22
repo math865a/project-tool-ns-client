@@ -6,36 +6,35 @@ interface PopperComponentProps {
     open: boolean;
 }
 
-const StyledAutocompletePopper = styled('div')(({ theme }) => ({
+const StyledAutocompletePopper = styled("div")(({ theme }) => ({
     [`& .${autocompleteClasses.paper}`]: {
-        boxShadow: 'none',
+        boxShadow: "none",
         margin: 0,
-        color: 'inherit',
+        color: "inherit",
         fontSize: 13,
         width: 400,
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
     },
 
     [`& .${autocompleteClasses.listbox}`]: {
         width: 400,
         padding: 0,
         [`& .${autocompleteClasses.option}`]: {
-            alignItems: 'center',
+            alignItems: "center",
             padding: 8,
             paddingTop: 6,
             paddingBottom: 6,
             backgroundColor: "inherit",
             borderBottom: `1px solid  ${
-                theme.palette.mode === 'light' ? ' #eaecef' : '#30363d'
+                theme.palette.mode === "light" ? " #eaecef" : "#30363d"
             }`,
             '&[aria-selected="true"]': {
-                backgroundColor: 'transparent',
+                backgroundColor: "transparent",
             },
-
         },
     },
     [`&.${autocompleteClasses.popperDisablePortal}`]: {
-        position: 'relative',
+        position: "relative",
     },
 }));
 

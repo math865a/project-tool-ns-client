@@ -29,7 +29,6 @@ export function FavoriteToggle({
     return (
         <Action.TextButton
             text={isFavorite ? "Favorit" : "Tilføj som favorit"}
-            iconSize={0.9}
             ptText={0.25}
             icon={isFavorite ? IconStarFilled : IconStar}
             onClick={handleClick}

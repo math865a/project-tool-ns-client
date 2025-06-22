@@ -50,9 +50,7 @@ export const meta: MetaFunction = () => ({
     viewport: "width=device-width,initial-scale=1",
 });
 
-LicenseInfo.setLicenseKey(
-    "d4f90511f17268f99082e440321d4f14Tz01MzgxMSxFPTE2OTkzMTI0ODk1NDMsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI="
-);
+LicenseInfo.setLicenseKey("**MISSING_LICENSE**");
 
 interface DocumentProps {
     children: React.ReactNode;

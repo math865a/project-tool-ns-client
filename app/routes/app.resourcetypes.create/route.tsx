@@ -7,7 +7,6 @@ import { getServiceUrl } from "~/server";
 import { Controls, Dialog, FormUI } from "~/src/design-system";
 import { useDialogCloseRedirect } from "~/src/hooks/useDialogCloseRedirect";
 import { formSubmit } from "~/src/hooks/useFormSubmit";
-import ServerValidation from "~/src/hooks/useServerValidation";
 import { parseRequest } from "~/util/formData";
 import {
     CreateValues,
@@ -26,14 +25,13 @@ export async function loader({ request }: LoaderArgs): Promise<any> {
 }
 
 export async function action({ request }: ActionArgs) {
-    const body = await request.formData();
     const result: FormResponse = await sendRequest(request, {
         url: getServiceUrl("resourceTypes"),
         method: "POST",
         body: await parseRequest(request),
     });
     if (result.status === "ok") {
-        return redirect(`../../${result.id}`);
+        return redirect(`../${result.id}`);
     }
     return json(result);
 }
@@ -52,15 +50,22 @@ export default function CreateResourceType() {
     );
 
     const transform = (values: CreateValues) => {
-        return {
+        const vals = {
             ...values,
             resources: _.map(values.resources.map((d) => d.id)),
             typeNo: values.typeNo ? Number(values.typeNo) : 1,
         };
+        console.log(vals);
+        return vals;
+    };
+
+    const handleSubmit = () => {
+        console.log("submit");
     };
 
     const onSubmit = formSubmit.useActionSubmit<CreateValues, any>({
         transform,
+        action: "/app/resourcetypes/create",
     });
 
     return (
@@ -70,7 +75,7 @@ export default function CreateResourceType() {
                     onSubmit={methods.handleSubmit(onSubmit)}
                     style={{ width: "100%" }}
                 >
-                    <ServerValidation />
+                    {/*<ServerValidation />*/}
                     <Dialog.Title title="Opret ressourcetype" />
                     <Dialog.Body>
                         <FormUI.VStack>
@@ -120,7 +125,10 @@ export default function CreateResourceType() {
                         </FormUI.VStack>
                     </Dialog.Body>
                     <Dialog.Footer>
-                        <FormUI.Actions onCancel={handleClose} />
+                        <FormUI.Actions
+                            onCancel={handleClose}
+                            onSubmit={handleSubmit}
+                        />
                     </Dialog.Footer>
                 </form>
             </FormProvider>

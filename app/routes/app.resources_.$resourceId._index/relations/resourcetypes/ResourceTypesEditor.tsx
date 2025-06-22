@@ -50,7 +50,7 @@ export default function ResourceTypesEditor({
             resourcetypeId: s.id,
         }));
         createAgents.submit(toFormData(dtos), {
-            action: "api/resource-portfolio",
+            action: "/api/resource-portfolio",
             method: "post",
         });
     };

@@ -1,7 +1,7 @@
 import { GridColumnResizeParams } from "@mui/x-data-grid-pro";
 import { GridApiPro } from "@mui/x-data-grid-pro/models/gridApiPro";
 import { computed } from "mobx";
-import { Model, getRoot, model, modelAction, prop } from "mobx-keystone";
+import { getRoot, Model, model, modelAction, prop } from "mobx-keystone";
 import { Gantt } from "../Gantt";
 import { ContextMenu } from "./ContextMenu";
 import { TableCommands } from "./TableCommands";
@@ -74,18 +74,17 @@ export class GanttTable extends Model({
 
     @modelAction
     expandRow(Activity: Activity) {
-   
         this.api?.current.setRowChildrenExpansion(Activity.id, true);
-        Activity.setIsExpanded(true)
+        Activity.setIsExpanded(true);
     }
 
     @modelAction
     collapseRow(Activity: Activity) {
         this.api?.current.setRowChildrenExpansion(Activity.id, false);
-        Activity.setIsExpanded(false)
+        Activity.setIsExpanded(false);
     }
 
-    getRow(rowId: string){
+    getRow(rowId: string) {
         return this.Rows.find((row) => row.id === rowId);
     }
 }
